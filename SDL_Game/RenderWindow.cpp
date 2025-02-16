@@ -16,6 +16,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 
 	//Create window
 	window = SDL_CreateWindow(tittle, SCREEN_WIDTH, SCREEN_HEIGHT, flags);
+	
 	if (window == NULL)
 	{
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -33,6 +34,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	float scale = CaculateScale(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	SDL_SetRenderScale(renderer, scale, scale);
+	SDL_SetRenderVSync(renderer, 1);
+	SDL_SetWindowSurfaceVSync(window, 1);
 	SetViewPort(Global.camera.rect);
 }
 

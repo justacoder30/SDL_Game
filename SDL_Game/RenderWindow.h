@@ -9,6 +9,7 @@ class RenderWindow
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	float CaculateScale(float w, float h);
 	
 public:
 	RenderWindow();
@@ -18,7 +19,6 @@ public:
 	void blit(Texture texture, Vector vector, Rect area);
 	void blit(Texture texture, Vector vector, Rect area, SDL_FlipMode flip);
 	void blit(Texture texture, Vector vector, Rect area, float scale);
-	float CaculateScale(float w, float h);
 	void SetFullScreen(SDL_WindowFlags flags);
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);
 	void Clear();

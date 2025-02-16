@@ -15,5 +15,5 @@ void GLOBAL::Update() {
 
 void GLOBAL::fpsShow()
 {
-	std::cout << (1.0 / Global.DeltaTime) << std::endl;
+	std::cout << round(1.0f / Global.DeltaTime) << std::endl;
 }

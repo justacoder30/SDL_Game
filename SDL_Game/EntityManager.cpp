@@ -3,7 +3,7 @@
 EntityManager::EntityManager(int level)
 {
 	player = new Player(0);
-	Entities.push_back(new Background());
+	//Entities.push_back(new Background());
 	Map map(0, Entities);
 	Entities.push_back(player);
 
