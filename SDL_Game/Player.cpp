@@ -63,7 +63,6 @@ void Player::Update()
 	UpdateVelocity();
 	UpdatePosition();
 	UpdateAnimation();
-	
 }
 
 void Player::Draw()

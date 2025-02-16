@@ -14,6 +14,7 @@ public:
 	Vector pos;
 	Vector velocity;
 	Rect rect;
+	Rect old_rect;
 	float speed;
 	SDL_FlipMode flip;
 
@@ -22,4 +23,6 @@ public:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 };
+
+extern std::vector<Entity*> Collisions;
 

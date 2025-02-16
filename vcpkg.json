@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "sdl3",
+    "sdl3-image",
+    "tmxlite",
+    "zlib",
+    "zstd"
+  ]
+}

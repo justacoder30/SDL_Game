@@ -1,0 +1,68 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: aa6d38575038f944130dd6236831c4b1c3062855a84e7f984575b60f28f2c32e
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 93a46b4a67465e5708e6887640de85f52ab224f56dd5c36acaec05dd1494638e
+Status: install ok installed
+
+Package: sdl3
+Version: 3.2.4
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 95a1254443d79c648e98a29723c3a369cf7477f2d169b7acc52f7f64a60d862b
+Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
+Status: install ok installed
+
+Package: sdl3-image
+Version: 3.2.0
+Depends: sdl3, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8915814f84a8e924bac8c6075482d44d1e910b71787a12e74c2c708b0428c269
+Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
+Status: install ok installed
+
+Package: zstd
+Version: 1.5.6
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: dee495c23af0456cf77e43fae8365490c17ff0f8e487057ea2c1f1e4003146cc
+Description: Zstandard - Fast real-time compression algorithm
+Status: install ok installed
+
+Package: zlib
+Version: 1.3.1
+Depends: vcpkg-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b1acdfefb1906e9827e3f48583eb8c4651cfdee47391b398cd40d88b146cda29
+Description: A compression library
+Status: install ok installed
+
+Package: pugixml
+Version: 1.15
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: ebd5c1564c92950a4004a843ca58665e03073239f26a3848447e6781eb02e284
+Description: Light-weight, simple and fast XML parser for C++ with XPath support
+Status: install ok installed
+
+Package: tmxlite
+Version: 1.4.4
+Depends: pugixml, vcpkg-cmake, vcpkg-cmake-config, zlib, zstd
+Architecture: x64-windows
+Multi-Arch: same
+Abi: c6470b01375e015e7627b4f7ff813bfb18ad8511dd0d71d0ae55f1f71d0a3e34
+Description: A lightweight C++14 parsing library for tmx map files created with the Tiled map editor.
+Status: install ok installed
+

@@ -1,4 +1,5 @@
 #include "RenderWindow.h"
+#include <iostream>
 
 RenderWindow window;
 
@@ -32,6 +33,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	float scale = CaculateScale(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	SDL_SetRenderScale(renderer, scale, scale);
+	SetViewPort(Global.camera.rect);
 }
 
 void RenderWindow::SetViewPort(Rect view)

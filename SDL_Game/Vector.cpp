@@ -1,4 +1,5 @@
 #include "Vector.h"
+#include <iostream>
 
 Vector& Vector::operator+=(Vector const& v2)
 {

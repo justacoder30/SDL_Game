@@ -23,7 +23,7 @@ void Game::Draw()
 	entityManager.Draw();
 
 	window.Render();
-	//std::cout << (1.0 / Global.DeltaTime) << std::endl;
+	//Global.fpsShow();
 }
 
 void Game::Run()

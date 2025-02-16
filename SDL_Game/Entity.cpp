@@ -3,3 +3,4 @@
 Entity::Entity()
 {}
 
+std::vector<Entity*> Collisions;

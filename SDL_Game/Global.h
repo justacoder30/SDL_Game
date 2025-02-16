@@ -10,10 +10,13 @@ private:
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
+	//std::vector<Entity*> Collisions;
 	double DeltaTime;
 	bool gameLoop = true;
 
 	void Update();
+	void fpsShow();
 };
 
 extern GLOBAL Global;
+
