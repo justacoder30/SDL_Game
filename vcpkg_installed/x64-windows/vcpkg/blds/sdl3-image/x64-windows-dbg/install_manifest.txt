@@ -1,0 +1,10 @@
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/lib/SDL3_image.lib
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/bin/SDL3_image.dll
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/include/SDL3_image/SDL_image.h
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/bin/SDL3_image.pdb
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/cmake/SDL3_imageConfig.cmake
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/cmake/SDL3_imageConfigVersion.cmake
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/cmake/SDL3_image-shared-targets.cmake
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/cmake/SDL3_image-shared-targets-debug.cmake
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/lib/pkgconfig/sdl3-image.pc
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/pkgs/sdl3-image_x64-windows/debug/share/licenses/SDL3_image/LICENSE.txt

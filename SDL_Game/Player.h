@@ -11,9 +11,10 @@ public:
 	Player();
 	Player(int level);
 	void UpdateVelocity();
+	void UpdatedGravity();
 	void UpdatePosition();
+	void UpdateState();
 	void UpdateAnimation();
 	void Update() override;
-	void Draw() override;
 };
 

@@ -1,0 +1,10 @@
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/SDL3-shared.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/SDL_uclibc.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/uninstall.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/package.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/package_source.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/edit_cache.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/rebuild_cache.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/list_install_components.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/install.dir
+D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/install/local.dir

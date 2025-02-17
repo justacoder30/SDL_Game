@@ -1,0 +1,8 @@
+Package: sdl3-image
+Version: 3.2.0
+Depends: sdl3, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: e02f557335639ea061cb52e9e7eaa4b66938224c3622ff31d21a86ac4c115d23
+Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
+Status: install ok installed

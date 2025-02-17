@@ -1,0 +1,629 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:206 (message)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      The target system is: Windows - 10.0.22631 - AMD64
+      The host system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe 
+      Build flags: /nologo;/DWIN32;/D_WINDOWS;/W3;/utf-8;/MP
+      Id flags:  
+      
+      The output was:
+      0
+      CMakeCCompilerId.c
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/3.27.1/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:1158 (message)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Note: including file: D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Note: including file: "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-8hjvci"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-8hjvci"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-8hjvci'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_d6b36
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_d6b36.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_d6b36.dir\\ /FS -c C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\share\\cmake-3.27\\Modules\\CMakeCCompilerABI.c
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_d6b36.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_d6b36.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_d6b36.exe /implib:cmTC_d6b36.lib /pdb:cmTC_d6b36.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/sdlcpu.cmake:93 (try_compile)"
+      - "CMakeLists.txt:81 (SDL_DetectTargetCPUArchitectures)"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "SDL_CPU_CHECK_ALL"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_d96b1
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_d96b1.dir\\SDL_detect_arch.c.obj /FdCMakeFiles\\cmTC_d96b1.dir\\cmTC_d96b1.pdb /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
+        [2/2] cmd.exe /C "cd . && "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\lib.exe" /nologo /machine:x64 /out:cmTC_d96b1.lib CMakeFiles\\cmTC_d96b1.dir\\SDL_detect_arch.c.obj  && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:651 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_MMX"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-rqgmek"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-rqgmek"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_MMX"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-rqgmek'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_ba0eb
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_MMX  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_ba0eb.dir\\src.c.obj /FdCMakeFiles\\cmTC_ba0eb.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-rqgmek\\src.c"
+        FAILED: CMakeFiles/cmTC_ba0eb.dir/src.c.obj 
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_MMX  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_ba0eb.dir\\src.c.obj /FdCMakeFiles\\cmTC_ba0eb.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-rqgmek\\src.c"
+        D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-rqgmek\\src.c(5): warning C4013: '_mm_add_pi32' undefined; assuming extern returning int
+        D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-rqgmek\\src.c(5): error C2440: '=': cannot convert from 'int' to '__m64'
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:672 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_SSE"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uw090i"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uw090i"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_SSE"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uw090i'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_76a77
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_SSE  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_76a77.dir\\src.c.obj /FdCMakeFiles\\cmTC_76a77.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-uw090i\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_76a77.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_76a77.dir\\src.c.obj  /out:cmTC_76a77.exe /implib:cmTC_76a77.lib /pdb:cmTC_76a77.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:693 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_SSE2"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-z2sb88"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-z2sb88"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_SSE2"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-z2sb88'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_fa7ce
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_SSE2  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_fa7ce.dir\\src.c.obj /FdCMakeFiles\\cmTC_fa7ce.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-z2sb88\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_fa7ce.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_fa7ce.dir\\src.c.obj  /out:cmTC_fa7ce.exe /implib:cmTC_fa7ce.lib /pdb:cmTC_fa7ce.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:714 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_SSE3"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-5emru3"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-5emru3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_SSE3"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-5emru3'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_4bf1d
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_SSE3  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_4bf1d.dir\\src.c.obj /FdCMakeFiles\\cmTC_4bf1d.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-5emru3\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_4bf1d.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_4bf1d.dir\\src.c.obj  /out:cmTC_4bf1d.exe /implib:cmTC_4bf1d.lib /pdb:cmTC_4bf1d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:735 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_SSE4_1"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-k1so6j"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-k1so6j"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_SSE4_1"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-k1so6j'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_73040
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_SSE4_1  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_73040.dir\\src.c.obj /FdCMakeFiles\\cmTC_73040.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-k1so6j\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_73040.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_73040.dir\\src.c.obj  /out:cmTC_73040.exe /implib:cmTC_73040.lib /pdb:cmTC_73040.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:756 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_SSE4_2"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uhosk2"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uhosk2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_SSE4_2"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-uhosk2'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_b7a2f
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_SSE4_2  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_b7a2f.dir\\src.c.obj /FdCMakeFiles\\cmTC_b7a2f.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-uhosk2\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_b7a2f.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_b7a2f.dir\\src.c.obj  /out:cmTC_b7a2f.exe /implib:cmTC_b7a2f.lib /pdb:cmTC_b7a2f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:779 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_AVX"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-qwwwtz"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-qwwwtz"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_AVX"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-qwwwtz'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_c1ddb
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_AVX  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_c1ddb.dir\\src.c.obj /FdCMakeFiles\\cmTC_c1ddb.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-qwwwtz\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_c1ddb.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_c1ddb.dir\\src.c.obj  /out:cmTC_c1ddb.exe /implib:cmTC_c1ddb.lib /pdb:cmTC_c1ddb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:800 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_AVX2"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-0oir1q"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-0oir1q"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_AVX2"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-0oir1q'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_593f2
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_AVX2  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_593f2.dir\\src.c.obj /FdCMakeFiles\\cmTC_593f2.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-0oir1q\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_593f2.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_593f2.dir\\src.c.obj  /out:cmTC_593f2.exe /implib:cmTC_593f2.lib /pdb:cmTC_593f2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:821 (check_c_source_compiles)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_AVX512F"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-zeizgo"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-zeizgo"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "COMPILER_SUPPORTS_AVX512F"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-zeizgo'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_cc941
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DCOMPILER_SUPPORTS_AVX512F  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_cc941.dir\\src.c.obj /FdCMakeFiles\\cmTC_cc941.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-zeizgo\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_cc941.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_cc941.dir\\src.c.obj  /out:cmTC_cc941.exe /implib:cmTC_cc941.lib /pdb:cmTC_cc941.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:964 (check_include_file)"
+    checks:
+      - "Looking for malloc.h"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-bnovf7"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-bnovf7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_MALLOC_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-bnovf7'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_861ed
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_861ed.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_861ed.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-bnovf7\\CheckIncludeFile.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_861ed.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_861ed.dir\\CheckIncludeFile.c.obj  /out:cmTC_861ed.exe /implib:cmTC_861ed.lib /pdb:cmTC_861ed.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:1045 (check_symbol_exists)"
+    checks:
+      - "Looking for _copysign"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-orr8fk"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-orr8fk"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "LIBC_HAS__COPYSIGN"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-orr8fk'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_8b64f
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_8b64f.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_8b64f.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-orr8fk\\CheckSymbolExists.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_8b64f.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_8b64f.dir\\CheckSymbolExists.c.obj  /out:cmTC_8b64f.exe /implib:cmTC_8b64f.lib /pdb:cmTC_8b64f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "CMakeLists.txt:1045 (check_symbol_exists)"
+    checks:
+      - "Looking for _fseeki64"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-4fx4xa"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-4fx4xa"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "LIBC_HAS__FSEEKI64"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-4fx4xa'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_d1bae
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_d1bae.dir\\CheckSymbolExists.c.obj /FdCMakeFiles\\cmTC_d1bae.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-4fx4xa\\CheckSymbolExists.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_d1bae.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_d1bae.dir\\CheckSymbolExists.c.obj  /out:cmTC_d1bae.exe /implib:cmTC_d1bae.lib /pdb:cmTC_d1bae.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:1966 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_GAMEINPUT_H"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-ovaauu"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-ovaauu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_GAMEINPUT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-ovaauu'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_a42e9
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DHAVE_GAMEINPUT_H  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_a42e9.dir\\src.c.obj /FdCMakeFiles\\cmTC_a42e9.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-ovaauu\\src.c"
+        FAILED: CMakeFiles/cmTC_a42e9.dir/src.c.obj 
+        "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DHAVE_GAMEINPUT_H  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_a42e9.dir\\src.c.obj /FdCMakeFiles\\cmTC_a42e9.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-ovaauu\\src.c"
+        D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-ovaauu\\src.c(4): fatal error C1083: Cannot open include file: 'gameinput.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:1972 (check_include_file)"
+    checks:
+      - "Looking for dxgi1_6.h"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-i8mtap"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-i8mtap"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_DXGI1_6_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-i8mtap'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_800c2
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_800c2.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_800c2.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-i8mtap\\CheckIncludeFile.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_800c2.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_800c2.dir\\CheckIncludeFile.c.obj  /out:cmTC_800c2.exe /implib:cmTC_800c2.lib /pdb:cmTC_800c2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Users/quang/AppData/Local/vcpkg/downloads/tools/cmake-3.27.1-windows/cmake-3.27.1-windows-i386/share/cmake-3.27/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:1979 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_MFAPI_H"
+    directories:
+      source: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-v4rj5d"
+      binary: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-v4rj5d"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP "
+      CMAKE_C_FLAGS_DEBUG: "/D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/src/ease-3.2.4-d381bc6db0.clean/cmake"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: ""
+      CMAKE_MSVC_RUNTIME_LIBRARY: "MultiThreaded$<$<CONFIG:Debug>:Debug>$<$<STREQUAL:dynamic,dynamic>:DLL>"
+      VCPKG_APPLOCAL_DEPS: "OFF"
+      VCPKG_CHAINLOAD_TOOLCHAIN_FILE: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg/scripts/toolchains/windows.cmake"
+      VCPKG_TARGET_ARCHITECTURE: "x64"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/vcpkg"
+    buildResult:
+      variable: "HAVE_MFAPI_H"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/DesktopFile/Game Dev/SDL_Game/vcpkg_installed/x64-windows/vcpkg/blds/sdl3/x64-windows-rel/CMakeFiles/CMakeScratch/TryCompile-v4rj5d'
+        
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_cae7d
+        [1/2] "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\cl.exe"  /nologo -DHAVE_MFAPI_H  /nologo /DWIN32 /D_WINDOWS /W3 /utf-8 /MP   -D_GNU_SOURCE=1 /D_DEBUG /MDd /Z7 /Ob0 /Od /RTC1  -MDd /showIncludes /FoCMakeFiles\\cmTC_cae7d.dir\\src.c.obj /FdCMakeFiles\\cmTC_cae7d.dir\\ /FS -c "D:\\DesktopFile\\Game Dev\\SDL_Game\\vcpkg_installed\\x64-windows\\vcpkg\\blds\\sdl3\\x64-windows-rel\\CMakeFiles\\CMakeScratch\\TryCompile-v4rj5d\\src.c"
+        [2/2] cmd.exe /C "cd . && C:\\Users\\quang\\AppData\\Local\\vcpkg\\downloads\\tools\\cmake-3.27.1-windows\\cmake-3.27.1-windows-i386\\bin\\cmake.exe -E vs_link_exe --intdir=CMakeFiles\\cmTC_cae7d.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_cae7d.dir\\src.c.obj  /out:cmTC_cae7d.exe /implib:cmTC_cae7d.lib /pdb:cmTC_cae7d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+...

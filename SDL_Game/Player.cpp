@@ -8,6 +8,9 @@ Player::Player(int level)
 	animations = {
 		{"Idle", Animation("resource/img/Player/Idle.png", 10, 0.05)},
 	    {"Run", Animation("resource/img/Player/Run.png", 10, 0.04)},
+		{"Attack", Animation("resource/img/Player/Attack.png", 6, 0.04, true)},
+		{"Jump", Animation("resource/img/Player/Jump.png", 3)},
+		{"Fall", Animation("resource/img/Player/Fall.png", 3)},
 	};
 
 	animationManger = AnimationManager(animations["Run"]);
@@ -16,20 +19,30 @@ Player::Player(int level)
 	velocity = Vector(0, 0);
 	rect = animationManger.getRect();
 	speed = 150;
+	gravity = 1000;
+	jump = 400;
 	flip = SDL_FLIP_NONE;
+
+	texture_width = animationManger.animation.FrameWidth;
+	texture_height = animationManger.animation.FrameHeight;
+	OFFSET[0] = 52;
+	OFFSET[1] = 42;
+
+	state = State::Idle;
 }
 
 void Player::UpdateVelocity()
 {
-	velocity = Vector(0, 0);
+	velocity.x = 0;
+	
 
-	if (currentKey[SDL_SCANCODE_W])
+	UpdatedGravity();
+
+	//std::cout << velocity.y << std::endl;
+
+	if (currentKey[SDL_SCANCODE_SPACE])
 	{
-		velocity.y = -speed;
-	}
-	if (currentKey[SDL_SCANCODE_S])
-	{
-		velocity.y = speed;
+		velocity.y = -jump;
 	}
 	if (currentKey[SDL_SCANCODE_A])
 	{
@@ -43,31 +56,77 @@ void Player::UpdateVelocity()
 	}
 }
 
+void Player::UpdatedGravity()
+{
+	if (IsFalling()) {
+		//std::cout << "Is Falling!" << std::endl;
+		velocity.y += gravity * Global.DeltaTime;
+	}
+	else {
+		std::cout << "Is standing!" << std::endl;
+	}
+	//std::cout << velocity.y << std::endl;
+}
+
 void Player::UpdatePosition()
 {
+	rect = GetRect();
+	for (int i = 0; i < Collisions.size(); ++i) {
+		if (rect.checkCollide(Collisions[i]->GetRect())) {
+			velocity.y = 0;
+			pos.y = Collisions[i]->GetRect().top - texture_height;
+		}
+	}
+	//std::cout << velocity.y << std::endl;
 	pos += velocity * Global.DeltaTime;
+
+
+}
+
+void Player::UpdateState()
+{
+	state = State::Idle;
+
+	if (velocity.y != 0) {
+		if (velocity.y > 0) state = State::Fall;
+		else state = State::Jump;
+	}
+	else {
+		if (velocity.x != 0) state = State::Run;
+		else state = State::Idle;
+	}
 }
 
 void Player::UpdateAnimation()
 {
-	animationManger.Update();
-	
-	if (velocity.x != 0)
-		animationManger.Play(animations["Run"]);
-	else
-		animationManger.Play(animations["Idle"]);
+	animationManger.Update();	
+
+	switch (state) {
+		case State::Idle:
+			animationManger.Play(animations["Idle"]);
+			break;
+		case State::Run:
+			animationManger.Play(animations["Run"]);
+			break;
+		case State::Jump:
+			animationManger.Play(animations["Jump"]);
+			break;
+		case State::Fall:
+			animationManger.Play(animations["Fall"]);
+			break;
+		default:
+			break;
+			// code block
+	}
+		
 }	
 
 void Player::Update()
 {
 	UpdateVelocity();
 	UpdatePosition();
+	UpdateState();
 	UpdateAnimation();
-}
-
-void Player::Draw()
-{
-	window.blit(animationManger.animation.texture, pos + Global.camera.current_pos, animationManger.getRect(), flip);
 }
 
 

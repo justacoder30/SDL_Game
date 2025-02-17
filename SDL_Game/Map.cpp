@@ -116,11 +116,12 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src)
 }
 
 void TiledMap::Update()
-{}
-
-void TiledMap::Draw()
 {
     dst.x = pos.x + Global.camera.current_pos.x;
     dst.y = pos.y + Global.camera.current_pos.y;
+}
+
+void TiledMap::Draw()
+{    
 	window.blit(tex, dst, src);
 }

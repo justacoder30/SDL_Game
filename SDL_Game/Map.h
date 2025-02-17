@@ -12,8 +12,8 @@ private:
 public:
 	TiledMap() {}
 	TiledMap(Texture _texure, Rect _dst, Rect _src);
-	void Update() override;
-	void Draw() override;
+	void Update();
+	void Draw();
 };
 
 class Map
