@@ -7,7 +7,7 @@ EntityManager::EntityManager(int level)
 	Map map(0, Entities);
 	Entities.push_back(player);
 
-	Global.camera.FollowEnity(&player->pos);
+	Global.camera.FollowEnity(&player->center_pos);
 }
 
 void EntityManager::Update()

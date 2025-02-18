@@ -1,4 +1,6 @@
 #include "Camera.h"
+#include "Global.h"
+#include "RenderWindow.h"
 
 Camera::Camera()
 {}
@@ -15,6 +17,9 @@ void Camera::FollowEnity(Vector* pos)
 
 void Camera::Update()
 {
+	rect.w = window.GetWindowSize().x / Global.scale;
+	rect.h = window.GetWindowSize().y / Global.scale;
+
 	current_pos.x = rect.w / 2.0 - dst_pos->x;
 	current_pos.y = rect.h / 2.0 - dst_pos->y;
 }

@@ -6,7 +6,7 @@ RenderWindow window;
 RenderWindow::RenderWindow()
 {}
 
-RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, SDL_WindowFlags flags)
+RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool fullscreen)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -15,7 +15,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	}
 
 	//Create window
-	window = SDL_CreateWindow(tittle, SCREEN_WIDTH, SCREEN_HEIGHT, flags);
+	window = SDL_CreateWindow(tittle, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	SDL_SetWindowFullscreen(window, fullscreen);
 	
 	if (window == NULL)
 	{
@@ -31,18 +32,26 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 	}
 	
-	float scale = CaculateScale(SCREEN_WIDTH, SCREEN_HEIGHT);
+	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 
-	SDL_SetRenderScale(renderer, scale, scale);
+	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
 	SDL_SetRenderVSync(renderer, 1);
 	SDL_SetWindowSurfaceVSync(window, 1);
 	SetViewPort(Global.camera.rect);
+	
 }
 
 void RenderWindow::SetViewPort(Rect view)
 {
 	SDL_Rect Viewport = view.getRect();
 	SDL_SetRenderViewport(renderer, &Viewport);
+}
+
+Vector RenderWindow::GetWindowSize()
+{
+	int w, h;
+	SDL_GetWindowSize(window, &w, &h);
+	return Vector(w, h);
 }
 
 void RenderWindow::blit(Texture texture, Rect dest, Rect area)
@@ -99,6 +108,12 @@ void RenderWindow::blit(Texture texture, Vector vector, Rect area, float scale)
 	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
 }
 
+void RenderWindow::DrawRect(Rect rect)
+{
+	SDL_FRect frect = rect.getFRect();
+	SDL_RenderRect(renderer, &frect);
+}
+
 float RenderWindow::CaculateScale(float w, float h)
 {
 	float scale_x = w / Global.camera.rect.w;
@@ -127,7 +142,8 @@ void RenderWindow::Clear()
 void RenderWindow::Render()
 {
 	//Update screen
-	//SDL_SetRenderScale(renderer, 4, 4);
+	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
+	SetViewPort(Global.camera.rect);
 
 	SDL_RenderPresent(renderer);
 

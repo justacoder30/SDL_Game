@@ -10,6 +10,7 @@ private:
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
+	float scale;
 	//std::vector<Entity*> Collisions;
 	double DeltaTime;
 	bool gameLoop = true;

@@ -46,6 +46,7 @@ public:
 
 	Rect GetRect();
 	Rect GravityRect();
+	Vector GetCenter();
 };
 
 extern std::vector<Entity*> Collisions;

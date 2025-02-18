@@ -6,7 +6,7 @@ class Player : public Entity
 private:
 	const bool* currentKey = SDL_GetKeyboardState(NULL);
 public:
-	
+	Vector center_pos;
 
 	Player();
 	Player(int level);
@@ -15,6 +15,7 @@ public:
 	void UpdatePosition();
 	void UpdateState();
 	void UpdateAnimation();
-	void Update() override;
+	void Update();
+	void Draw();
 };
 

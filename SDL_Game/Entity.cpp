@@ -3,9 +3,10 @@
 bool Entity::IsFalling()
 {
     Rect g_rect = GravityRect();
-    for (int i = 0; i < Collisions.size(); ++i)
+    for (int i = 0; i < Collisions.size(); ++i) {
         if (g_rect.checkCollide(Collisions[i]->GetRect()))
             return false;
+    }
     return true;
 }
 
@@ -40,6 +41,13 @@ Rect Entity::GravityRect()
         texture_width - OFFSET[0] * 2,
         3
     );
+}
+
+Vector Entity::GetCenter()
+{
+    float pos_X = rect.x + (rect.w / 2);
+    float pos_Y = rect.y + (rect.h / 2);
+    return Vector(pos_X, pos_Y);
 }
 
 std::vector<Entity*> Collisions;

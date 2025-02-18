@@ -29,6 +29,8 @@ Player::Player(int level)
 	OFFSET[1] = 42;
 
 	state = State::Idle;
+
+	center_pos = GetCenter();
 }
 
 void Player::UpdateVelocity()
@@ -40,7 +42,7 @@ void Player::UpdateVelocity()
 
 	//std::cout << velocity.y << std::endl;
 
-	if (currentKey[SDL_SCANCODE_SPACE])
+	if (currentKey[SDL_SCANCODE_SPACE] && !IsFalling())
 	{
 		velocity.y = -jump;
 	}
@@ -54,22 +56,27 @@ void Player::UpdateVelocity()
 		velocity.x = speed;
 		flip = SDL_FLIP_NONE;
 	}
+
+	if (currentKey[SDL_SCANCODE_Z])
+	{
+		Global.scale += 10 * Global.DeltaTime;
+	}
+	if (currentKey[SDL_SCANCODE_X])
+	{
+		Global.scale -= 10 * Global.DeltaTime;
+	}
 }
 
 void Player::UpdatedGravity()
 {
-	if (IsFalling()) {
-		//std::cout << "Is Falling!" << std::endl;
+	if (IsFalling()) 
 		velocity.y += gravity * Global.DeltaTime;
-	}
-	else {
-		std::cout << "Is standing!" << std::endl;
-	}
-	//std::cout << velocity.y << std::endl;
 }
 
 void Player::UpdatePosition()
 {
+	std::cout << velocity.y << std::endl;
+	pos += velocity * Global.DeltaTime;
 	rect = GetRect();
 	for (int i = 0; i < Collisions.size(); ++i) {
 		if (rect.checkCollide(Collisions[i]->GetRect())) {
@@ -77,8 +84,8 @@ void Player::UpdatePosition()
 			pos.y = Collisions[i]->GetRect().top - texture_height;
 		}
 	}
-	//std::cout << velocity.y << std::endl;
-	pos += velocity * Global.DeltaTime;
+	
+	//pos += velocity * Global.DeltaTime;
 
 
 }
@@ -127,6 +134,21 @@ void Player::Update()
 	UpdatePosition();
 	UpdateState();
 	UpdateAnimation();
+
+	center_pos = GetCenter();
 }
+
+void Player::Draw()
+{
+	Entity::Draw();
+	rect = GetRect();
+	Rect gravity = GravityRect();
+	Rect r = Rect(rect.x + Global.camera.current_pos.x, rect.y + Global.camera.current_pos.y, rect.w, rect.h);
+	Rect g = Rect(gravity.x + Global.camera.current_pos.x, gravity.y + Global.camera.current_pos.y, gravity.w, gravity.h);
+	window.DrawRect(r);
+	window.DrawRect(g);
+}
+
+
 
 
