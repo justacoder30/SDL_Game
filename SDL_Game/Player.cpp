@@ -35,12 +35,9 @@ Player::Player(int level)
 
 void Player::UpdateVelocity()
 {
-	velocity.x = 0;
-	
+	velocity.x = 0;	
 
-	UpdatedGravity();
-
-	//std::cout << velocity.y << std::endl;
+	UpdateGravity();
 
 	if (currentKey[SDL_SCANCODE_SPACE] && !IsFalling())
 	{
@@ -67,15 +64,8 @@ void Player::UpdateVelocity()
 	}
 }
 
-void Player::UpdatedGravity()
-{
-	if (IsFalling()) 
-		velocity.y += gravity * Global.DeltaTime;
-}
-
 void Player::UpdatePosition()
 {
-	std::cout << velocity.y << std::endl;
 	pos += velocity * Global.DeltaTime;
 	rect = GetRect();
 	for (int i = 0; i < Collisions.size(); ++i) {

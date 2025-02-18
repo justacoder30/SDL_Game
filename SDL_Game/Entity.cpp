@@ -10,6 +10,12 @@ bool Entity::IsFalling()
     return true;
 }
 
+void Entity::UpdateGravity()
+{
+    if (IsFalling())
+        velocity.y += gravity * Global.DeltaTime;
+}
+
 Entity::Entity()
 {}
 

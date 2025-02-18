@@ -3,9 +3,9 @@
 Game::Game()
 {
 	Global.camera = Camera(560, 315);
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
-	entityManager = EntityManager(1);
+	entityManager = EntityManager(0);
 }
 
 void Game::Update()
@@ -23,7 +23,7 @@ void Game::Draw()
 	entityManager.Draw();
 
 	window.Render();
-	//Global.fpsShow();
+	Global.fpsShow();
 }
 
 void Game::Run()

@@ -27,6 +27,7 @@ protected:
 	State state;
 
 	bool IsFalling();
+	void UpdateGravity();
 
 public:
 	std::unordered_map<std::string, Animation> animations;
