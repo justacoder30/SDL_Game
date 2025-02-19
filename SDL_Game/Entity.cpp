@@ -12,8 +12,10 @@ bool Entity::IsFalling()
 
 void Entity::UpdateGravity()
 {
-    if (IsFalling())
+    if (IsFalling()) {
         velocity.y += gravity * Global.DeltaTime;
+        falling = true;
+    }
 }
 
 Entity::Entity()
@@ -29,7 +31,7 @@ void Entity::Draw()
                 pos + Global.camera.current_pos, 
                 animationManger.getRect(), 
                 animationManger.flip
-    );
+    );    
 }
 
 void Entity::Collision(std::string direction)
@@ -39,17 +41,20 @@ void Entity::Collision(std::string direction)
     for (int i = 0; i < Collisions.size(); ++i) {
         if (!rect.checkCollide(Collisions[i]->rect))
             continue;
-        std::cout << "Is Collide" << std::endl;
         if (direction == "y") {
-            /*if (rect.right >= Collisions[i]->rect.left && old_rect.right <= Collisions[i]->old_rect.left) {
-                rect.right = Collisions[i]->rect.left;
-                pos.x = Collisions[i]->rect.left - texture_width + OFFSET.right;
+
+            if (rect.bottom >= Collisions[i]->rect.top && old_rect.bottom <= Collisions[i]->old_rect.top) {
+                rect.bottom = Collisions[i]->rect.top;
+                pos.y = Collisions[i]->rect.top - texture_height + OFFSET.bottom;
+                falling = false;
             }
 
-            if (rect.left < Collisions[i]->rect.right && old_rect.left > Collisions[i]->old_rect.right) {
-                rect.left = Collisions[i]->rect.right;
-                pos.x = Collisions[i]->rect.right - OFFSET.left;
-            }*/
+            if (rect.top <= Collisions[i]->rect.bottom && old_rect.top >= Collisions[i]->old_rect.bottom) {
+                rect.top = Collisions[i]->rect.bottom;
+                pos.y = Collisions[i]->rect.bottom - OFFSET.top;
+            }
+
+            velocity.y = 0;
         }
         else {
             if (rect.right >= Collisions[i]->rect.left && old_rect.right <= Collisions[i]->old_rect.left) {
@@ -59,7 +64,7 @@ void Entity::Collision(std::string direction)
             
             if (rect.left <= Collisions[i]->rect.right && old_rect.left >= Collisions[i]->old_rect.right) {
                 rect.left = Collisions[i]->rect.right;
-                pos.x = Collisions[i]->rect.right - OFFSET.left;
+                pos.x = Collisions[i]->rect.right - OFFSET.right;
             }
         }
     }

@@ -25,6 +25,7 @@ protected:
 	float speed;
 	float jump;
 	State state;
+	bool falling;
 
 	bool IsFalling();
 	void UpdateGravity();

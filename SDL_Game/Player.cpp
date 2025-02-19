@@ -35,11 +35,10 @@ Player::Player(int level)
 void Player::UpdateVelocity()
 {
 	velocity.x = 0;
-	velocity.y = 0;
+	//velocity.y = 0;
 
-	//UpdateGravity();
-
-	if (currentKey[SDL_SCANCODE_SPACE] && !IsFalling())
+	
+	if (currentKey[SDL_SCANCODE_SPACE] && !falling)
 	{
 		velocity.y = -jump;
 	}
@@ -72,23 +71,17 @@ void Player::UpdateVelocity()
 	{
 		Global.scale -= 10 * Global.DeltaTime;
 	}
+
+	UpdateGravity();
 }
 
 void Player::UpdatePosition()
 {
-	pos += velocity * Global.DeltaTime;
-	rect = GetRect();
-	/*for (int i = 0; i < Collisions.size(); ++i) {
-		if (rect.checkCollide(Collisions[i]->GetRect())) {
-			velocity.y = 0;
-			pos.y = Collisions[i]->rect.top - texture_height;
-		}
-	}*/
+	old_rect = rect;
+	pos.x += velocity.x * Global.DeltaTime;
 	Collision("x");
-	
-	//pos += velocity * Global.DeltaTime;
-
-
+	pos.y += velocity.y * Global.DeltaTime;
+	Collision("y");
 }
 
 void Player::UpdateState()
@@ -142,12 +135,12 @@ void Player::Update()
 void Player::Draw()
 {
 	Entity::Draw();
-	rect = GetRect();
-	Rect gravity = GravityRect();
-	Rect r = Rect(rect.x + Global.camera.current_pos.x, rect.y + Global.camera.current_pos.y, rect.w, rect.h);
-	Rect g = Rect(gravity.x + Global.camera.current_pos.x, gravity.y + Global.camera.current_pos.y, gravity.w, gravity.h);
-	window.DrawRect(r);
-	window.DrawRect(g);
+	////rect = GetRect();
+	//Rect gravity = GravityRect();
+	//Rect r = Rect(rect.x + Global.camera.current_pos.x, rect.y + Global.camera.current_pos.y, rect.w, rect.h);
+	//Rect g = Rect(gravity.x + Global.camera.current_pos.x, gravity.y + Global.camera.current_pos.y, gravity.w, gravity.h);
+	//window.DrawRect(r);
+	//window.DrawRect(g);
 }
 
 
