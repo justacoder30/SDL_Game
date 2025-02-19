@@ -34,10 +34,11 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 
+	Global.camera = Camera(Global.camera.rect.w, Global.camera.rect.h);
 	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
 	SDL_SetRenderVSync(renderer, 1);
 	SDL_SetWindowSurfaceVSync(window, 1);
-	SetViewPort(Global.camera.rect);
+	//SetViewPort(Global.camera.rect);
 	
 }
 
@@ -119,8 +120,6 @@ float RenderWindow::CaculateScale(float w, float h)
 	float scale_x = w / Global.camera.rect.w;
 	float scale_y = h / Global.camera.rect.h;
 
-	//std::cout << w << Global.camera.rect.w;;
-
 	return std::min(scale_x, scale_y);
 }
 
@@ -142,9 +141,10 @@ void RenderWindow::Clear()
 void RenderWindow::Render()
 {
 	//Update screen
+	//Global.camera.rect.printf();
 	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
 	SetViewPort(Global.camera.rect);
-
+	//Global.camera.rect.printf();
 	SDL_RenderPresent(renderer);
 
 }

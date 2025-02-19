@@ -43,5 +43,5 @@ SDL_Rect Rect::getRect()
 
 void Rect::printf()
 {
-	std::cout << "(" << x << ", " << y << ", " << w << ", " << w << ")" << std::endl;
+	std::cout << "(" << x << ", " << y << ", " << w << ", " << h << ")" << std::endl;
 }

@@ -6,6 +6,9 @@ class Camera
 {
 private:
 	Rect size;
+	Vector window_size;
+	Vector pos;
+	void CaculateWindowSize();
 public:
 	Rect rect;
 	Vector current_pos;
@@ -15,7 +18,7 @@ public:
 
 	Camera();
 	Camera(float w, float h);
-	void FollowEnity(Vector* pos);
+	void FollowEnity(Vector* _pos);
 	void Update();
 };
 
