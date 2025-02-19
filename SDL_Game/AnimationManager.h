@@ -16,6 +16,7 @@ public:
 	AnimationManager(Animation Animation);
 	void Play(Animation _animation);
 	void Update();
+	bool IsFlip();
 	Rect getRect();
 };
 

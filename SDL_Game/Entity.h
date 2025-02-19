@@ -20,7 +20,7 @@ private:
 protected:
 	int texture_width;
 	int texture_height;
-	int OFFSET[4];
+	Rect OFFSET;
 	float gravity;
 	float speed;
 	float jump;
@@ -37,14 +37,14 @@ public:
 	Vector velocity;
 	Rect rect;
 	Rect old_rect;
-	SDL_FlipMode flip;
-	
 
 	Entity();
 
 	virtual void Update();
 	virtual void Draw();
 
+	void Collision(std::string direction);
+	void SetCollision(float _top, float _left, float _bottom, float _right);
 	Rect GetRect();
 	Rect GravityRect();
 	Vector GetCenter();

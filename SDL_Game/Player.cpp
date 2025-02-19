@@ -21,12 +21,11 @@ Player::Player(int level)
 	speed = 150;
 	gravity = 1000;
 	jump = 400;
-	flip = SDL_FLIP_NONE;
 
 	texture_width = animationManger.animation.FrameWidth;
 	texture_height = animationManger.animation.FrameHeight;
-	OFFSET[0] = 52;
-	OFFSET[1] = 42;
+	
+	SetCollision(42, 48, 0, 57);
 
 	state = State::Idle;
 
@@ -35,9 +34,10 @@ Player::Player(int level)
 
 void Player::UpdateVelocity()
 {
-	velocity.x = 0;	
+	velocity.x = 0;
+	velocity.y = 0;
 
-	UpdateGravity();
+	//UpdateGravity();
 
 	if (currentKey[SDL_SCANCODE_SPACE] && !IsFalling())
 	{
@@ -46,12 +46,22 @@ void Player::UpdateVelocity()
 	if (currentKey[SDL_SCANCODE_A])
 	{
 		velocity.x = -speed;
-		flip = SDL_FLIP_HORIZONTAL;
+		animationManger.flip = SDL_FLIP_HORIZONTAL;
 	}
 	if (currentKey[SDL_SCANCODE_D])
 	{
 		velocity.x = speed;
-		flip = SDL_FLIP_NONE;
+		animationManger.flip = SDL_FLIP_NONE;
+	}
+
+	if (currentKey[SDL_SCANCODE_S])
+	{
+		velocity.y = speed;
+	}
+
+	if (currentKey[SDL_SCANCODE_W])
+	{
+		velocity.y = -speed;
 	}
 
 	if (currentKey[SDL_SCANCODE_Z])
@@ -68,12 +78,13 @@ void Player::UpdatePosition()
 {
 	pos += velocity * Global.DeltaTime;
 	rect = GetRect();
-	for (int i = 0; i < Collisions.size(); ++i) {
+	/*for (int i = 0; i < Collisions.size(); ++i) {
 		if (rect.checkCollide(Collisions[i]->GetRect())) {
 			velocity.y = 0;
-			pos.y = Collisions[i]->GetRect().top - texture_height;
+			pos.y = Collisions[i]->rect.top - texture_height;
 		}
-	}
+	}*/
+	Collision("x");
 	
 	//pos += velocity * Global.DeltaTime;
 

@@ -36,6 +36,13 @@ void AnimationManager::Update()
 	}
 }
 
+bool AnimationManager::IsFlip()
+{
+	if (flip != SDL_FLIP_NONE)
+		return true;
+	return false;
+}
+
 Rect AnimationManager::getRect()
 {
 	return Rect(animation.CurrentFrame * animation.FrameWidth, 0, animation.FrameWidth, animation.FrameHeight);

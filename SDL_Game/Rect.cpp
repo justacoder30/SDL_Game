@@ -15,10 +15,10 @@ Rect::Rect(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
 
 bool Rect::checkCollide(Rect rect)
 {
-	return (top <= rect.bottom and
-		bottom >= rect.top and
-		left <= rect.right and
-		right >= rect.left);
+	return (top < rect.bottom and
+		bottom > rect.top and
+		left < rect.right and
+		right > rect.left);
 }
 
 SDL_FRect Rect::getFRect()
