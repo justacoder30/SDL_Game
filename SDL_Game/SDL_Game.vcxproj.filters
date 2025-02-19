@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Animation">
       <UniqueIdentifier>{1a3819dc-ca86-4e53-bc39-a5dc3e6ae745}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Control">
+      <UniqueIdentifier>{f1cb2ea5-2fe0-40c3-accf-18dbb83fb4db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,6 +69,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -109,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="Global.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

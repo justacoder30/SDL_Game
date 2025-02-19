@@ -3,14 +3,14 @@
 Game::Game()
 {
 	Global.camera = Camera(560, 315);	
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
 	entityManager = EntityManager(0);
 }
 
 void Game::Update()
 {
-	
+	Input.Update();
 	Global.Update();
 	entityManager.Update();
 }

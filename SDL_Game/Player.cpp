@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Input.h"
 
 Player::Player()
 {}
@@ -35,39 +36,38 @@ Player::Player(int level)
 void Player::UpdateVelocity()
 {
 	velocity.x = 0;
-	//velocity.y = 0;
 
 	
-	if (currentKey[SDL_SCANCODE_SPACE] && !falling)
+	if (Key[SDL_SCANCODE_SPACE] && !falling)
 	{
 		velocity.y = -jump;
 	}
-	if (currentKey[SDL_SCANCODE_A])
+	if (Key[SDL_SCANCODE_A])
 	{
 		velocity.x = -speed;
 		animationManger.flip = SDL_FLIP_HORIZONTAL;
 	}
-	if (currentKey[SDL_SCANCODE_D])
+	if (Key[SDL_SCANCODE_D])
 	{
 		velocity.x = speed;
 		animationManger.flip = SDL_FLIP_NONE;
 	}
 
-	if (currentKey[SDL_SCANCODE_S])
+	if (Key[SDL_SCANCODE_S])
 	{
 		velocity.y = speed;
 	}
 
-	if (currentKey[SDL_SCANCODE_W])
+	if (Key[SDL_SCANCODE_W])
 	{
 		velocity.y = -speed;
 	}
 
-	if (currentKey[SDL_SCANCODE_Z])
+	if (Key[SDL_SCANCODE_Z])
 	{
 		Global.scale += 10 * Global.DeltaTime;
 	}
-	if (currentKey[SDL_SCANCODE_X])
+	if (Key[SDL_SCANCODE_X])
 	{
 		Global.scale -= 10 * Global.DeltaTime;
 	}

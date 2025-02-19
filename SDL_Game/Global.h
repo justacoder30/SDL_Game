@@ -6,12 +6,10 @@ class GLOBAL
 {
 private:
 	Uint64 startTime;
-	SDL_Event event;
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
 	float scale;
-	//std::vector<Entity*> Collisions;
 	double DeltaTime;
 	bool gameLoop = true;
 

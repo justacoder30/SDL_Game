@@ -4,7 +4,6 @@
 class Player : public Entity
 {
 private:
-	const bool* currentKey = SDL_GetKeyboardState(NULL);
 public:
 	Vector center_pos;
 

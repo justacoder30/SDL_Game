@@ -140,24 +140,19 @@ void RenderWindow::Clear()
 
 void RenderWindow::Render()
 {
-	//Update screen
-	//Global.camera.rect.printf();
 	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
 	SetViewPort(Global.camera.rect);
-	//Global.camera.rect.printf();
 	SDL_RenderPresent(renderer);
 
 }
 
 void RenderWindow::quit()
 {
-	//Destroy window
 	SDL_DestroyWindow(window);
 	window = NULL;
 
 	SDL_DestroyRenderer(renderer);
 	renderer = NULL;
 
-	//Quit SDL subsystems
 	SDL_Quit();
 }
