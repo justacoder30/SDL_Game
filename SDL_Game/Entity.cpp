@@ -4,7 +4,13 @@ bool Entity::IsFalling()
 {
     Rect g_rect = GravityRect();
     for (int i = 0; i < Collisions.size(); ++i) {
-        if (g_rect.checkCollide(Collisions[i]->GetRect()))
+        Rect r = Collisions[i]->GetRect();
+        /*if (g_rect.checkCollide(r))
+            return false;*/
+        if (g_rect.top <= r.bottom and
+            g_rect.bottom >= r.top and
+            g_rect.left <= r.right and
+            g_rect.right >= r.left)
             return false;
     }
     return true;
@@ -70,11 +76,11 @@ void Entity::Collision(std::string direction)
     }
 }
 
-void Entity::SetCollision(float _top, float _left, float _bottom, float _right)
+void Entity::SetCollision(float _top, float _bottom, float _left, float _right)
 {
     OFFSET.top = _top;
-    OFFSET.left = _left;
     OFFSET.bottom = _bottom;
+    OFFSET.left = _left;
     OFFSET.right = _right;
 }
 

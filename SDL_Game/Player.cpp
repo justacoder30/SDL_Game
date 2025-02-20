@@ -26,83 +26,41 @@ Player::Player(int level)
 	texture_width = animationManger.animation.FrameWidth;
 	texture_height = animationManger.animation.FrameHeight;
 	
-	SetCollision(42, 48, 0, 57);
-
-	state = State::Idle;
+	SetCollision(42, 0, 48, 57);
 
 	center_pos = GetCenter();
+
+	state = new IdleState();
+
 }
 
 void Player::UpdateVelocity()
 {
-	velocity.x = 0;
-
-	
-	if (Key[SDL_SCANCODE_SPACE] && !falling)
-	{
-		velocity.y = -jump;
-	}
-	if (Key[SDL_SCANCODE_A])
-	{
-		velocity.x = -speed;
-		animationManger.flip = SDL_FLIP_HORIZONTAL;
-	}
-	if (Key[SDL_SCANCODE_D])
-	{
-		velocity.x = speed;
-		animationManger.flip = SDL_FLIP_NONE;
-	}
-
-	if (Key[SDL_SCANCODE_S])
-	{
-		velocity.y = speed;
-	}
-
-	if (Key[SDL_SCANCODE_W])
-	{
-		velocity.y = -speed;
-	}
-
-	if (Key[SDL_SCANCODE_Z])
-	{
-		Global.scale += 10 * Global.DeltaTime;
-	}
-	if (Key[SDL_SCANCODE_X])
-	{
-		Global.scale -= 10 * Global.DeltaTime;
-	}
-
 	UpdateGravity();
 }
 
 void Player::UpdatePosition()
 {
 	old_rect = rect;
+
 	pos.x += velocity.x * Global.DeltaTime;
 	Collision("x");
 	pos.y += velocity.y * Global.DeltaTime;
 	Collision("y");
+
+	center_pos = GetCenter();
 }
 
 void Player::UpdateState()
 {
-	state = State::Idle;
-
-	if (velocity.y != 0) {
-		if (velocity.y > 0) state = State::Fall;
-		else state = State::Jump;
-	}
-	else {
-		if (velocity.x != 0) state = State::Run;
-		else state = State::Idle;
-	}
+	state = state->Update(*this);
 }
 
 void Player::UpdateAnimation()
 {
 	animationManger.Update();	
 
-	switch (state) {
+	switch (state->GetState()) {
 		case State::Idle:
 			animationManger.Play(animations["Idle"]);
 			break;
@@ -117,50 +75,18 @@ void Player::UpdateAnimation()
 			break;
 		default:
 			break;
-			// code block
 	}
 		
 }	
 
 void Player::Update()
 {
+	UpdateState();
 	UpdateVelocity();
 	UpdatePosition();
-	UpdateState();
 	UpdateAnimation();
-
-	center_pos = GetCenter();
+	
 }
-
-IdleState::IdleState()
-{
-	state = State::Idle;
-}
-
-void IdleState::Intput(Player& player)
-{
-	if (Key[SDL_SCANCODE_A])
-	{
-		player.velocity.x = -player.speed;
-		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
-	}
-	if (Key[SDL_SCANCODE_D])
-	{
-		player.velocity.x = player.speed;
-		player.animationManger.flip = SDL_FLIP_NONE;
-	}
-}
-
-void IdleState::Update(Player& player)
-{
-
-}
-
-RunState::RunState()
-{
-	state = State::Run;
-}
-
 
 
 

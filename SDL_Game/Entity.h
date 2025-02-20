@@ -14,19 +14,6 @@ enum State
 	Hurt,
 };
 
-class CharacterState
-{
-protected:
-	State state;
-public:
-	virtual ~CharacterState() {}
-	virtual void Intput() {}
-	virtual void Update() {}
-	virtual State GetState() {
-		return state;
-	}
-};
-
 class Entity
 {
 private:
@@ -34,7 +21,6 @@ protected:
 	int texture_width;
 	int texture_height;
 	Rect OFFSET;
-	bool falling;
 
 	bool IsFalling();
 	void UpdateGravity();
@@ -50,6 +36,7 @@ public:
 	float gravity;
 	float speed;
 	float jump;
+	bool falling;
 
 	Entity();
 
@@ -57,7 +44,7 @@ public:
 	virtual void Draw();
 
 	void Collision(std::string direction);
-	void SetCollision(float _top, float _left, float _bottom, float _right);
+	void SetCollision(float _top, float _bottom, float _left, float _right);
 	Rect GetRect();
 	Rect GravityRect();
 	Vector GetCenter();
