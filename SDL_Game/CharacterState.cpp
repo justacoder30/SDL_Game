@@ -15,6 +15,17 @@ CharacterState* IdleState::Update(Player& player)
 {
 	player.velocity.x = 0;
 
+	if (Key[SDL_SCANCODE_SPACE] && !player.falling)
+	{
+		player.velocity.y = -player.jump;
+		return new JumpState();
+	}
+
+	if (player.falling)
+	{
+		return new FallState();
+	}
+
 	if (Key[SDL_SCANCODE_A])
 	{
 		player.velocity.x = -player.speed;
@@ -28,12 +39,6 @@ CharacterState* IdleState::Update(Player& player)
 		return new RunState();
 	}
 
-	/*if (player.velocity.x != 0)
-		return new RunState();*/
-	if (player.velocity.y > 0)
-		return new FallState();
-	if (player.velocity.y < 0)
-		return new JumpState();
     return new IdleState();
 }
 
