@@ -10,10 +10,11 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	float CaculateScale(float w, float h);
+	bool fullscreen;
 	
 public:
 	RenderWindow();
-	RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool fullscreen);
+	RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen);
 	void SetViewPort(Rect view);
 	Vector GetWindowSize();
 	void blit(Texture texture, Rect dest, Rect area);
@@ -22,6 +23,7 @@ public:
 	void blit(Texture texture, Vector vector, Rect area, float scale);
 	void DrawRect(Rect rect);
 	void SetFullScreen(SDL_WindowFlags flags);
+	void FullScreenToggle();
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);
 	void Clear();
 	void Render();

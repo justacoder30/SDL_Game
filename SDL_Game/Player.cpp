@@ -132,15 +132,33 @@ void Player::Update()
 	center_pos = GetCenter();
 }
 
-void Player::Draw()
+IdleState::IdleState()
 {
-	Entity::Draw();
-	////rect = GetRect();
-	//Rect gravity = GravityRect();
-	//Rect r = Rect(rect.x + Global.camera.current_pos.x, rect.y + Global.camera.current_pos.y, rect.w, rect.h);
-	//Rect g = Rect(gravity.x + Global.camera.current_pos.x, gravity.y + Global.camera.current_pos.y, gravity.w, gravity.h);
-	//window.DrawRect(r);
-	//window.DrawRect(g);
+	state = State::Idle;
+}
+
+void IdleState::Intput(Player& player)
+{
+	if (Key[SDL_SCANCODE_A])
+	{
+		player.velocity.x = -player.speed;
+		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
+	}
+	if (Key[SDL_SCANCODE_D])
+	{
+		player.velocity.x = player.speed;
+		player.animationManger.flip = SDL_FLIP_NONE;
+	}
+}
+
+void IdleState::Update(Player& player)
+{
+
+}
+
+RunState::RunState()
+{
+	state = State::Run;
 }
 
 

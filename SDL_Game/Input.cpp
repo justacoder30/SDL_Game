@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "Global.h"
+#include "RenderWindow.h"
 
 INPUT Input = INPUT();
 const bool* Key = SDL_GetKeyboardState(NULL);
@@ -22,6 +23,8 @@ void INPUT::Update()
 			Global.gameLoop = false;
 			break;
 		}
-
 	}
+
+	if (Key[SDL_SCANCODE_F11] && !PrevKey[SDL_SCANCODE_F11])
+		window.FullScreenToggle();
 }

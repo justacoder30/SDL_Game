@@ -6,7 +6,7 @@ RenderWindow window;
 RenderWindow::RenderWindow()
 {}
 
-RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool fullscreen)
+RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen) :fullscreen(_fullscreen)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -33,12 +33,9 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	}
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
-
-	Global.camera = Camera(Global.camera.rect.w, Global.camera.rect.h);
-	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
+	Global.camera.SetCamera(GetWindowSize());
 	SDL_SetRenderVSync(renderer, 1);
 	SDL_SetWindowSurfaceVSync(window, 1);
-	//SetViewPort(Global.camera.rect);
 	
 }
 
@@ -128,6 +125,14 @@ void RenderWindow::SetFullScreen(SDL_WindowFlags flags)
 	SDL_SetWindowFullscreen(window, flags);
 }
 
+void RenderWindow::FullScreenToggle()
+{
+	fullscreen = !fullscreen;
+	SDL_SetWindowFullscreen(window, fullscreen);
+	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
+	Global.camera.SetCamera(GetWindowSize());
+}
+
 void RenderWindow::SetColor(Uint8 r, Uint8 g, Uint8 b)
 {
 	SDL_SetRenderDrawColor(renderer, r, g, b, 0xFF);
@@ -143,7 +148,6 @@ void RenderWindow::Render()
 	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
 	SetViewPort(Global.camera.rect);
 	SDL_RenderPresent(renderer);
-
 }
 
 void RenderWindow::quit()

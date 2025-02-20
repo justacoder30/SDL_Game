@@ -14,6 +14,19 @@ enum State
 	Hurt,
 };
 
+class CharacterState
+{
+protected:
+	State state;
+public:
+	virtual ~CharacterState() {}
+	virtual void Intput() {}
+	virtual void Update() {}
+	virtual State GetState() {
+		return state;
+	}
+};
+
 class Entity
 {
 private:
@@ -21,10 +34,6 @@ protected:
 	int texture_width;
 	int texture_height;
 	Rect OFFSET;
-	float gravity;
-	float speed;
-	float jump;
-	State state;
 	bool falling;
 
 	bool IsFalling();
@@ -38,6 +47,9 @@ public:
 	Vector velocity;
 	Rect rect;
 	Rect old_rect;
+	float gravity;
+	float speed;
+	float jump;
 
 	Entity();
 

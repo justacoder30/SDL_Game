@@ -23,11 +23,18 @@ Camera::Camera(float w, float h)
 	rect = Rect(0, 0, w, h);
 }
 
+void Camera::SetCamera(Vector _windowSize)
+{
+	window_size.x = rect.w * Global.scale;
+	window_size.y = rect.h * Global.scale;
+
+	pos.x = abs(_windowSize.x - window_size.x) / 2.f;
+	pos.y = abs(_windowSize.y - window_size.y) / 2.f;
+}
+
 void Camera::FollowEnity(Vector* _pos)
 {
 	dst_pos = _pos;
-	pos.x = abs(window.GetWindowSize().x - window_size.x) / 2.f;
-	pos.y = abs(window.GetWindowSize().y - window_size.y) / 2.f;
 }
 
 void Camera::Update()
