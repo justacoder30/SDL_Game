@@ -147,7 +147,7 @@ CharacterState* AttackState::Update(Player& player)
 	if (player.animationManger.FrameEnd())
 		return new IdleState();
 
-	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) {
+	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) 
 		doubleAttack = true;
 
 	return this;
