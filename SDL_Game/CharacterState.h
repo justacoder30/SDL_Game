@@ -42,3 +42,19 @@ public:
 	FallState();
 	CharacterState* Update(Player& player) override;
 };
+
+class AttackState : public CharacterState
+{
+protected:
+	bool doubleAttack;
+public:
+	AttackState();
+	CharacterState* Update(Player& player) override;
+};
+
+class DoubleAttackState : public CharacterState
+{
+public:
+	DoubleAttackState();
+	CharacterState* Update(Player& player) override;
+};

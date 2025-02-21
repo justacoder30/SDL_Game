@@ -11,6 +11,7 @@ enum State
 	Jump,
 	Fall,
 	Attack,
+	DoubleAttack,
 	Hurt,
 };
 

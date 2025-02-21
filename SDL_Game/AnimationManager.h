@@ -17,6 +17,7 @@ public:
 	void Play(Animation _animation);
 	void Update();
 	bool IsFlip();
+	bool FrameEnd();
 	Rect getRect();
 };
 

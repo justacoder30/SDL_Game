@@ -43,6 +43,11 @@ bool AnimationManager::IsFlip()
 	return false;
 }
 
+bool AnimationManager::FrameEnd()
+{
+	return animation.CurrentFrame + 1 >= animation.FrameCount;
+}
+
 Rect AnimationManager::getRect()
 {
 	return Rect(animation.CurrentFrame * animation.FrameWidth, 0, animation.FrameWidth, animation.FrameHeight);

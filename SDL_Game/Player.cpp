@@ -9,7 +9,8 @@ Player::Player(int level)
 	animations = {
 		{"Idle", Animation("resource/img/Player/Idle.png", 10, 0.05)},
 	    {"Run", Animation("resource/img/Player/Run.png", 10, 0.04)},
-		{"Attack", Animation("resource/img/Player/Attack.png", 6, 0.04, true)},
+		{"Attack", Animation("resource/img/Player/Attack.png", 4, 0.07, true)},
+		{"DoubleAttack", Animation("resource/img/Player/Attack2.png", 6, 0.045, true)},
 		{"Jump", Animation("resource/img/Player/Jump.png", 3)},
 		{"Fall", Animation("resource/img/Player/Fall.png", 3)},
 	};
@@ -58,7 +59,7 @@ void Player::UpdateState()
 
 void Player::UpdateAnimation()
 {
-	animationManger.Update();	
+		
 
 	switch (state->GetState()) {
 		case State::Idle:
@@ -73,9 +74,17 @@ void Player::UpdateAnimation()
 		case State::Fall:
 			animationManger.Play(animations["Fall"]);
 			break;
+		case State::Attack:
+			animationManger.Play(animations["Attack"]);
+			break;
+		case State::DoubleAttack:
+			animationManger.Play(animations["DoubleAttack"]);
+			break;
 		default:
 			break;
 	}
+
+	animationManger.Update();
 		
 }	
 

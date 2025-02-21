@@ -15,25 +15,26 @@ CharacterState* IdleState::Update(Player& player)
 {
 	player.velocity.x = 0;
 
-	if (Key[SDL_SCANCODE_SPACE] && !player.falling)
-	{
+	if (Key[SDL_SCANCODE_SPACE] && !player.falling)	{
 		player.velocity.y = -player.jump;
 		return new JumpState();
 	}
 
-	if (player.falling)
-	{
+	if (player.falling)	{
 		return new FallState();
 	}
 
-	if (Key[SDL_SCANCODE_A])
-	{
+	if (Key[SDL_SCANCODE_J]) {
+		return new AttackState();
+	}
+
+	if (Key[SDL_SCANCODE_A]) {
 		player.velocity.x = -player.speed;
 		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
 		return new RunState();
 	}
-	if (Key[SDL_SCANCODE_D])
-	{
+
+	if (Key[SDL_SCANCODE_D]) {
 		player.velocity.x = player.speed;
 		player.animationManger.flip = SDL_FLIP_NONE;
 		return new RunState();
@@ -49,26 +50,22 @@ RunState::RunState()
 
 CharacterState* RunState::Update(Player& player)
 {
-	if (Key[SDL_SCANCODE_SPACE] && !player.falling)
-	{
+	if (Key[SDL_SCANCODE_SPACE] && !player.falling)	{
 		player.velocity.y = -player.jump;
 		return new JumpState();
 	}
 
-	if (player.falling)
-	{
+	if (player.falling)	{
 		return new FallState();
 	}
 
-	if (Key[SDL_SCANCODE_A])
-	{
+	if (Key[SDL_SCANCODE_A]) {
 		player.velocity.x = -player.speed;
 		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
 		return new RunState();
 	}
 
-	if (Key[SDL_SCANCODE_D])
-	{
+	if (Key[SDL_SCANCODE_D]) {
 		player.velocity.x = player.speed;
 		player.animationManger.flip = SDL_FLIP_NONE;
 		return new RunState();
@@ -86,16 +83,15 @@ CharacterState* JumpState::Update(Player& player)
 {
 	player.velocity.x = 0;
 
-	if (Key[SDL_SCANCODE_A])
-	{
+	if (Key[SDL_SCANCODE_A]) {
 		player.velocity.x = -player.speed;
 		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
 	} 
-	else if (Key[SDL_SCANCODE_D])
-	{
+	else if (Key[SDL_SCANCODE_D]) {
 		player.velocity.x = player.speed;
 		player.animationManger.flip = SDL_FLIP_NONE;
 	}
+
 	if (player.velocity.y > 0)
 		return new FallState();
 	return new JumpState();
@@ -110,13 +106,11 @@ CharacterState* FallState::Update(Player& player)
 {
 	player.velocity.x = 0;
 
-	if (Key[SDL_SCANCODE_A])
-	{
+	if (Key[SDL_SCANCODE_A]) {
 		player.velocity.x = -player.speed;
 		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
 	}
-	else if (Key[SDL_SCANCODE_D])
-	{
+	else if (Key[SDL_SCANCODE_D]) {
 		player.velocity.x = player.speed;
 		player.animationManger.flip = SDL_FLIP_NONE;
 	}
@@ -125,4 +119,61 @@ CharacterState* FallState::Update(Player& player)
 	if (player.velocity.y == 0)
 		return new IdleState();
 	return new FallState();
+}
+
+AttackState::AttackState()
+{
+	state = State::Attack;
+	doubleAttack = false;
+}
+
+CharacterState* AttackState::Update(Player& player)
+{
+	if (player.animationManger.FrameEnd() && doubleAttack)
+		return new DoubleAttackState();
+
+	if (Key[SDL_SCANCODE_A]) {
+		player.velocity.x = -player.speed;
+		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
+		return new RunState();
+	}
+
+	if (Key[SDL_SCANCODE_D]) {
+		player.velocity.x = player.speed;
+		player.animationManger.flip = SDL_FLIP_NONE;
+		return new RunState();
+	}
+
+	if (player.animationManger.FrameEnd())
+		return new IdleState();
+
+	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) {
+		doubleAttack = true;
+
+	return this;
+}
+
+DoubleAttackState::DoubleAttackState()
+{
+	state = State::DoubleAttack;
+}
+
+CharacterState* DoubleAttackState::Update(Player& player)
+{
+	if (player.animationManger.FrameEnd())
+		return new IdleState();
+
+	if (Key[SDL_SCANCODE_A]) {
+		player.velocity.x = -player.speed;
+		player.animationManger.flip = SDL_FLIP_HORIZONTAL;
+		return new RunState();
+	}
+
+	if (Key[SDL_SCANCODE_D]) {
+		player.velocity.x = player.speed;
+		player.animationManger.flip = SDL_FLIP_NONE;
+		return new RunState();
+	}
+
+	return new DoubleAttackState();
 }
