@@ -108,7 +108,6 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src)
 {
 	tex = _texure;
     dst = _dst;
-    pos = Vector(dst.x, dst.y);
 	src = _src;
 
     rect = dst;
@@ -117,8 +116,8 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src)
 
 void TiledMap::Update()
 {
-    dst.x = pos.x + Global.camera.current_pos.x;
-    dst.y = pos.y + Global.camera.current_pos.y;
+    dst.x = rect.x + Global.camera.current_pos.x;
+    dst.y = rect.y + Global.camera.current_pos.y;
 }
 
 void TiledMap::Draw()

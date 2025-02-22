@@ -17,7 +17,6 @@ Player::Player(int level)
 
 	animationManger = AnimationManager(animations["Run"]);
 	tex = animations["Run"].texture;
-	pos = Vector(0, 0);
 	velocity = Vector(0, 0);
 	rect = animationManger.getRect();
 	speed = 150;
@@ -33,6 +32,9 @@ Player::Player(int level)
 
 	state = new IdleState();
 
+	rect = Rect(0, 0, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
+	old_rect = rect;
+
 }
 
 void Player::UpdateVelocity()
@@ -44,9 +46,9 @@ void Player::UpdatePosition()
 {
 	old_rect = rect;
 
-	pos.x += velocity.x * Global.DeltaTime;
+	rect.x += velocity.x * Global.DeltaTime;
 	Collision("x");
-	pos.y += velocity.y * Global.DeltaTime;
+	rect.y += velocity.y * Global.DeltaTime;
 	Collision("y");
 
 	center_pos = GetCenter();

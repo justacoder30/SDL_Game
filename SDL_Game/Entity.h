@@ -21,16 +21,15 @@ private:
 protected:
 	int texture_width;
 	int texture_height;
+	Texture tex;
 	Rect OFFSET;
+	std::unordered_map<std::string, Animation> animations;	
 
 	bool IsFalling();
 	void UpdateGravity();
 
-public:
-	std::unordered_map<std::string, Animation> animations;
-	AnimationManager animationManger;
-	Texture tex;
-	Vector pos;
+public:	
+	AnimationManager animationManger;	
 	Vector velocity;
 	Rect rect;
 	Rect old_rect;
@@ -46,7 +45,7 @@ public:
 
 	void Collision(std::string direction);
 	void SetCollision(float _top, float _bottom, float _left, float _right);
-	Rect GetRect();
+	Vector GetPos();
 	Rect GravityRect();
 	Vector GetCenter();
 };

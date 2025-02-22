@@ -20,13 +20,11 @@ CharacterState* IdleState::Update(Player& player)
 		return new JumpState();
 	}
 
-	if (player.falling)	{
-		return new FallState();
-	}
+	if (player.falling)	
+		return new FallState();	
 
-	if (Key[SDL_SCANCODE_J]) {
+	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) 
 		return new AttackState();
-	}
 
 	if (Key[SDL_SCANCODE_A]) {
 		player.velocity.x = -player.speed;
