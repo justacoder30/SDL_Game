@@ -13,6 +13,12 @@ enum State
 	Attack,
 	DoubleAttack,
 	Hurt,
+	TurnAround,
+	Slide,
+	Crouch,
+	CrouchTransition,
+	CrouchWalk,
+	CrouchAttack,
 };
 
 class Entity

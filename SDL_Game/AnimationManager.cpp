@@ -45,7 +45,7 @@ bool AnimationManager::IsFlip()
 
 bool AnimationManager::FrameEnd()
 {
-	return animation.CurrentFrame + 1 >= animation.FrameCount;
+	return animation.CurrentFrame + 1 >= animation.FrameCount && timer + Global.DeltaTime > animation.FrameSpeed;
 }
 
 Rect AnimationManager::getRect()

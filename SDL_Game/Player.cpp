@@ -9,10 +9,16 @@ Player::Player(int level)
 	animations = {
 		{"Idle", Animation("resource/img/Player/Idle.png", 10, 0.05)},
 	    {"Run", Animation("resource/img/Player/Run.png", 10, 0.04)},
-		{"Attack", Animation("resource/img/Player/Attack.png", 4, 0.07, true)},
-		{"DoubleAttack", Animation("resource/img/Player/Attack2.png", 6, 0.045, true)},
+		{"Attack", Animation("resource/img/Player/Attack.png", 4, 0.065)},
+		{"DoubleAttack", Animation("resource/img/Player/Attack2.png", 6, 0.045)},
 		{"Jump", Animation("resource/img/Player/Jump.png", 3)},
 		{"Fall", Animation("resource/img/Player/Fall.png", 3)},
+		{"TurnAround", Animation("resource/img/Player/TurnAround.png", 3)},
+		{"Slide", Animation("resource/img/Player/Slide.png", 4)},
+		{"Crouch", Animation("resource/img/Player/Crouch.png", 1)},
+		{"CrouchTransition", Animation("resource/img/Player/CrouchTransition.png", 1)},
+		{"CrouchWalk", Animation("resource/img/Player/CrouchWalk.png", 8)},
+		{"CrouchAttack", Animation("resource/img/Player/CrouchAttack.png", 4)},
 	};
 
 	animationManger = AnimationManager(animations["Run"]);
@@ -81,6 +87,24 @@ void Player::UpdateAnimation()
 			break;
 		case State::DoubleAttack:
 			animationManger.Play(animations["DoubleAttack"]);
+			break;
+		case State::TurnAround:
+			animationManger.Play(animations["TurnAround"]);
+			break;
+		case State::Slide:
+			animationManger.Play(animations["Slide"]);
+			break;
+		case State::Crouch:
+			animationManger.Play(animations["Crouch"]);
+			break;
+		case State::CrouchTransition:
+			animationManger.Play(animations["CrouchTransition"]);
+			break;
+		case State::CrouchWalk:
+			animationManger.Play(animations["CrouchWalk"]);
+			break;
+		case State::CrouchAttack:
+			animationManger.Play(animations["CrouchAttack"]);
 			break;
 		default:
 			break;

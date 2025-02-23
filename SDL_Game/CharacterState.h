@@ -58,3 +58,48 @@ public:
 	DoubleAttackState();
 	CharacterState* Update(Player& player) override;
 };
+
+class TurnAroundState : public CharacterState
+{
+public:
+	TurnAroundState();
+	CharacterState* Update(Player& player) override;
+};
+
+class SlideState : public CharacterState
+{
+public:
+	SlideState();
+	CharacterState* Update(Player& player) override;
+};
+
+class CrouchTransitionState : public CharacterState
+{
+private:
+	bool crouch;
+public:
+	CrouchTransitionState(bool _crouch);
+	CharacterState* Update(Player& player) override;
+};
+
+class CrouchState : public CharacterState
+{
+public:
+	CrouchState();
+	CharacterState* Update(Player& player) override;
+};
+
+class CrouchWalkState : public CharacterState
+{
+public:
+	CrouchWalkState();
+	CharacterState* Update(Player& player) override;
+};
+
+class CrouchAttackState : public CharacterState
+{
+public:
+	CrouchAttackState();
+	CharacterState* Update(Player& player) override;
+};
+

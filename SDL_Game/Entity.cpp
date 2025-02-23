@@ -33,7 +33,7 @@ void Entity::Draw()
                 animationManger.flip
     );    
 
-    Rect r = rect;
+   /* Rect r = rect;
     r.x += Global.camera.current_pos.x;
     r.y += Global.camera.current_pos.y;
 
@@ -42,7 +42,7 @@ void Entity::Draw()
     g_rect.y += Global.camera.current_pos.y;
 
     window.DrawRect(r);
-    window.DrawRect(g_rect);
+    window.DrawRect(g_rect);*/
 }
 
 void Entity::Collision(std::string direction)
