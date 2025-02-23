@@ -4,7 +4,7 @@
 Player::Player()
 {}
 
-Player::Player(int level)
+Player::Player(int level, Vector pos)
 {
 	animations = {
 		{"Idle", Animation("resource/img/Player/Idle.png", 10, 0.05)},
@@ -37,8 +37,9 @@ Player::Player(int level)
 	center_pos = GetCenter();
 
 	state = new IdleState();
+	pos.printf();
 
-	rect = Rect(0, 0, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
+	rect = Rect(pos.x, pos.y, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
 	old_rect = rect;
 
 }

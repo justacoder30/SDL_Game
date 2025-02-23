@@ -12,7 +12,7 @@ public:
 	CharacterState* state;
 
 	Player();
-	Player(int level);
+	Player(int level, Vector pos);
 	void UpdateVelocity();
 	void UpdatePosition();
 	void UpdateState();

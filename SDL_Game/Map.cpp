@@ -1,14 +1,7 @@
 #include "Map.h"
 #include <tmxlite/TileLayer.hpp>
 
-tmx::Map InitMap(std::string f_path) {
-	tmx::Map map;
-
-	if (!map.load(f_path))
-		std::cout << "Failed to load map: " << f_path << std::endl;
-
-	return map;
-}
+tmx::Map Map::map;
 
 std::vector<Texture*> GetTextures(std::vector<tmx::Tileset> tileSets) {
 	std::vector<Texture*> texure;
@@ -86,9 +79,32 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
     }
 }
 
+Vector Map::GetPos(std::string name)
+{
+    auto tileSets = Map::map.getTilesets();
+    const auto& mapLayers = Map::map.getLayers();
+
+    for (auto i = 0u; i < mapLayers.size(); ++i)
+    {
+        if (mapLayers[i]->getName() == name) {
+            const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
+            const auto& obj = layer1.getObjects();
+            return Vector(obj[0].getPosition().x, obj[0].getPosition().y);
+        }
+    }
+
+    return Vector();
+}
+
+void Map::InitMap(std::string f_path)
+{
+    if (!Map::map.load(f_path))
+        std::cout << "Failed to load map: " << f_path << std::endl;
+}
+
 Map::Map(int level, std::vector<Entity*>& Entities)
 {
-    tmx::Map map = InitMap("resource/Map1/map1.tmx");
+    InitMap("resource/Map1/map1.tmx");
 
     auto tileSets = map.getTilesets();
 	std::vector<Texture*> texure = GetTextures(map.getTilesets());
@@ -97,13 +113,7 @@ Map::Map(int level, std::vector<Entity*>& Entities)
     //const auto& layer1 = layers[layerIndex]->getLayerAs<tmx::ObjectGroup>();
 	for (auto i = 0u; i < mapLayers.size(); ++i)
 	{
-		//std::cout << mapLayers[i]->getName() << std::endl;
-        if (mapLayers[i]->getName() == "PlayerPosition") {
-            const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
-            const auto& obj = layer1.getObjects();
-            std::cout << obj[0].getPosition().x << std::endl;
-        }
-		if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
+        if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
 		{
 			CreateMap(map, i, texure, Entities);
 		}
