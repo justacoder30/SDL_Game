@@ -20,6 +20,7 @@ class Map
 {
 private:
 	std::vector<TiledMap*> tiledmap;
+	//static tmx::Map map;
 public:
 	Map() {}
 	Map(int level, std::vector<Entity*>& Entities);

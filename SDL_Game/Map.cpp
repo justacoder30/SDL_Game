@@ -88,15 +88,21 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
 
 Map::Map(int level, std::vector<Entity*>& Entities)
 {
-	tmx::Map map = InitMap("resource/Map1/map1.tmx");
+    tmx::Map map = InitMap("resource/Map1/map1.tmx");
 
     auto tileSets = map.getTilesets();
 	std::vector<Texture*> texure = GetTextures(map.getTilesets());
 
 	const auto& mapLayers = map.getLayers();
+    //const auto& layer1 = layers[layerIndex]->getLayerAs<tmx::ObjectGroup>();
 	for (auto i = 0u; i < mapLayers.size(); ++i)
 	{
 		//std::cout << mapLayers[i]->getName() << std::endl;
+        if (mapLayers[i]->getName() == "PlayerPosition") {
+            const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
+            const auto& obj = layer1.getObjects();
+            std::cout << obj[0].getPosition().x << std::endl;
+        }
 		if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
 		{
 			CreateMap(map, i, texure, Entities);
