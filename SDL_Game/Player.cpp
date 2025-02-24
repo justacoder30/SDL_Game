@@ -39,7 +39,7 @@ Player::Player(int level, Vector pos)
 	state = new IdleState();
 	pos.printf();
 
-	rect = Rect(pos.x, pos.y, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
+	rect = Rect(pos.x + OFFSET.left, pos.y - OFFSET.top, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
 	old_rect = rect;
 
 }

@@ -23,10 +23,10 @@ CharacterState* IdleState::Update(Player& player)
 	if (player.falling)	
 		return new FallState();	
 
-	if (Key[SDL_SCANCODE_LCTRL] && !PrevKey[SDL_SCANCODE_LCTRL])
+	if (Key[SDL_SCANCODE_LCTRL] && !PreKey[SDL_SCANCODE_LCTRL])
 		return new CrouchTransitionState(true);
 
-	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) 
+	if (Key[SDL_SCANCODE_J] && !PreKey[SDL_SCANCODE_J]) 
 		return new AttackState();
 
 	if (Key[SDL_SCANCODE_A]) {
@@ -60,11 +60,11 @@ CharacterState* RunState::Update(Player& player)
 		return new FallState();
 	}
 
-	if (Key[SDL_SCANCODE_A] && Key[SDL_SCANCODE_S] && !PrevKey[SDL_SCANCODE_S]) {
+	if (Key[SDL_SCANCODE_A] && Key[SDL_SCANCODE_S] && !PreKey[SDL_SCANCODE_S]) {
 		return new SlideState();
 	}
 
-	if (Key[SDL_SCANCODE_D] && Key[SDL_SCANCODE_S] && !PrevKey[SDL_SCANCODE_S]) {
+	if (Key[SDL_SCANCODE_D] && Key[SDL_SCANCODE_S] && !PreKey[SDL_SCANCODE_S]) {
 		return new SlideState();
 	}
 
@@ -164,7 +164,7 @@ CharacterState* AttackState::Update(Player& player)
 		return new RunState();
 	}
 
-	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J]) 
+	if (Key[SDL_SCANCODE_J] && !PreKey[SDL_SCANCODE_J]) 
 		doubleAttack = true;
 
 	return this;
@@ -252,7 +252,7 @@ CrouchState::CrouchState()
 CharacterState* CrouchState::Update(Player& player)
 {
 	player.velocity.x = 0;
-	if (Key[SDL_SCANCODE_LCTRL] && !PrevKey[SDL_SCANCODE_LCTRL])
+	if (Key[SDL_SCANCODE_LCTRL] && !PreKey[SDL_SCANCODE_LCTRL])
 		return new CrouchTransitionState(false);
 
 	if (Key[SDL_SCANCODE_D]) {
@@ -267,7 +267,7 @@ CharacterState* CrouchState::Update(Player& player)
 		return new CrouchWalkState();
 	}
 
-	if (Key[SDL_SCANCODE_J] && !PrevKey[SDL_SCANCODE_J])
+	if (Key[SDL_SCANCODE_J] && !PreKey[SDL_SCANCODE_J])
 		return new CrouchAttackState();
 
 	return new CrouchState();
@@ -281,7 +281,7 @@ CrouchWalkState::CrouchWalkState()
 CharacterState* CrouchWalkState::Update(Player& player)
 {
 	float crouch_speed = player.speed * 0.5;
-	if (Key[SDL_SCANCODE_LCTRL] && !PrevKey[SDL_SCANCODE_LCTRL])
+	if (Key[SDL_SCANCODE_LCTRL] && !PreKey[SDL_SCANCODE_LCTRL])
 		return new CrouchTransitionState(false);
 
 	if (Key[SDL_SCANCODE_A]) {

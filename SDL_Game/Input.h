@@ -15,4 +15,4 @@ public:
 
 extern INPUT Input;
 extern const bool* Key;
-extern bool PrevKey[SDL_SCANCODE_COUNT];
+extern bool PreKey[SDL_SCANCODE_COUNT];

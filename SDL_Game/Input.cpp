@@ -4,12 +4,12 @@
 
 INPUT Input = INPUT();
 const bool* Key = SDL_GetKeyboardState(NULL);
-bool PrevKey[SDL_SCANCODE_COUNT];
+bool PreKey[SDL_SCANCODE_COUNT];
 
 void INPUT::CopyKey()
 {
 	for (int i = 0; i < SDL_SCANCODE_COUNT; i++) { // init them all to false
-		PrevKey[i] = Key[i];
+		PreKey[i] = Key[i];
 	}
 }
 
@@ -25,6 +25,6 @@ void INPUT::Update()
 		}
 	}
 
-	if (Key[SDL_SCANCODE_F11] && !PrevKey[SDL_SCANCODE_F11])
+	if (Key[SDL_SCANCODE_F11] && !PreKey[SDL_SCANCODE_F11])
 		window.FullScreenToggle();
 }
