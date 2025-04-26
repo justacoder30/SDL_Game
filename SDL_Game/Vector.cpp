@@ -1,6 +1,6 @@
 #include "Vector.h"
 #include <iostream>
-
+////hdhadh
 Vector& Vector::operator+=(Vector const& v2)
 {
     x += + v2.x;
