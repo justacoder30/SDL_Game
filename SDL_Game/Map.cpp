@@ -104,7 +104,7 @@ void Map::InitMap(std::string f_path)
 
 Map::Map(int level, std::vector<Entity*>& Entities)
 {
-    InitMap("resource/Map1/map1.tmx");
+    InitMap("resource/Map/map" + std::to_string(level) + ".tmx");
 
     auto tileSets = map.getTilesets();
 	std::vector<Texture*> texure = GetTextures(map.getTilesets());
