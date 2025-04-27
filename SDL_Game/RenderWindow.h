@@ -17,7 +17,7 @@ public:
 	RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen);
 	void SetViewPort(Rect view);
 	Vector GetWindowSize();
-	void blit(Texture texture, Rect dest, Rect area);
+	void blit(Texture texture, Rect dest, Rect area, float rotate = 0.0, SDL_FlipMode flip = SDL_FLIP_NONE);
 	void blit(Texture texture, Vector vector, Rect area);
 	void blit(Texture texture, Vector vector, Rect area, SDL_FlipMode flip);
 	void blit(Texture texture, Vector vector, Rect area, float scale);

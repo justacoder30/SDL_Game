@@ -43,6 +43,7 @@ public:
 	float speed;
 	float jump;
 	bool falling;
+	float rotate;
 
 	Entity();
 
