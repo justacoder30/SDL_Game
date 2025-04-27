@@ -52,14 +52,14 @@ Vector RenderWindow::GetWindowSize()
 	return Vector(w, h);
 }
 
-void RenderWindow::blit(Texture texture, Rect dest, Rect area)
+void RenderWindow::blit(Texture texture, Rect dest, Rect area, float rotate, SDL_FlipMode flip)
 {
 	SDL_FRect src, dst;
 
 	dst = dest.getFRect();
 	src = area.getFRect();
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
+	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, rotate, NULL, flip);
 }
 
 void RenderWindow::blit(Texture texture, Vector vector, Rect area)
