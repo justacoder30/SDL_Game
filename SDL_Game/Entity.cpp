@@ -4,7 +4,11 @@ bool Entity::IsFalling()
 {
     Rect g_rect = GravityRect();
     for (int i = 0; i < Collisions.size(); ++i) {
-        if (g_rect.checkCollide(Collisions[i]->rect))
+        //if (g_rect.checkCollide(Collisions[i]->rect) ) 
+        if (g_rect.top <= Collisions[i]->rect.bottom and
+            g_rect.bottom >= Collisions[i]->rect.top and
+            g_rect.left <= Collisions[i]->rect.right and
+            g_rect.right >= Collisions[i]->rect.left)
             return false;
     }
     return true;
