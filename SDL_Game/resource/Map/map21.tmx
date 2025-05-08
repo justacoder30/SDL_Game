@@ -70,6 +70,6 @@
   <object id="5" x="2080" y="720" width="48" height="32"/>
  </objectgroup>
  <objectgroup id="2" name="PlayerPosition">
-  <object id="1" x="187.333" y="424" width="72" height="97"/>
+  <object id="1" x="195.333" y="340" width="72" height="97"/>
  </objectgroup>
 </map>
