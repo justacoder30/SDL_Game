@@ -3,7 +3,7 @@
 EntityManager::EntityManager(int level)
 {
 	Entities.push_back(new Background());
-	Map map(22, Entities);
+	Map map(1, Entities);
 	player = new Player(0, Map::GetPos("PlayerPosition"));
 	Entities.push_back(player);
 
