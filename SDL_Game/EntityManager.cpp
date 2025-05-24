@@ -3,8 +3,13 @@
 EntityManager::EntityManager(int level)
 {
 	Entities.push_back(new Background());
+<<<<<<< HEAD
 	Map map(1, Entities);
 	player = new Player(0, map.GetPos("PlayerPosition"));
+=======
+	Map map(2, Entities);
+	player = new Player(0, Map::GetPos("PlayerPosition"));
+>>>>>>> Dung---Map
 	Entities.push_back(player);
 
 	Global.camera.Follow(&player->center_pos);
