@@ -13,6 +13,7 @@ public:
 	int FrameHeight;
 
 	Animation();
-	Animation(const char* f_p, int frame_count, float frame_speed = 0.08, bool Loop = false);
+	Animation(const char* f_p, int frame_count, float frame_speed = 0.08, bool Loop = true);
+	int LastFrame();
 };
 

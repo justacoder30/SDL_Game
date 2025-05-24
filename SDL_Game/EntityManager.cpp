@@ -4,10 +4,10 @@ EntityManager::EntityManager(int level)
 {
 	Entities.push_back(new Background());
 	Map map(1, Entities);
-	player = new Player(0, Map::GetPos("PlayerPosition"));
+	player = new Player(0, map.GetPos("PlayerPosition"));
 	Entities.push_back(player);
 
-	Global.camera.FollowEnity(&player->center_pos);
+	Global.camera.Follow(&player->center_pos);
 }
 
 void EntityManager::Update()

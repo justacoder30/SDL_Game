@@ -13,3 +13,8 @@ Animation::Animation(const char* f_p, int frame_count, float frame_speed, bool L
 	FrameWidth = texture.getWidth() / FrameCount;
 	FrameHeight = texture.getHeight();
 }
+
+int Animation::LastFrame()
+{
+	return FrameCount-1;
+}

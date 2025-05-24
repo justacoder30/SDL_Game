@@ -1,6 +1,16 @@
 #include "Vector.h"
 #include <iostream>
 
+Vector Vector::zero()
+{
+    return Vector(0, 0);
+}
+
+Vector Vector::all(float size)
+{
+    return Vector(size, size);
+}
+
 Vector& Vector::operator+=(Vector const& v2)
 {
     x += + v2.x;

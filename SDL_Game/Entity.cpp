@@ -1,25 +1,24 @@
 #include "Entity.h"
 
-bool Entity::IsFalling()
+bool Entity::IsOnGround()
 {
     Rect g_rect = GravityRect();
     for (int i = 0; i < Collisions.size(); ++i) {
-        //if (g_rect.checkCollide(Collisions[i]->rect) ) 
-        if (g_rect.top <= Collisions[i]->rect.bottom and
-            g_rect.bottom >= Collisions[i]->rect.top and
-            g_rect.left <= Collisions[i]->rect.right and
-            g_rect.right >= Collisions[i]->rect.left)
-            return false;
+        if (g_rect.checkCollide(Collisions[i]->rect) ) 
+            return true;
     }
-    return true;
+    return false;
 }
 
 void Entity::UpdateGravity()
 {
-    if (IsFalling()) {
-        velocity.y += gravity * Global.DeltaTime;
-        falling = true;
-    }
+    isOnGround = IsOnGround();
+}
+
+void Entity::UpdateAnimation()
+{
+    animationManger.Play(animations[current]);
+    animationManger.Update();
 }
 
 Entity::Entity()
@@ -37,7 +36,7 @@ void Entity::Draw()
                 animationManger.flip
     );    
 
-   /* Rect r = rect;
+    /*Rect r = rect;
     r.x += Global.camera.current_pos.x;
     r.y += Global.camera.current_pos.y;
 
@@ -61,7 +60,7 @@ void Entity::Collision(std::string direction)
             if (rect.bottom >= Collisions[i]->rect.top && old_rect.bottom <= Collisions[i]->old_rect.top) {
                 rect.bottom = Collisions[i]->rect.top;
                 rect.y = Collisions[i]->rect.top - rect.h;
-                falling = false;
+                isOnGround = true;
             }
 
             if (rect.top <= Collisions[i]->rect.bottom && old_rect.top >= Collisions[i]->old_rect.bottom) {
@@ -85,7 +84,7 @@ void Entity::Collision(std::string direction)
     }
 }
 
-void Entity::SetCollision(float _top, float _bottom, float _left, float _right)
+void Entity::SetCollision(float _left, float _top, float _right, float _bottom)
 {
     OFFSET.top = _top;
     OFFSET.bottom = _bottom;

@@ -2,7 +2,7 @@
 
 Background::Background()
 {
-	tex = Texture("resource/img/Background/Background1.png");
+	tex = Texture("resource/img/Background/background.png");
 	rect = Rect(0, 0, tex.getWidth(), tex.getHeight());
 }
 

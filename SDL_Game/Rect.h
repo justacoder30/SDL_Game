@@ -9,6 +9,7 @@ public:
 	float x, y, w, h;
 	float top, bottom, left, right;
 	bool checkCollide(Rect rect);
+	bool checkCollide1(Rect rect);
 	SDL_FRect getFRect();
 	SDL_Rect getRect();
 	void printf();

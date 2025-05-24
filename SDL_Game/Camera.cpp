@@ -32,7 +32,7 @@ void Camera::SetCamera(Vector _windowSize)
 	pos.y = abs(_windowSize.y - window_size.y) / 2.f;
 }
 
-void Camera::FollowEnity(Vector* _pos)
+void Camera::Follow(Vector* _pos)
 {
 	dst_pos = _pos;
 }

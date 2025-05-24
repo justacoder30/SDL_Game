@@ -21,6 +21,14 @@ bool Rect::checkCollide(Rect rect)
 		right > rect.left);
 }
 
+bool Rect::checkCollide1(Rect rect)
+{
+	return (top <= rect.bottom and
+		bottom >= rect.top and
+		left <= rect.right and
+		right >= rect.left);
+}
+
 SDL_FRect Rect::getFRect()
 {
 	SDL_FRect frect;

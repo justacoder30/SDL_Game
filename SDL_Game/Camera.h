@@ -19,7 +19,7 @@ public:
 	Camera();
 	Camera(float w, float h);
 	void SetCamera(Vector _windowSize);
-	void FollowEnity(Vector* _pos);
+	void Follow(Vector* _pos);
 	void Update();
 };
 

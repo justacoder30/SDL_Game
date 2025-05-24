@@ -19,6 +19,7 @@ enum State
 	CrouchTransition,
 	CrouchWalk,
 	CrouchAttack,
+	Death,
 };
 
 class Entity
@@ -29,20 +30,23 @@ protected:
 	int texture_height;
 	Texture tex;
 	Rect OFFSET;
-	std::unordered_map<std::string, Animation> animations;	
+	std::unordered_map<State, Animation> animations;
 
-	bool IsFalling();
+	bool IsOnGround();
 	void UpdateGravity();
+	void UpdateAnimation();
 
 public:	
 	AnimationManager animationManger;	
+	Vector center_pos;
+	State current;
 	Vector velocity;
 	Rect rect;
 	Rect old_rect;
+	bool isOnGround;
 	float gravity;
-	float speed;
+	float moveSpeed;
 	float jump;
-	bool falling;
 	float rotate;
 
 	Entity();
@@ -51,7 +55,7 @@ public:
 	virtual void Draw();
 
 	void Collision(std::string direction);
-	void SetCollision(float _top, float _bottom, float _left, float _right);
+	void SetCollision(float _left, float _top, float _right, float _bottom);
 	Vector GetPos();
 	Rect GravityRect();
 	Vector GetCenter();

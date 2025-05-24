@@ -31,8 +31,8 @@ void AnimationManager::Update()
 	animation.CurrentFrame += 1;
 
 	if (animation.CurrentFrame >= animation.FrameCount) {
-		animation.CurrentFrame = 0;
-		loop = false;
+		if (animation.loop) animation.CurrentFrame = 0;
+		else animation.CurrentFrame = animation.LastFrame();
 	}
 }
 
@@ -43,9 +43,13 @@ bool AnimationManager::IsFlip()
 	return false;
 }
 
-bool AnimationManager::FrameEnd()
+bool AnimationManager::IsDone()
 {
-	return animation.CurrentFrame + 1 >= animation.FrameCount && timer + Global.DeltaTime > animation.FrameSpeed;
+	if (animation.CurrentFrame == animation.LastFrame() && timer + Global.DeltaTime > animation.FrameSpeed) {
+		return true;
+	}
+
+	return false;
 }
 
 Rect AnimationManager::getRect()
