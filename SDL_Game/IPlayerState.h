@@ -28,3 +28,24 @@ class JumpState : public IPlayerState {
 public:
 	IPlayerState* Update(Player& player) override;
 };
+
+class Attack1State : public IPlayerState {
+private:
+	bool comboAtk = false;
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
+class Attack2State : public IPlayerState {
+private:
+	bool comboAtk = false;
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
+class Attack3State : public IPlayerState {
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
+

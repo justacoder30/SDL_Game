@@ -11,10 +11,10 @@ Player::Player(int level, Vector pos)
 		{Run, Animation("resource/img/Knight/Run.png", 7, 0.09)},
 		{Fall, Animation("resource/img/Knight/Fall.png", 4, 0.135, false)},
 		{Jump, Animation("resource/img/Knight/Jump.png", 2, 0.12, false)},
-		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.2, false)},
-		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
-		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
-		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
+		//{Jump, Animation("resource/img/Knight/Jump1.png", 6, 0.2, false)},
+		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.08, false)},
+		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.08, false)},
+		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.08, false)},
 	};
 
 	animationManger = AnimationManager(animations[Idle]);
@@ -24,7 +24,7 @@ Player::Player(int level, Vector pos)
 	moveSpeed = 200;
 	gravity = 800;
 	jump = 400;
-	current = Run;
+	current = Idle;
 
 	texture_width = animationManger.animation.FrameWidth;
 	texture_height = animationManger.animation.FrameHeight;
@@ -56,7 +56,7 @@ void Player::UpdateVelocity()
 		animationManger.flip = SDL_FLIP_NONE;
 	}
 
-	if (Key[SDL_SCANCODE_SPACE] && isOnGround) {
+	if (!PreKey[SDL_SCANCODE_SPACE] && Key[SDL_SCANCODE_SPACE] && isOnGround) {
 		velocity.y = -jump;
 	}
 }
@@ -82,6 +82,7 @@ void Player::UpdateState()
 void Player::Update()
 {
 	UpdateVelocity();
+	std::cout << Key[SDL_SCANCODE_J] << std::endl;
 	UpdateState();
 	UpdatePosition();
 	UpdateAnimation();
