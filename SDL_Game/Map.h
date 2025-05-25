@@ -20,6 +20,8 @@ public:
 class Map
 {
 private:
+	float width;
+	float height;
 	std::vector<TiledMap*> tiledmap;
 	static tmx::Map map;
 
@@ -30,5 +32,7 @@ public:
 	Map(int level, std::vector<Entity*>& Entities);
 	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures, std::vector<Entity*>& Entities);
 	std::vector<Rect> GetObjectGroup(std::string name);
+	float getWidth();
+	float getHeight();
 };
 

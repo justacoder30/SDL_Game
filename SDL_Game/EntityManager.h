@@ -11,6 +11,7 @@ private:
 	Map map;
 	void addObjects();
 	void addCollisions();
+	void setCamera();
 public:
 	std::vector<Entity*> Entities;
 

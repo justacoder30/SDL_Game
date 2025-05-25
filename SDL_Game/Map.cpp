@@ -40,6 +40,9 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
 
     const auto& tileSets = map.getTilesets();
 
+    int max_X = 0;
+    int max_Y = 0;
+
     for (auto i = 0u; i < tileSets.size(); ++i)
     {
         //check tile ID to see if it falls within the current tile set
@@ -51,8 +54,10 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
 
         for (auto y = 0u; y < mapSize.y; ++y)
         {
+            if (max_Y < y) max_Y = y;
             for (auto x = 0u; x < mapSize.x; ++x)
             {
+                if (max_X < x) max_X = x;
                 const auto idx = y * mapSize.x + x;
                 //auto idIndex = (tileIDs[idx].ID - ts.getFirstGID());
                 if (idx < tileIDs.size() &&
@@ -78,6 +83,9 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
             }
         }
     }
+
+    width = max_X * mapTileSize.x;
+    height = max_Y * mapTileSize.y;
 }
 
 std::vector<Rect> Map::GetObjectGroup(std::string name)
@@ -99,6 +107,16 @@ std::vector<Rect> Map::GetObjectGroup(std::string name)
     }
 
     return rect;
+}
+
+float Map::getWidth()
+{
+    return width;
+}
+
+float Map::getHeight()
+{
+    return height;
 }
 
 void Map::InitMap(std::string f_path)

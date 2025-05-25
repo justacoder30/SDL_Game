@@ -35,12 +35,26 @@ void EntityManager::addCollisions()
 	std::cout<< Collisions.size()<<std::endl;
 }
 
+void EntityManager::setCamera()
+{
+	Rect size = Global.camera.rect;
+
+	Global.camera.SetAnchor(0.5, 0.5);
+	Global.camera.SetBound(
+		size.w/2,
+		size.h/2,
+		map.getWidth() - size.w / 2,
+		map.getHeight() - size.h / 2
+	);
+	Global.camera.Follow(&player->center_pos);
+}
+
 EntityManager::EntityManager(int level)
 {
 	addObjects();
 	addCollisions();
 
-	Global.camera.Follow(&player->center_pos);
+	setCamera();
 }
 
 void EntityManager::Update()
