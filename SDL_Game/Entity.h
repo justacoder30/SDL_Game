@@ -61,5 +61,6 @@ public:
 	Vector GetCenter();
 };
 
-extern std::vector<Entity*> Collisions;
+//extern std::vector<Entity*> Collisions;
+extern std::vector<Rect> Collisions;
 

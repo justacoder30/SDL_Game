@@ -23,7 +23,7 @@ void Game::Draw()
 	entityManager.Draw();
 
 	window.Render();
-	//Global.fpsShow();
+	Global.fpsShow();
 }
 
 void Game::Run()

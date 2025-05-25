@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "Input.h"
 
 std::string objects_pos[] = { "PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition" };
 //std::cout<< <<std::endl;
@@ -6,8 +7,7 @@ std::string objects_pos[] = { "PlayerPosition", "CoinPosition", "EnemyPosition",
 void EntityManager::addObjects()
 {
 	Entities.push_back(new Background());
-	Map map(1, Entities);
-
+	map = Map(1, Entities);
 	for (auto obj : objects_pos) {
 		auto positions = map.GetObjectGroup(obj);
 
@@ -28,15 +28,37 @@ void EntityManager::addObjects()
 	
 }
 
+void EntityManager::addCollisions()
+{
+
+	Collisions = map.GetObjectGroup("Collision");
+	std::cout<< Collisions.size()<<std::endl;
+}
+
 EntityManager::EntityManager(int level)
 {
 	addObjects();
+	addCollisions();
 
 	Global.camera.Follow(&player->center_pos);
 }
 
 void EntityManager::Update()
 {
+	//static float scale = Global.scale;
+	//float speed = 10;
+
+	//if (Key[SDL_SCANCODE_E]) {
+	//	//velocity.y = -jump;
+	//	Global.scale += speed * Global.DeltaTime;
+	//}
+
+	//if (Key[SDL_SCANCODE_Q]) {
+	//	//velocity.y = -jump;
+	//	Global.scale -= speed * Global.DeltaTime;
+	//	if (Global.scale < scale) Global.scale = scale;
+	//}
+
 	for (int i = 0; i < Entities.size(); ++i)
 	{
 		Entities[i]->Update();

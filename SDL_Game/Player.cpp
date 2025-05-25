@@ -37,8 +37,8 @@ Player::Player(int level, Vector pos)
 	state = new IdleState();
 
 	rect = Rect(
-		pos.x + OFFSET.left,
-		pos.y - OFFSET.top,
+		pos.x,
+		pos.y,
 		texture_width - OFFSET.left - OFFSET.right,
 		texture_height - OFFSET.top - OFFSET.bottom
 	);

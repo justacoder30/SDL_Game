@@ -8,7 +8,9 @@ class EntityManager
 {
 private:
 	Player* player;
+	Map map;
 	void addObjects();
+	void addCollisions();
 public:
 	std::vector<Entity*> Entities;
 

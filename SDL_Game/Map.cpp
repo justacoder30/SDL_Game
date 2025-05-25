@@ -3,11 +3,6 @@
 
 tmx::Map Map::map;
 
-const std::uint32_t FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
-const std::uint32_t FLIPPED_VERTICALLY_FLAG = 0x40000000;
-const std::uint32_t FLIPPED_DIAGONALLY_FLAG = 0x20000000;
-
-
 std::vector<Texture*> GetTextures(std::vector<tmx::Tileset> tileSets) {
 	std::vector<Texture*> texure;
 
@@ -76,8 +71,8 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
                     TiledMap* tiled = new TiledMap(*textures[i], dst, src, rotate, flip);
                     Entities.push_back(tiled);
 
-                    if (layers[layerIndex]->getName() == "Terrain")
-                        Collisions.push_back(tiled);
+                    /*if (layers[layerIndex]->getName() == "Terrain")
+                        Collisions.push_back(tiled);*/
 
                 }
             }
@@ -96,8 +91,10 @@ std::vector<Rect> Map::GetObjectGroup(std::string name)
     {
         if (mapLayers[i]->getName() == name) {
             const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
-            const auto& obj = layer1.getObjects();
-            rect.push_back(Rect(obj[0].getPosition().x, obj[0].getPosition().y, obj[0].getAABB().width, obj[0].getAABB().height));
+            const auto& objs = layer1.getObjects();
+            for (auto obj : objs) {
+                rect.push_back(Rect(obj.getPosition().x, obj.getPosition().y, obj.getAABB().width, obj.getAABB().height));
+            }
         }
     }
 
@@ -196,11 +193,12 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_Fli
 
 void TiledMap::Update()
 {
-    dst.x = rect.x + Global.camera.current_pos.x;
-    dst.y = rect.y + Global.camera.current_pos.y;
+    dst.x = rect.x + Global.camera.transform.x;
+    dst.y = rect.y + Global.camera.transform.y;
 }
 
 void TiledMap::Draw()
-{    
+{   
+    if (!Global.camera.canSee(rect)) return;
 	window.blit(tex, dst, src, rotate, flip);
 }

@@ -21,6 +21,7 @@ Camera::Camera(float w, float h)
 	window_size.y = h * Global.scale;
 		
 	rect = Rect(0, 0, w, h);
+	visibleWoldRect = rect;
 }
 
 void Camera::SetCamera(Vector _windowSize)
@@ -44,6 +45,18 @@ void Camera::Update()
 				window_size.x / Global.scale, 
 				window_size.y / Global.scale);
 	
-	current_pos.x = rect.w / 2.0 - dst_pos->x;
-	current_pos.y = rect.h / 2.0 - dst_pos->y;
+	transform.x = rect.w / 2.0 - dst_pos->x;
+	transform.y = rect.h / 2.0 - dst_pos->y;
+
+	visibleWoldRect = Rect(
+		-transform.x,
+		-transform.y,
+		rect.w,
+		rect.h
+	);
+}
+
+bool Camera::canSee(Rect rect)
+{
+	return visibleWoldRect.checkCollide(rect);
 }
