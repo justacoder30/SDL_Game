@@ -16,6 +16,9 @@ enum State
 	Attack2,
 	Attack3,
 	Death,
+	RunAttack,
+	Defend,
+	Protect,
 };
 
 class Entity
@@ -36,7 +39,7 @@ public:
 	AnimationManager animationManger;	
 	Vector center_pos;
 	State current;
-	Vector velocity;
+	Vector velocity = Vector::zero();
 	Rect rect;
 	Rect old_rect;
 	bool isOnGround;
@@ -44,6 +47,7 @@ public:
 	float moveSpeed;
 	float jump;
 	float rotate;
+	float damage;
 
 	Entity();
 

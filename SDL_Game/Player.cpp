@@ -12,15 +12,16 @@ Player::Player(int level, Vector pos)
 		{Fall, Animation("resource/img/Knight/Fall.png", 4, 0.135, false)},
 		{Jump, Animation("resource/img/Knight/Jump.png", 2, 0.12, false)},
 		//{Jump, Animation("resource/img/Knight/Jump1.png", 6, 0.2, false)},
-		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.08, false)},
-		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.08, false)},
-		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.08, false)},
+		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.09, false)},
+		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.09, false)},
+		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.09, false)},
+		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.09, false)},
+		{Defend, Animation("resource/img/Knight/Defend.png", 5, 0.1)},
+		{Protect, Animation("resource/img/Knight/Protect.png", 5, 0.2, false)},
 	};
 
 	animationManger = AnimationManager(animations[Idle]);
 	tex = animations[Idle].texture;
-	velocity = Vector(0, 0);
-	rect = animationManger.getRect();
 	moveSpeed = 200;
 	gravity = 800;
 	jump = 400;
@@ -35,7 +36,12 @@ Player::Player(int level, Vector pos)
 
 	state = new IdleState();
 
-	rect = Rect(pos.x + OFFSET.left, pos.y - OFFSET.top, texture_width - OFFSET.left - OFFSET.right, texture_height - OFFSET.top - OFFSET.bottom);
+	rect = Rect(
+		pos.x + OFFSET.left,
+		pos.y - OFFSET.top,
+		texture_width - OFFSET.left - OFFSET.right,
+		texture_height - OFFSET.top - OFFSET.bottom
+	);
 	old_rect = rect;
 
 }
@@ -82,7 +88,6 @@ void Player::UpdateState()
 void Player::Update()
 {
 	UpdateVelocity();
-	std::cout << Key[SDL_SCANCODE_J] << std::endl;
 	UpdateState();
 	UpdatePosition();
 	UpdateAnimation();

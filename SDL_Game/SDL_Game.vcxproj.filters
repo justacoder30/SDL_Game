@@ -25,9 +25,6 @@
     <Filter Include="Header Files\State">
       <UniqueIdentifier>{207495ef-de45-4f7c-a492-487a7e3abc70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\State\PlayerState">
-      <UniqueIdentifier>{5fe58785-7f08-410d-9c2c-bc103d763a9e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +78,9 @@
     <ClCompile Include="IPlayerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -128,8 +128,11 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
     <ClInclude Include="IPlayerState.h">
-      <Filter>Header Files\State\PlayerState</Filter>
+      <Filter>Header Files\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

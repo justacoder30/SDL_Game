@@ -3,7 +3,7 @@
 Game::Game()
 {
 	Global.camera = Camera(800, 450);	
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
 	entityManager = EntityManager(0);
 }

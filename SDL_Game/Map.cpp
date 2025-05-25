@@ -85,8 +85,10 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
     }
 }
 
-Vector Map::GetPos(std::string name)
+std::vector<Rect> Map::GetObjectGroup(std::string name)
 {
+    std::vector<Rect> rect;
+
     auto tileSets = Map::map.getTilesets();
     const auto& mapLayers = Map::map.getLayers();
 
@@ -95,11 +97,11 @@ Vector Map::GetPos(std::string name)
         if (mapLayers[i]->getName() == name) {
             const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
             const auto& obj = layer1.getObjects();
-            return Vector(obj[0].getPosition().x, obj[0].getPosition().y);
+            rect.push_back(Rect(obj[0].getPosition().x, obj[0].getPosition().y, obj[0].getAABB().width, obj[0].getAABB().height));
         }
     }
 
-    return Vector();
+    return rect;
 }
 
 void Map::InitMap(std::string f_path)

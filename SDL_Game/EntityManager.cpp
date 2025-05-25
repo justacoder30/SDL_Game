@@ -1,11 +1,36 @@
 #include "EntityManager.h"
 
-EntityManager::EntityManager(int level)
+std::string objects_pos[] = { "PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition" };
+//std::cout<< <<std::endl;
+
+void EntityManager::addObjects()
 {
 	Entities.push_back(new Background());
 	Map map(1, Entities);
-	player = new Player(0, map.GetPos("PlayerPosition"));
-	Entities.push_back(player);
+
+	for (auto obj : objects_pos) {
+		auto positions = map.GetObjectGroup(obj);
+
+		if (positions.empty()) continue;
+
+		if (obj == "PlayerPosition") {
+			for (auto pos : positions) {
+				player = new Player(0, Vector(pos.x, pos.y));
+				Entities.push_back(player);
+			}
+		} else if (obj == "EnemyPosition") {
+			for (auto pos : positions) {
+				Entities.push_back(new Enemy(0, Vector(pos.x, pos.y)));
+			}
+		}
+	}
+
+	
+}
+
+EntityManager::EntityManager(int level)
+{
+	addObjects();
 
 	Global.camera.Follow(&player->center_pos);
 }

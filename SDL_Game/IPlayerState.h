@@ -48,4 +48,19 @@ public:
 	IPlayerState* Update(Player& player) override;
 };
 
+class RunAttackState : public IPlayerState {
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
+class DefendState : public IPlayerState {
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
+class ProtectState : public IPlayerState {
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
 
