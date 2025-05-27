@@ -18,6 +18,11 @@ IPlayerState* IdleState::Update(Player& player)
 
 	if (!PreKey[SDL_SCANCODE_F] && Key[SDL_SCANCODE_F]) return new DefendState();
 
+	if (player.isHurt) {
+		player.velocity.y = -200;
+		return new HurtState();
+	}
+
     return this;
 }
 
@@ -36,6 +41,11 @@ IPlayerState* RunState::Update(Player& player)
 
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new RunAttackState;
 
+	if (player.isHurt) {
+		player.velocity.y = -200;
+		return new HurtState();
+	}
+
     return this;
 }
 
@@ -48,6 +58,11 @@ IPlayerState* FallState::Update(Player& player)
 		return new IdleState();
 	}
 
+	if (player.isHurt) {
+		player.velocity.y = -200;
+		return new HurtState();
+	}
+
 	return this;
 }
 
@@ -57,6 +72,11 @@ IPlayerState* JumpState::Update(Player& player)
 
 	if (player.velocity.y >= 0) return new FallState();
 
+	if (player.isHurt) {
+		player.velocity.y = -200;
+		return new HurtState();
+	}
+
 	return this;
 }
 
@@ -64,6 +84,7 @@ IPlayerState* Attack1State::Update(Player& player)
 {
 	player.current = Attack1;
 	player.velocity.x = 0;
+	player.attackFrame = 4;
 
 	if (!player.isOnGround)
 		return new FallState();
@@ -87,6 +108,7 @@ IPlayerState* Attack2State::Update(Player& player)
 {
 	player.current = Attack2;
 	player.velocity.x = 0;
+	player.attackFrame = 3;
 
 	if (!player.isOnGround)
 		return new FallState();
@@ -110,6 +132,7 @@ IPlayerState* Attack3State::Update(Player& player)
 {
 	player.current = Attack3;
 	player.velocity.x = 0;
+	player.attackFrame = 3;
 
 	if (!player.isOnGround)
 		return new FallState();
@@ -129,6 +152,7 @@ IPlayerState* RunAttackState::Update(Player& player)
 {
 	player.current = RunAttack;
 	player.velocity.x = 0;
+	player.attackFrame = 4;
 
 	if (!player.isOnGround)
 		return new FallState();
@@ -159,6 +183,17 @@ IPlayerState* DefendState::Update(Player& player)
 IPlayerState* ProtectState::Update(Player& player)
 {
 	player.current = Protect;
+
+	if (player.animationManger.IsDone()) return new IdleState();
+
+	return this;
+}
+
+IPlayerState* HurtState::Update(Player& player)
+{
+	player.current = Hurt;
+	player.isHurt = false;
+	player.velocity.x = 0;
 
 	if (player.animationManger.IsDone()) return new IdleState();
 

@@ -3,11 +3,13 @@
 #include "Enemy.h"
 #include "Background.h"
 #include "Map.h"
+#include "LoadingScreen.h"
 
 class EntityManager
 {
 private:
 	Player* player;
+	LoadingScreen * loading;
 	Map map;
 	void addObjects();
 	void addCollisions();

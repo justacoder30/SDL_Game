@@ -2,15 +2,30 @@
 #include <iostream>
 
 
-Rect::Rect()
-{}
-
-Rect::Rect(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
+void Rect::setRect()
 {
 	top = y;
 	bottom = y + h;
 	left = x;
 	right = x + w;
+}
+
+Rect::Rect()
+{}
+
+Rect::Rect(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
+{
+	setRect();
+}
+
+Rect::Rect(Vector pos, Vector size)
+{
+	x = pos.x;
+	y = pos.y;
+	w = size.x;
+	h = size.y;
+
+	setRect();
 }
 
 bool Rect::checkCollide(Rect rect)

@@ -18,9 +18,10 @@ public:
 	void SetViewPort(Rect view);
 	Vector GetWindowSize();
 	void blit(Texture texture, Rect dest, Rect area, float rotate = 0.0, SDL_FlipMode flip = SDL_FLIP_NONE);
-	void blit(Texture texture, Vector vector, Rect area);
-	void blit(Texture texture, Vector vector, Rect area, SDL_FlipMode flip);
-	void blit(Texture texture, Vector vector, Rect area, float scale);
+	void blit(Texture texture, Vector pos, Rect area, SDL_FlipMode flip = SDL_FLIP_NONE);
+	void blit(Texture texture, Vector pos, Rect area, float scale);
+	void blit(Texture texture, Vector pos, Rect area, Vector size);
+	void blit(Texture texture, Vector pos, Vector size);
 	void DrawRect(Rect rect);
 	void SetFullScreen(SDL_WindowFlags flags);
 	void FullScreenToggle();

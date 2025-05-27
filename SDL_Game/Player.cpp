@@ -18,6 +18,8 @@ Player::Player(int level, Vector pos)
 		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.09, false)},
 		{Defend, Animation("resource/img/Knight/Defend.png", 5, 0.1)},
 		{Protect, Animation("resource/img/Knight/Protect.png", 5, 0.2, false)},
+		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.2, false)},
+		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
 	};
 
 	animationManger = AnimationManager(animations[Idle]);
@@ -44,6 +46,18 @@ Player::Player(int level, Vector pos)
 	);
 	old_rect = rect;
 
+	backDrop = true;
+
+	atkBox.left = 57;
+	atkBox.top = 74;
+	atkBox.right = 19;
+	atkBox.bottom = 0;
+
+	atkBox = Rect(
+		Vector(57, 54),
+		Vector(52, 74)
+	);
+
 }
 
 void Player::UpdateVelocity()
@@ -65,6 +79,7 @@ void Player::UpdateVelocity()
 	if (!PreKey[SDL_SCANCODE_SPACE] && Key[SDL_SCANCODE_SPACE] && isOnGround) {
 		velocity.y = -jump;
 	}
+	std::cout << texture_width << std::endl;
 }
 
 void Player::UpdatePosition()

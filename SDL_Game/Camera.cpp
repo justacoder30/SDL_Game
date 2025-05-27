@@ -70,23 +70,22 @@ void Camera::Update()
 				window_size.x / Global.scale, 
 				window_size.y / Global.scale);
 	
-	/*transform.x = rect.w * anchor.x - dst_pos->x;*/
-	//transform.y = rect.h * anchor.y - dst_pos->y;
-
-	std::cout << rect.w * anchor.x - bound.x << std::endl;
-
 	transform.x = clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left);
 	transform.y = clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom , rect.h * anchor.y - bound.top);
 
+	float increase = 10;
+
 	visibleWoldRect = Rect(
-		-transform.x,
-		-transform.y,
-		rect.w,
-		rect.h
+		-transform.x - increase/2,
+		-transform.y - increase/2,
+		rect.w + increase,
+		rect.h + increase
 	);
 }
 
 bool Camera::canSee(Rect rect)
 {
-	return visibleWoldRect.checkCollide(rect);
+	Rect r(0, 0, rect.w, rect.h);
+
+	return visibleWoldRect.checkCollide(rect) || r.checkCollide(rect);
 }

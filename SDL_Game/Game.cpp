@@ -1,5 +1,7 @@
 #include "Game.h"
 
+
+
 Game::Game()
 {
 	Global.camera = Camera(800, 450);	
@@ -12,6 +14,7 @@ void Game::Update()
 {
 	Input.Update();
 	Global.Update();
+
 	entityManager.Update();
 }
 

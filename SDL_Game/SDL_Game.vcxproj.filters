@@ -25,6 +25,9 @@
     <Filter Include="Header Files\State">
       <UniqueIdentifier>{207495ef-de45-4f7c-a492-487a7e3abc70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{93fb7dc3-aede-4213-b390-5d4c4176b16f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IEnemyState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -133,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="IPlayerState.h">
       <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyState.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScreen.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

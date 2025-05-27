@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int level, Vector pos)
+
+Enemy::Enemy(int level, Vector pos, Player* player)
 {
 	animations = {
 		{Idle, Animation("resource/img/Enemy/Skeleton/Idle.png", 8, 0.08)},
@@ -12,7 +13,7 @@ Enemy::Enemy(int level, Vector pos)
 
 	animationManger = AnimationManager(animations[Idle]);
 	tex = animations[Idle].texture;
-	moveSpeed = 200;
+	moveSpeed = 80;
 	gravity = 800;
 	damage = 10;
 
@@ -25,7 +26,7 @@ Enemy::Enemy(int level, Vector pos)
 
 	center_pos = GetCenter();
 
-	//state = new IdleState();
+	state = new IdleEnemyState();
 
 	rect = Rect(
 		pos.x,
@@ -34,11 +35,25 @@ Enemy::Enemy(int level, Vector pos)
 		texture_height - OFFSET.top - OFFSET.bottom
 	);
 	old_rect = rect;
+
+	damage = 10;
+
+	int min = 2;
+	int max = 6;
+
+	timeChangeState = min + std::rand() % (max - min + 1);
+	
+	this->player = player;
 }
 
 void Enemy::UpdateVelocity()
 {
-	velocity.x = 0;
+	if (velocity.x > 0) {
+		animationManger.flip = SDL_FLIP_NONE;
+	}
+	if (velocity.x < 0) {
+		animationManger.flip = SDL_FLIP_HORIZONTAL;
+	}
 }
 
 void Enemy::UpdatePosition()
@@ -56,7 +71,7 @@ void Enemy::UpdatePosition()
 
 void Enemy::UpdateState()
 {
-
+	state = state->Update(*this);
 }
 
 void Enemy::Update()
@@ -65,4 +80,29 @@ void Enemy::Update()
 	UpdateState();
 	UpdatePosition();
 	UpdateAnimation();
+	CollideWithPlayer();
+}
+
+bool Enemy::isEdge()
+{
+	Rect edgeRect;
+	if (!animationManger.IsFlip()) edgeRect = Rect(rect.right, rect.bottom, 2, 2);
+	else edgeRect = Rect(rect.left - 2, rect.bottom, 2, 2);
+
+	for (int i = 0; i < Collisions.size(); ++i) {
+		if (edgeRect.checkCollide(Collisions[i]))
+			return false;
+	}
+
+	return true;
+}
+
+void Enemy::CollideWithPlayer()
+{
+	if (rect.checkCollide(player->rect)) {
+		player->isHurt = true;
+		player->damageTaken = damage;
+	}
+
+	if(rect.checkCollide(player->getAtkBox()) && player->isAttacking()) removeFromTree();
 }

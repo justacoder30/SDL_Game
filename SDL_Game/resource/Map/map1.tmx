@@ -187,7 +187,7 @@
   <object id="101" x="4064" y="704" width="32" height="48"/>
  </objectgroup>
  <objectgroup id="2" name="PlayerPosition">
-  <object id="217" x="320" y="352" width="22" height="64"/>
+  <object id="217" x="304" y="464" width="22" height="64"/>
  </objectgroup>
  <objectgroup id="7" name="EnemyPosition" locked="1">
   <object id="75" x="688" y="560" width="16" height="48"/>

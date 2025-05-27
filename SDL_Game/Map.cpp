@@ -217,6 +217,5 @@ void TiledMap::Update()
 
 void TiledMap::Draw()
 {   
-    if (!Global.camera.canSee(rect)) return;
-	window.blit(tex, dst, src, rotate, flip);
+    window.blit(tex, dst, src, rotate, flip);
 }

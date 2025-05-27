@@ -24,6 +24,14 @@ void Entity::UpdateAnimation()
     animationManger.Update();
 }
 
+void Entity::DrawRectTransform(Rect r)
+{
+    Rect newR = r;
+    newR.x += Global.camera.transform.x;
+    newR.y += Global.camera.transform.y;
+    window.DrawRect(newR);
+}
+
 Entity::Entity()
 {}
 
@@ -33,8 +41,6 @@ void Entity::Update()
 
 void Entity::Draw()
 {
-    if(!Global.camera.canSee(rect)) return;
-
     window.blit(
         animationManger.animation.texture, 
         GetPos() + Global.camera.transform,
@@ -42,21 +48,9 @@ void Entity::Draw()
         animationManger.flip
     );    
 
-    /*Rect r = rect;
-    r.x += Global.camera.transform.x;
-    r.y += Global.camera.transform.y;
-
-    Rect g_rect = GravityRect();
-    g_rect.x += Global.camera.transform.x;
-    g_rect.y += Global.camera.transform.y;
-
-    Rect cam_rect = GravityRect();
-    cam_rect.x += Global.camera.transform.x;
-    cam_rect.y += Global.camera.transform.y;
-
-    window.DrawRect(r);
-    window.DrawRect(g_rect);*/
-    //window.DrawRect(Global.camera.visibleWoldRect);
+    /*Rect newR = Rect(GetPos().x, GetPos().y, texture_width, texture_height);
+    DrawRectTransform(getAtkBox());
+    DrawRectTransform(newR);*/
 }
 
 void Entity::Collision(std::string direction)
@@ -108,6 +102,8 @@ void Entity::Collision(std::string direction)
             if (velocity.x < 0) {
                 rect.x = Collisions[i].right;
             }
+
+            velocity.x *= -1;
         }
     }
 }
@@ -118,6 +114,33 @@ void Entity::SetCollision(float _left, float _top, float _right, float _bottom)
     OFFSET.bottom = _bottom;
     OFFSET.left = _left;
     OFFSET.right = _right;
+}
+
+void Entity::removeFromTree()
+{
+    removed = true;
+}
+
+bool Entity::isRemoved()
+{
+    return removed;
+}
+
+bool Entity::isAttacking()
+{
+    if (animationManger.animation.CurrentFrame != attackFrame) return false;
+    if (current != Attack && current != Attack1 && current != Attack2 && current != Attack3 && current != RunAttack) return false;
+
+    return true;
+}
+
+Rect Entity::getAtkBox()
+{
+    Vector Pos = GetPos();
+
+    if (!animationManger.IsFlip())
+        return Rect(Pos.x + atkBox.x, Pos.y + atkBox.y, atkBox.w, atkBox.h);
+    return Rect(Pos.x + texture_width - atkBox.x - atkBox.w, Pos.y + atkBox.y, atkBox.w, atkBox.h);
 }
 
 Vector Entity::GetPos()

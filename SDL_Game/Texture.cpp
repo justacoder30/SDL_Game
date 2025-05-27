@@ -15,6 +15,7 @@ Texture::Texture(std::string f_path)
 	}
 
 	SetScaleMode(SDL_SCALEMODE_NEAREST);
+	//SetScaleMode(SDL_SCALEMODE_LINEAR);
 }
 
 float Texture::getWidth()

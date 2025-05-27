@@ -34,8 +34,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 	Global.camera.SetCamera(GetWindowSize());
-	//SDL_SetRenderVSync(renderer, 1);
-	SDL_SetWindowSurfaceVSync(window, 1);
+	SDL_SetRenderVSync(renderer, 1);
+	//SDL_SetWindowSurfaceVSync(window, 1);
 	
 }
 
@@ -62,28 +62,13 @@ void RenderWindow::blit(Texture texture, Rect dest, Rect area, float rotate, SDL
 	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, rotate, NULL, flip);
 }
 
-void RenderWindow::blit(Texture texture, Vector vector, Rect area)
+void RenderWindow::blit(Texture texture, Vector pos, Rect area, SDL_FlipMode flip)
 {
 	SDL_FRect src = area.getFRect();
 
 	SDL_FRect dst = {
-		vector.x,
-		vector.y,
-		texture.getWidth(),
-		texture.getHeight()
-	};
-
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
-}
-
-void RenderWindow::blit(Texture texture, Vector vector, Rect area, SDL_FlipMode flip)
-{
-	//printf("True");
-	SDL_FRect src = area.getFRect();
-
-	SDL_FRect dst = {
-		vector.x,
-		vector.y,
+		pos.x,
+		pos.y,
 		src.w,
 		src.h
 	};
@@ -91,16 +76,48 @@ void RenderWindow::blit(Texture texture, Vector vector, Rect area, SDL_FlipMode 
 	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, flip);
 }
 
-void RenderWindow::blit(Texture texture, Vector vector, Rect area, float scale)
+void RenderWindow::blit(Texture texture, Vector pos, Rect area, float scale)
 {
-	//printf("True");
 	SDL_FRect src = area.getFRect();
 
 	SDL_FRect dst = {
-		vector.x,
-		vector.y,
+		pos.x,
+		pos.y,
 		src.w * scale,
 		src.h * scale
+	};
+
+	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
+}
+
+void RenderWindow::blit(Texture texture, Vector pos, Rect area, Vector size)
+{
+	SDL_FRect src = area.getFRect();
+
+	SDL_FRect dst = {
+		pos.x,
+		pos.y,
+		size.x,
+		size.y
+	};
+
+	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
+}
+
+void RenderWindow::blit(Texture texture, Vector pos, Vector size)
+{
+	SDL_FRect src = {
+		0,
+		0,
+		texture.getWidth(),
+		texture.getHeight()
+	};
+
+	SDL_FRect dst = {
+		pos.x,
+		pos.y,
+		size.x,
+		size.y
 	};
 
 	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);

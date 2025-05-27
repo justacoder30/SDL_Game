@@ -1,12 +1,18 @@
 #include "EntityManager.h"
 #include "Input.h"
+#include "Sprite.h"
 
-std::string objects_pos[] = { "PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition" };
 //std::cout<< <<std::endl;
 
 void EntityManager::addObjects()
 {
-	Entities.push_back(new Background());
+	std::string objects_pos[] = { "PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition" };
+
+	Entities.push_back(
+		new Background(
+			Vector(Global.camera.rect.w, Global.camera.rect.h)
+		)
+	);
 	map = Map(1, Entities);
 	for (auto obj : objects_pos) {
 		auto positions = map.GetObjectGroup(obj);
@@ -20,19 +26,18 @@ void EntityManager::addObjects()
 			}
 		} else if (obj == "EnemyPosition") {
 			for (auto pos : positions) {
-				Entities.push_back(new Enemy(0, Vector(pos.x, pos.y)));
+				Entities.push_back(new Enemy(0, Vector(pos.x, pos.y), player));
 			}
 		}
 	}
 
-	
+	loading = new LoadingScreen(Vector(64, 64), 1.5);
+	Entities.push_back(loading);
 }
 
 void EntityManager::addCollisions()
 {
-
 	Collisions = map.GetObjectGroup("Collision");
-	std::cout<< Collisions.size()<<std::endl;
 }
 
 void EntityManager::setCamera()
@@ -59,24 +64,29 @@ EntityManager::EntityManager(int level)
 
 void EntityManager::Update()
 {
-	//static float scale = Global.scale;
-	//float speed = 10;
+	/*static float scale = Global.scale;
+	float speed = 10;
 
-	//if (Key[SDL_SCANCODE_E]) {
-	//	//velocity.y = -jump;
-	//	Global.scale += speed * Global.DeltaTime;
-	//}
+	if (Key[SDL_SCANCODE_E]) {
+		Global.scale += speed * Global.DeltaTime;
+	}
 
-	//if (Key[SDL_SCANCODE_Q]) {
-	//	//velocity.y = -jump;
-	//	Global.scale -= speed * Global.DeltaTime;
-	//	if (Global.scale < scale) Global.scale = scale;
-	//}
+	if (Key[SDL_SCANCODE_Q]) {
+		Global.scale -= speed * Global.DeltaTime;
+		if (Global.scale < scale) Global.scale = scale;
+	}*/
+
+	loading->Update();
+	if (!loading->isEnd()) return;
 
 	for (int i = 0; i < Entities.size(); ++i)
 	{
 		Entities[i]->Update();
+		if (Entities[i]->isRemoved()) {
+			Entities.erase(Entities.begin() + i--);
+		}
 	}
+
 	Global.camera.Update();
 }
 
@@ -84,6 +94,7 @@ void EntityManager::Draw()
 {
 	for (int i = 0; i < Entities.size(); ++i)
 	{
+		if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
 		Entities[i]->Draw();
 	}
 }
