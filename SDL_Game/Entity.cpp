@@ -129,7 +129,14 @@ bool Entity::isRemoved()
 bool Entity::isAttacking()
 {
     if (animationManger.animation.CurrentFrame != attackFrame) return false;
-    if (current != Attack && current != Attack1 && current != Attack2 && current != Attack3 && current != RunAttack) return false;
+
+    if (current != Attack && 
+        current != Attack1 && 
+        current != Attack2 && 
+        current != Attack3 && 
+        current != RunAttack
+    ) 
+        return false;
 
     return true;
 }
