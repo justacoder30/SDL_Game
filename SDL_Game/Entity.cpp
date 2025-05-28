@@ -43,7 +43,10 @@ void Entity::Draw()
 {
     window.blit(
         animationManger.animation.texture, 
-        GetPos() + Global.camera.transform,
+        Vector(
+            int(GetPos().x + Global.camera.transform.x),
+            int(GetPos().y + Global.camera.transform.y)
+        ),
         animationManger.getRect(), 
         animationManger.flip
     );    

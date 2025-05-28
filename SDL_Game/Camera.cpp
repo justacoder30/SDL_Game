@@ -70,10 +70,10 @@ void Camera::Update()
 				window_size.x / Global.scale, 
 				window_size.y / Global.scale);
 	
-	transform.x = clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left);
-	transform.y = clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom , rect.h * anchor.y - bound.top);
+	transform.x = int(clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left));
+	transform.y = int(clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top));
 
-	float increase = 10;
+	float increase = 16;
 
 	visibleWoldRect = Rect(
 		-transform.x - increase/2,
