@@ -28,6 +28,9 @@
     <Filter Include="Header Files\Screen">
       <UniqueIdentifier>{93fb7dc3-aede-4213-b390-5d4c4176b16f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screen\GameState">
+      <UniqueIdentifier>{55730d6c-ce7c-4a9a-a00f-201ed2777c40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -96,6 +99,9 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IGameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture.h">
@@ -155,10 +161,13 @@
     <ClInclude Include="Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadingScreen.h">
+    <ClInclude Include="Coin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Coin.h">
+    <ClInclude Include="LoadingScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

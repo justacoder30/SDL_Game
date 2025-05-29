@@ -7,7 +7,36 @@ Game::Game()
 	Global.camera = Camera(800, 450);	
 	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
-	entityManager = EntityManager(0);
+	//currentState = new MenuState(this);
+	currentState = new MenuState(this);
+	preveriousState = currentState;
+
+	//entityManager = new EntityManager(0);
+}
+
+void Game::ChangeState(IGameState* newState)
+{
+	currentState = newState;
+}
+
+void Game::ChangeToPreState()
+{
+	currentState = preveriousState;
+}
+
+void Game::SaveState()
+{
+	preveriousState = currentState;
+}
+
+IGameState* Game::getPreState()
+{
+	return preveriousState;
+}
+
+IGameState* Game::getCurrentState()
+{
+	return currentState;
 }
 
 void Game::Update()
@@ -15,7 +44,8 @@ void Game::Update()
 	Input.Update();
 	Global.Update();
 
-	entityManager.Update();
+	currentState->Update();
+	//entityManager->Update();
 }
 
 void Game::Draw()
@@ -23,8 +53,8 @@ void Game::Draw()
 	window.SetColor(0, 0, 0);
 	window.Clear();
 
-	entityManager.Draw();
-
+	//entityManager->Draw();
+	currentState->Draw();
 	window.Render();
 	//Global.fpsShow();
 }

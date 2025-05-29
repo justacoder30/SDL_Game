@@ -35,6 +35,7 @@ protected:
 	
 	Rect OFFSET;
 	std::unordered_map<State, Animation> animations;
+	std::vector<Entity*> Entities;
 
 	bool IsOnGround();
 	void UpdateGravity();
@@ -68,8 +69,10 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
+	void add(Entity* entity);
 	void Collision(std::string direction);
 	void SetCollision(float _left, float _top, float _right, float _bottom);
+	void DrawAnimateGroup();
 	void removeFromTree();
 	bool isRemoved();
 	bool isAttacking();

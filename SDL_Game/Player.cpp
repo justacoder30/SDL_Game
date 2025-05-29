@@ -107,6 +107,11 @@ void Player::Update()
 	UpdateAnimation();
 }
 
+void Player::Draw()
+{
+	Entity::DrawAnimateGroup();
+}
+
 
 
 

@@ -16,4 +16,5 @@ public:
 	void UpdatePosition();
 	void UpdateState();
 	void Update();
+	void Draw();
 };

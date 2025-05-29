@@ -59,6 +59,7 @@ EntityManager::EntityManager(int level)
 	addObjects();
 	addCollisions();
 
+	backDrop = true;
 	setCamera();
 }
 
@@ -79,22 +80,11 @@ void EntityManager::Update()
 	loading->Update();
 	if (!loading->isEnd()) return;
 
-	for (int i = 0; i < Entities.size(); ++i)
-	{
-		Entities[i]->Update();
-		if (Entities[i]->isRemoved()) {
-			Entities.erase(Entities.begin() + i--);
-		}
-	}
+	Entity::Update();
 
 	Global.camera.Update();
 }
 
-void EntityManager::Draw()
-{
-	for (int i = 0; i < Entities.size(); ++i)
-	{
-		if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
-		Entities[i]->Draw();
-	}
+void EntityManager::Draw() {
+	Entity::Draw();
 }

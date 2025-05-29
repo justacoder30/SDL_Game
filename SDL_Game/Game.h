@@ -4,18 +4,28 @@
 #include "Global.h"
 #include "EntityManager.h"
 #include "Input.h"
+#include "IGameState.h"
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
 
+class IGameState;
+
 class Game
 {
 private:
-	EntityManager entityManager;
+	EntityManager *entityManager;
+	IGameState *currentState;
+	IGameState *preveriousState;
 
 public:
 	Game();
 	
+	void ChangeState(IGameState* newState);
+	void ChangeToPreState();
+	void SaveState();
+	IGameState *getPreState();
+	IGameState *getCurrentState();
 	void Update();
 	void Draw();
 	void Run();

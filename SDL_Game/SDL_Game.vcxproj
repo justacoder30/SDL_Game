@@ -30,6 +30,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="IEnemyState.cpp" />
+    <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IPlayerState.cpp" />
     <ClCompile Include="LoadingScreen.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="IEnemyState.h" />
+    <ClInclude Include="IGameState.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IPlayerState.h" />
     <ClInclude Include="LoadingScreen.h" />

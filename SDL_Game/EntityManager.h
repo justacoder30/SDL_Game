@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "LoadingScreen.h"
 
-class EntityManager
+class EntityManager: public Entity
 {
 private:
 	Player* player;
@@ -15,7 +15,7 @@ private:
 	void addCollisions();
 	void setCamera();
 public:
-	std::vector<Entity*> Entities;
+	
 
 	EntityManager() {}
 	EntityManager(int level);

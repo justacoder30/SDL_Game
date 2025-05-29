@@ -22,6 +22,7 @@ public:
 	void UpdatePosition();
 	void UpdateState();
 	void Update();
+	void Draw();
 	bool isEdge();
 	void CollideWithPlayer();
 

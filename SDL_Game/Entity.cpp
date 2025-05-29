@@ -37,23 +37,31 @@ Entity::Entity()
 
 void Entity::Update()
 {
+    for (int i = 0; i < Entities.size(); ++i)
+    {
+        Entities[i]->Update();
+        if (Entities[i]->isRemoved()) {
+            Entities.erase(Entities.begin() + i--);
+        }
+    }
 }
 
 void Entity::Draw()
 {
-    window.blit(
-        animationManger.animation.texture, 
-        Vector(
-            int(GetPos().x + Global.camera.transform.x),
-            int(GetPos().y + Global.camera.transform.y)
-        ),
-        animationManger.getRect(), 
-        animationManger.flip
-    );    
+    for (int i = 0; i < Entities.size(); ++i)
+    {
+        if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
+        Entities[i]->Draw();
+    }
 
     /*Rect newR = Rect(GetPos().x, GetPos().y, texture_width, texture_height);
     DrawRectTransform(getAtkBox());
     DrawRectTransform(newR);*/
+}
+
+void Entity::add(Entity* entity)
+{
+    Entities.push_back(entity);
 }
 
 void Entity::Collision(std::string direction)
@@ -64,17 +72,6 @@ void Entity::Collision(std::string direction)
         if (!rect.checkCollide(Collisions[i]))
             continue;
         if (direction == "y") {
-
-            /*if (rect.bottom >= Collisions[i]->rect.top && old_rect.bottom <= Collisions[i]->old_rect.top) {
-                rect.bottom = Collisions[i]->rect.top;
-                rect.y = Collisions[i]->rect.top - rect.h;
-                isOnGround = true;
-            }
-
-            if (rect.top <= Collisions[i]->rect.bottom && old_rect.top >= Collisions[i]->old_rect.bottom) {
-                rect.top = Collisions[i]->rect.bottom;
-                rect.y = Collisions[i]->rect.bottom;
-            }*/
 
             if (velocity.y > 0) {
                 rect.y = Collisions[i].top - rect.h;
@@ -88,16 +85,6 @@ void Entity::Collision(std::string direction)
             velocity.y = 0;
         }
         else {
-            /*if (rect.right >= Collisions[i]->rect.left && old_rect.right <= Collisions[i]->old_rect.left) {
-                rect.right = Collisions[i]->rect.left;
-                rect.x = Collisions[i]->rect.left - rect.w;
-            }
-            
-            if (rect.left <= Collisions[i]->rect.right && old_rect.left >= Collisions[i]->old_rect.right) {
-                rect.left = Collisions[i]->rect.right;
-                rect.x = Collisions[i]->rect.right;
-            }*/
-
             if (velocity.x > 0) {
                 rect.x = Collisions[i].left - rect.w;
             }
@@ -117,6 +104,19 @@ void Entity::SetCollision(float _left, float _top, float _right, float _bottom)
     OFFSET.bottom = _bottom;
     OFFSET.left = _left;
     OFFSET.right = _right;
+}
+
+void Entity::DrawAnimateGroup()
+{
+    window.blit(
+        animationManger.animation.texture,
+        Vector(
+            int(GetPos().x + Global.camera.transform.x),
+            int(GetPos().y + Global.camera.transform.y)
+        ),
+        animationManger.getRect(),
+        animationManger.flip
+    );
 }
 
 void Entity::removeFromTree()

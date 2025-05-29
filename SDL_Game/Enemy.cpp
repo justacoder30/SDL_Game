@@ -83,6 +83,11 @@ void Enemy::Update()
 	CollideWithPlayer();
 }
 
+void Enemy::Draw()
+{
+	Entity::DrawAnimateGroup();
+}
+
 bool Enemy::isEdge()
 {
 	Rect edgeRect;
