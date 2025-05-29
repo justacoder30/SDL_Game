@@ -13,30 +13,21 @@ Abi: 0d71a47a7106462d30ba7d2b374cf6b3b63ade7d29e5cd0f9683c341c7d4251d
 Status: install ok installed
 
 Package: sdl3
-Version: 3.2.4
+Version: 3.2.14
 Depends: vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 93f20a5508b0bdf7748a9985c18389c927bc185adb94c4e6726d6c40c91c811c
+Abi: f9cae09bd0de172cd2482cbc24970fe809cc0af5104ec1841e5b0a3870b6c0b2
 Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
 Status: install ok installed
 
 Package: sdl3-image
-Version: 3.2.0
+Version: 3.2.4
 Depends: sdl3, vcpkg-cmake, vcpkg-cmake-config
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 1a32a68770f10157a7bb0036e35ed918a77a8e11bfcc725ec84c7a2306b7ecf4
+Abi: 60a124318c8fddf905c0a8cfd680652134760ad10f31c01d6942ffcf6fe07a70
 Description: SDL_image is an image file loading library. It loads images as SDL surfaces and textures, and supports the following formats: BMP, GIF, JPEG, LBM, PCX, PNG, PNM, TGA, TIFF, WEBP, XCF, XPM, XV
-Status: install ok installed
-
-Package: zstd
-Version: 1.5.6
-Depends: vcpkg-cmake, vcpkg-cmake-config
-Architecture: x64-windows
-Multi-Arch: same
-Abi: 56eed7159a34eab673ed6350c1f1fa6d30876d2ebabd6782260a7e724c28fc5f
-Description: Zstandard - Fast real-time compression algorithm
 Status: install ok installed
 
 Package: zlib
@@ -46,6 +37,104 @@ Architecture: x64-windows
 Multi-Arch: same
 Abi: bc6a71bbf1853bd9cda17208666cb1418fac31b322d580a7204b30aa3d7ae605
 Description: A compression library
+Status: install ok installed
+
+Package: libpng
+Version: 1.6.47
+Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: e7fde19c9b58b1efbd46e2f163cc19c8ac81b650538b83479932f33e4afe2d19
+Description: libpng is a library implementing an interface for reading and writing PNG (Portable Network Graphics) format files
+Status: install ok installed
+
+Package: bzip2
+Version: 1.0.8
+Port-Version: 6
+Depends: vcpkg-cmake
+Architecture: x64-windows
+Multi-Arch: same
+Abi: caaafb1adbcd154d3fe81d854df7e90752ed43ecdeffc27caec7ef59d4dfdd48
+Description: bzip2 is a freely available, patent free, high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.
+Default-Features: tool
+Status: install ok installed
+
+Package: bzip2
+Feature: tool
+Architecture: x64-windows
+Multi-Arch: same
+Description: Builds bzip2 executable
+Status: install ok installed
+
+Package: brotli
+Version: 1.1.0
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5a907e4bce2cd964e6b7a8ca1748ae97855c20246afb7628646e7943b270ef47
+Description: a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling.
+Status: install ok installed
+
+Package: freetype
+Version: 2.13.3
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 4e3942c38ecd5c8afb1e421212945fb193f6db4c9eedab733edb814d83931c86
+Description: A library to render fonts.
+Default-Features: brotli, bzip2, png, zlib
+Status: install ok installed
+
+Package: freetype
+Feature: brotli
+Depends: brotli
+Architecture: x64-windows
+Multi-Arch: same
+Description: Support decompression of WOFF2 streams
+Status: install ok installed
+
+Package: freetype
+Feature: bzip2
+Depends: bzip2
+Architecture: x64-windows
+Multi-Arch: same
+Description: Support bzip2 compressed fonts.
+Status: install ok installed
+
+Package: freetype
+Feature: png
+Depends: libpng
+Architecture: x64-windows
+Multi-Arch: same
+Description: Support PNG compressed OpenType embedded bitmaps.
+Status: install ok installed
+
+Package: freetype
+Feature: zlib
+Depends: zlib
+Architecture: x64-windows
+Multi-Arch: same
+Description: Use zlib instead of internal library for DEFLATE
+Status: install ok installed
+
+Package: sdl3-ttf
+Version: 3.2.2
+Port-Version: 1
+Depends: freetype, sdl3, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 0ac7001690f2a096c9ec372841caf9368ea1b9dd97c4a72598dedffb299e4e02
+Description: A library for rendering TrueType fonts with SDL
+Status: install ok installed
+
+Package: zstd
+Version: 1.5.7
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 2a2c156cb60374d699c865f34ed894266b539141d1d27690cdacb1c85b72a591
+Description: Zstandard - Fast real-time compression algorithm
 Status: install ok installed
 
 Package: pugixml
@@ -62,7 +151,7 @@ Version: 1.4.4
 Depends: pugixml, vcpkg-cmake, vcpkg-cmake-config, zlib, zstd
 Architecture: x64-windows
 Multi-Arch: same
-Abi: 692887fd1f9c088016788303a20ae50f440bf986b2cc1a74dfa1db33d59f4746
+Abi: 7ad8c133eb9763074062449650e0e9195df97ec7f820b6a5b5e122c6f42872ee
 Description: A lightweight C++14 parsing library for tmx map files created with the Tiled map editor.
 Status: install ok installed
 

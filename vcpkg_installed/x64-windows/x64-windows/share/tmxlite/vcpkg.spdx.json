@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/tmxlite-x64-windows-1.4.4-d8081157-63a8-471f-b01c-3e4b3c3f01f8",
-  "name": "tmxlite:x64-windows@1.4.4 692887fd1f9c088016788303a20ae50f440bf986b2cc1a74dfa1db33d59f4746",
+  "documentNamespace": "https://spdx.org/spdxdocs/tmxlite-x64-windows-1.4.4-f59c019e-4366-45ed-9947-247f243e1f42",
+  "name": "tmxlite:x64-windows@1.4.4 7ad8c133eb9763074062449650e0e9195df97ec7f820b6a5b5e122c6f42872ee",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-05-29T10:11:38Z"
+    "created": "2025-05-29T09:53:16Z"
   },
   "relationships": [
     {
@@ -63,7 +63,7 @@
       "name": "tmxlite",
       "SPDXID": "SPDXRef-port",
       "versionInfo": "1.4.4",
-      "downloadLocation": "git+https://github.com/microsoft/vcpkg@b18995c78b7b6057c2a1d69eba2118bfcb17fa36",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/tmxlite",
       "homepage": "https://github.com/fallahn/tmxlite",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",
@@ -74,7 +74,7 @@
     {
       "name": "tmxlite:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "692887fd1f9c088016788303a20ae50f440bf986b2cc1a74dfa1db33d59f4746",
+      "versionInfo": "7ad8c133eb9763074062449650e0e9195df97ec7f820b6a5b5e122c6f42872ee",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",
