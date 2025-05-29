@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/bzip2-x64-windows-1.0.8#6-f1a3a865-9b7b-4aa0-bfb2-b82f73224cb4",
-  "name": "bzip2:x64-windows@1.0.8#6 caaafb1adbcd154d3fe81d854df7e90752ed43ecdeffc27caec7ef59d4dfdd48",
+  "documentNamespace": "https://spdx.org/spdxdocs/bzip2-x64-windows-1.0.8#6-83d1109f-4eaa-4e1e-8580-a08b0ca983a5",
+  "name": "bzip2:x64-windows@1.0.8#6 262e57d165eaedd64d664450bcaab8780c152b729c6ea87c332b4b214425b9b7",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-05-29T10:12:38Z"
+    "created": "2025-05-29T13:50:30Z"
   },
   "relationships": [
     {
@@ -93,7 +93,7 @@
       "name": "bzip2",
       "SPDXID": "SPDXRef-port",
       "versionInfo": "1.0.8#6",
-      "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/bzip2",
+      "downloadLocation": "git+https://github.com/microsoft/vcpkg@2d029da682847c5ebdc54e4dbea001331a02207e",
       "homepage": "https://sourceware.org/bzip2/",
       "licenseConcluded": "bzip2-1.0.6",
       "licenseDeclared": "NOASSERTION",
@@ -104,7 +104,7 @@
     {
       "name": "bzip2:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "caaafb1adbcd154d3fe81d854df7e90752ed43ecdeffc27caec7ef59d4dfdd48",
+      "versionInfo": "262e57d165eaedd64d664450bcaab8780c152b729c6ea87c332b4b214425b9b7",
       "downloadLocation": "NONE",
       "licenseConcluded": "bzip2-1.0.6",
       "licenseDeclared": "NOASSERTION",
