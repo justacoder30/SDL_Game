@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/zstd-x64-windows-1.5.6-05ceafed-d45f-4325-80e9-09491ce697a7",
-  "name": "zstd:x64-windows@1.5.6 7f63af6586d64d0e26f4fc50606d0efdfe3802b7f7c75758289e5e835b52701d",
+  "documentNamespace": "https://spdx.org/spdxdocs/zstd-x64-windows-1.5.6-392b4463-5c17-45cf-8510-2a192eaac421",
+  "name": "zstd:x64-windows@1.5.6 56eed7159a34eab673ed6350c1f1fa6d30876d2ebabd6782260a7e724c28fc5f",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
+      "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-02-13T12:14:52Z"
+    "created": "2025-05-29T10:11:26Z"
   },
   "relationships": [
     {
@@ -81,6 +81,11 @@
       "spdxElementId": "SPDXRef-file-5",
       "relationshipType": "CONTAINED_BY",
       "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-5",
+      "relationshipType": "DEPENDENCY_MANIFEST_OF",
+      "relatedSpdxElement": "SPDXRef-port"
     }
   ],
   "packages": [
@@ -99,7 +104,7 @@
     {
       "name": "zstd:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "7f63af6586d64d0e26f4fc50606d0efdfe3802b7f7c75758289e5e835b52701d",
+      "versionInfo": "56eed7159a34eab673ed6350c1f1fa6d30876d2ebabd6782260a7e724c28fc5f",
       "downloadLocation": "NONE",
       "licenseConcluded": "BSD-3-Clause OR GPL-2.0-only",
       "licenseDeclared": "NOASSERTION",
@@ -107,7 +112,7 @@
       "comment": "This is a binary package built by vcpkg."
     },
     {
-      "SPDXID": "SPDXRef-resource-1",
+      "SPDXID": "SPDXRef-resource-0",
       "name": "facebook/zstd",
       "downloadLocation": "git+https://github.com/facebook/zstd@v1.5.6",
       "licenseConcluded": "NOASSERTION",
@@ -123,7 +128,7 @@
   ],
   "files": [
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/fix-emscripten-and-clang-cl.patch",
+      "fileName": "./fix-emscripten-and-clang-cl.patch",
       "SPDXID": "SPDXRef-file-0",
       "checksums": [
         {
@@ -135,7 +140,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/fix-windows-rc-compile.patch",
+      "fileName": "./fix-windows-rc-compile.patch",
       "SPDXID": "SPDXRef-file-1",
       "checksums": [
         {
@@ -147,7 +152,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/no-static-suffix.patch",
+      "fileName": "./no-static-suffix.patch",
       "SPDXID": "SPDXRef-file-2",
       "checksums": [
         {
@@ -159,7 +164,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/portfile.cmake",
+      "fileName": "./portfile.cmake",
       "SPDXID": "SPDXRef-file-3",
       "checksums": [
         {
@@ -171,7 +176,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/usage",
+      "fileName": "./usage",
       "SPDXID": "SPDXRef-file-4",
       "checksums": [
         {
@@ -183,7 +188,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/796171d4d359b6786b8e1380fb6da8e677a9087b/vcpkg.json",
+      "fileName": "./vcpkg.json",
       "SPDXID": "SPDXRef-file-5",
       "checksums": [
         {

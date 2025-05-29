@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/sdl3-x64-windows-3.2.4-386e2885-427f-466b-b58e-136777e88b81",
-  "name": "sdl3:x64-windows@3.2.4 68151308f183e97cab8e5365746bf9abbe79f1af3277f7912865baccfecb6ca4",
+  "documentNamespace": "https://spdx.org/spdxdocs/sdl3-x64-windows-3.2.4-76df211a-b0fa-4a25-8b07-1b47fa0f760b",
+  "name": "sdl3:x64-windows@3.2.4 93f20a5508b0bdf7748a9985c18389c927bc185adb94c4e6726d6c40c91c811c",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-1c9ec1978a6b0c2b39c9e9554a96e3e275f7556e"
+      "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-02-17T07:03:55Z"
+    "created": "2025-05-29T10:10:55Z"
   },
   "relationships": [
     {
@@ -51,6 +51,11 @@
       "spdxElementId": "SPDXRef-file-2",
       "relationshipType": "CONTAINED_BY",
       "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "DEPENDENCY_MANIFEST_OF",
+      "relatedSpdxElement": "SPDXRef-port"
     }
   ],
   "packages": [
@@ -69,7 +74,7 @@
     {
       "name": "sdl3:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "68151308f183e97cab8e5365746bf9abbe79f1af3277f7912865baccfecb6ca4",
+      "versionInfo": "93f20a5508b0bdf7748a9985c18389c927bc185adb94c4e6726d6c40c91c811c",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib AND MIT AND Apache-2.0",
       "licenseDeclared": "NOASSERTION",
@@ -77,7 +82,7 @@
       "comment": "This is a binary package built by vcpkg."
     },
     {
-      "SPDXID": "SPDXRef-resource-1",
+      "SPDXID": "SPDXRef-resource-0",
       "name": "libsdl-org/SDL",
       "downloadLocation": "git+https://github.com/libsdl-org/SDL@release-3.2.4",
       "licenseConcluded": "NOASSERTION",
@@ -93,7 +98,7 @@
   ],
   "files": [
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/8f6fe1fdd4aeb45f5c0f0e02876f44e400f694f0/portfile.cmake",
+      "fileName": "./portfile.cmake",
       "SPDXID": "SPDXRef-file-0",
       "checksums": [
         {
@@ -105,7 +110,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/8f6fe1fdd4aeb45f5c0f0e02876f44e400f694f0/usage",
+      "fileName": "./usage",
       "SPDXID": "SPDXRef-file-1",
       "checksums": [
         {
@@ -117,7 +122,7 @@
       "copyrightText": "NOASSERTION"
     },
     {
-      "fileName": "./C:/Users/quang/AppData/Local/vcpkg/registries/git-trees/8f6fe1fdd4aeb45f5c0f0e02876f44e400f694f0/vcpkg.json",
+      "fileName": "./vcpkg.json",
       "SPDXID": "SPDXRef-file-2",
       "checksums": [
         {

@@ -195,6 +195,8 @@ IPlayerState* HurtState::Update(Player& player)
 	player.isHurt = false;
 	player.velocity.x = 0;
 
+	player.velocity.x = -player.moveSpeed/2;
+
 	if (player.animationManger.IsDone()) return new IdleState();
 
 	return this;

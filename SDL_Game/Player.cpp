@@ -79,7 +79,6 @@ void Player::UpdateVelocity()
 	if (!PreKey[SDL_SCANCODE_SPACE] && Key[SDL_SCANCODE_SPACE] && isOnGround) {
 		velocity.y = -jump;
 	}
-	std::cout << texture_width << std::endl;
 }
 
 void Player::UpdatePosition()
