@@ -19,7 +19,7 @@ IPlayerState* IdleState::Update(Player& player)
 	if (!PreKey[SDL_SCANCODE_F] && Key[SDL_SCANCODE_F]) return new DefendState();
 
 	if (player.isHurt) {
-		player.velocity.y = -200;
+		player.beingHurt();
 		return new HurtState();
 	}
 
@@ -42,7 +42,7 @@ IPlayerState* RunState::Update(Player& player)
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new RunAttackState;
 
 	if (player.isHurt) {
-		player.velocity.y = -200;
+		player.beingHurt();
 		return new HurtState();
 	}
 
@@ -59,7 +59,7 @@ IPlayerState* FallState::Update(Player& player)
 	}
 
 	if (player.isHurt) {
-		player.velocity.y = -200;
+		player.beingHurt();
 		return new HurtState();
 	}
 
@@ -73,7 +73,7 @@ IPlayerState* JumpState::Update(Player& player)
 	if (player.velocity.y >= 0) return new FallState();
 
 	if (player.isHurt) {
-		player.velocity.y = -200;
+		player.beingHurt();
 		return new HurtState();
 	}
 
@@ -93,6 +93,12 @@ IPlayerState* Attack1State::Update(Player& player)
 		return new JumpState();
 	}
 
+	if (player.isHurt) {
+		player.beingHurt();
+		return new HurtState();
+	}
+
+
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J])
 		comboAtk = true;
 
@@ -100,6 +106,8 @@ IPlayerState* Attack1State::Update(Player& player)
 		if (comboAtk) return new Attack2State();
 		return new IdleState();
 	}
+
+
 
 	return this;
 }
@@ -115,6 +123,11 @@ IPlayerState* Attack2State::Update(Player& player)
 
 	if (player.velocity.y < 0) {
 		return new JumpState();
+	}
+
+	if (player.isHurt) {
+		player.beingHurt();
+		return new HurtState();
 	}
 
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J])
@@ -141,6 +154,11 @@ IPlayerState* Attack3State::Update(Player& player)
 		return new JumpState();
 	}
 
+	if (player.isHurt) {
+		player.beingHurt();
+		return new HurtState();
+	}
+
 	if (player.animationManger.IsDone()) {
 		return new IdleState();
 	}
@@ -161,6 +179,11 @@ IPlayerState* RunAttackState::Update(Player& player)
 		return new JumpState();
 	}
 
+	if (player.isHurt) {
+		player.beingHurt();
+		return new HurtState();
+	}
+
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new Attack1State();
 
 	if (player.animationManger.IsDone()) return new IdleState();
@@ -173,6 +196,17 @@ IPlayerState* DefendState::Update(Player& player)
 	player.current = Defend;
 	player.velocity.x = 0;
 	
+	if (player.isHurt) {
+		if(player.animationManger.IsFlip() && player.hurtDirection == 1 ||
+			!player.animationManger.IsFlip() && player.hurtDirection == -1
+			)
+			return new ProtectState();
+		else {
+			player.beingHurt();
+			return new HurtState();
+		}
+	}
+
 	if (player.velocity.y < 0) return new JumpState();
 
 	if (Key[SDL_SCANCODE_F]) return this;
@@ -183,8 +217,13 @@ IPlayerState* DefendState::Update(Player& player)
 IPlayerState* ProtectState::Update(Player& player)
 {
 	player.current = Protect;
+	player.velocity.x = player.moveSpeed * player.hurtDirection;
+	player.isHurt = false;
 
-	if (player.animationManger.IsDone()) return new IdleState();
+	if (player.animationManger.IsDone()) {
+		if (Key[SDL_SCANCODE_F]) return new DefendState();
+		return new IdleState();
+	}
 
 	return this;
 }
@@ -193,11 +232,23 @@ IPlayerState* HurtState::Update(Player& player)
 {
 	player.current = Hurt;
 	player.isHurt = false;
+	player.velocity.x = player.moveSpeed/2 * player.hurtDirection;
+
+	if (player.animationManger.IsDone()) {
+		if (player.currentHp <= 0) return new DeathState();
+		return new IdleState();
+	}
+
+
+	return this;
+}
+
+IPlayerState* DeathState::Update(Player& player)
+{
+	player.current = Death;
+
 	player.velocity.x = 0;
-
-	player.velocity.x = -player.moveSpeed/2;
-
-	if (player.animationManger.IsDone()) return new IdleState();
+	if (player.animationManger.IsDone()) Global.gameLoop = false;
 
 	return this;
 }

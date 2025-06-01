@@ -7,14 +7,17 @@ class IPlayerState;
 class Player : public Entity
 {
 private:
+	Rect mapRect;
 public:
 	IPlayerState* state;
 
 	Player();
 	Player(int level, Vector pos);
+	void SetMapRect(Rect rect);
 	void UpdateVelocity();
 	void UpdatePosition();
 	void UpdateState();
 	void Update();
 	void Draw();
+	bool isOutOfMap();
 };

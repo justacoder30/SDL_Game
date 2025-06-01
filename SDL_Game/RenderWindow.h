@@ -22,7 +22,9 @@ public:
 	void blit(Texture texture, Vector pos, Rect area, float scale);
 	void blit(Texture texture, Vector pos, Rect area, Vector size);
 	void blit(Texture texture, Vector pos, Vector size);
+	void blit(Texture texture, Vector pos);
 	void DrawRect(Rect rect);
+	void DrawFillRect(Rect rect);
 	void SetFullScreen(SDL_WindowFlags flags);
 	void FullScreenToggle();
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);

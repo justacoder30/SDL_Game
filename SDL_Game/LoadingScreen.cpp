@@ -48,7 +48,9 @@ void LoadingScreen::UpdateState()
 
 void LoadingScreen::Draw()
 {
+	window.SetColor(0, 0, 0);
 	window.Clear();
+	
 
 	window.blit(
 		animationManger.animation.texture,
@@ -56,6 +58,7 @@ void LoadingScreen::Draw()
 		animationManger.getRect(),
 		size
 	);
+	
 }
 
 bool LoadingScreen::isEnd()

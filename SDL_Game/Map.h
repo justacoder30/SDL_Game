@@ -17,7 +17,7 @@ public:
 	void Draw();
 };
 
-class Map
+class Map : public Entity
 {
 private:
 	float width;
@@ -29,8 +29,8 @@ private:
 	float CaculateRotate(uint8_t flags, SDL_FlipMode& flip);
 public:
 	Map() {}
-	Map(int level, std::vector<Entity*>& Entities);
-	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures, std::vector<Entity*>& Entities);
+	Map(std::string level);
+	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures);
 	std::vector<Rect> GetObjectGroup(std::string name);
 	float getWidth();
 	float getHeight();

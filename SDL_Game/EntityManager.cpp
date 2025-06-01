@@ -1,6 +1,9 @@
 #include "EntityManager.h"
 #include "Input.h"
 #include "Sprite.h"
+#include "Coin.h"
+#include "Heart.h"
+
 
 //std::cout<< <<std::endl;
 
@@ -13,23 +16,41 @@ void EntityManager::addObjects()
 			Vector(Global.camera.rect.w, Global.camera.rect.h)
 		)
 	);
-	map = Map(1, Entities);
+	Entities.push_back(map);
 	for (auto obj : objects_pos) {
-		auto positions = map.GetObjectGroup(obj);
+		auto positions = map->GetObjectGroup(obj);
 
 		if (positions.empty()) continue;
 
 		if (obj == "PlayerPosition") {
 			for (auto pos : positions) {
 				player = new Player(0, Vector(pos.x, pos.y));
+				player->SetMapRect(Rect(0, 0, map->getWidth(), map->getHeight()));
 				Entities.push_back(player);
 			}
 		} else if (obj == "EnemyPosition") {
 			for (auto pos : positions) {
 				Entities.push_back(new Enemy(0, Vector(pos.x, pos.y), player));
 			}
+		} else if (obj == "CoinPosition") {
+			for (auto pos : positions) {
+				Entities.push_back(new Coin(Vector(pos.x, pos.y), player));
+			}
+		} else if (obj == "HeartPosition") {
+			for (auto pos : positions) {
+				Entities.push_back(new Heart(Vector(pos.x, pos.y), player));
+			}
+		} else if (obj == "FlagPosition") {
+			for (auto pos : positions) {
+				flag = new Flag(Vector(pos.x, pos.y), player);
+				Entities.push_back(flag);
+			}
 		}
 	}
+	playerHealthBar = new HealthBar(player, Vector(20, 10), Vector(150, 15));
+	playerHealthBar->SetStatic();
+	playerHealthBar->SetColor(255, 0, 0);
+	Entities.push_back(playerHealthBar);
 
 	loading = new LoadingScreen(Vector(64, 64), 1.5);
 	Entities.push_back(loading);
@@ -37,7 +58,7 @@ void EntityManager::addObjects()
 
 void EntityManager::addCollisions()
 {
-	Collisions = map.GetObjectGroup("Collision");
+	Collisions = map->GetObjectGroup("Collision");
 }
 
 void EntityManager::setCamera()
@@ -48,14 +69,15 @@ void EntityManager::setCamera()
 	Global.camera.SetBound(
 		size.w/2,
 		size.h/2,
-		map.getWidth() - size.w / 2,
-		map.getHeight() - size.h / 2
+		map->getWidth() - size.w / 2,
+		map->getHeight() - size.h / 2
 	);
 	Global.camera.Follow(&player->center_pos);
 }
 
-EntityManager::EntityManager(int level)
+EntityManager::EntityManager(std::string level)
 {
+	map = new Map(level);
 	addObjects();
 	addCollisions();
 

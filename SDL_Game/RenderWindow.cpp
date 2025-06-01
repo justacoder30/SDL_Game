@@ -1,5 +1,6 @@
 #include "RenderWindow.h"
 #include <iostream>
+#include <SDL3_ttf/SDL_ttf.h>
 
 RenderWindow window;
 
@@ -8,6 +9,11 @@ RenderWindow::RenderWindow()
 
 RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen) :fullscreen(_fullscreen)
 {
+	if (!TTF_Init())
+	{
+		SDL_Log("SDL_ttf could not initialize! SDL_ttf error: %s\n", SDL_GetError());
+	}
+
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -106,13 +112,6 @@ void RenderWindow::blit(Texture texture, Vector pos, Rect area, Vector size)
 
 void RenderWindow::blit(Texture texture, Vector pos, Vector size)
 {
-	SDL_FRect src = {
-		0,
-		0,
-		texture.getWidth(),
-		texture.getHeight()
-	};
-
 	SDL_FRect dst = {
 		pos.x,
 		pos.y,
@@ -120,13 +119,31 @@ void RenderWindow::blit(Texture texture, Vector pos, Vector size)
 		size.y
 	};
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
+	SDL_RenderTextureRotated(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
+}
+
+void RenderWindow::blit(Texture texture, Vector pos)
+{
+	SDL_FRect dst = {
+		0,
+		0,
+		texture.getWidth(),
+		texture.getHeight()
+	};
+
+	SDL_RenderTextureRotated(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
 }
 
 void RenderWindow::DrawRect(Rect rect)
 {
 	SDL_FRect frect = rect.getFRect();
 	SDL_RenderRect(renderer, &frect);
+}
+
+void RenderWindow::DrawFillRect(Rect rect)
+{
+	SDL_FRect frect = rect.getFRect();
+	SDL_RenderFillRect(renderer, &frect);
 }
 
 float RenderWindow::CaculateScale(float w, float h)

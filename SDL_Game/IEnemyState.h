@@ -18,3 +18,18 @@ class RunEnemyState : public IEnemyState {
 public:
 	IEnemyState* Update(Enemy& enemy) override;
 };
+
+class HurtEnemyState : public IEnemyState {
+public:
+	IEnemyState* Update(Enemy& enemy) override;
+};
+
+class DeathEnemyState : public IEnemyState {
+public:
+	IEnemyState* Update(Enemy& enemy) override;
+};
+
+class AttackEnemyState : public IEnemyState {
+public:
+	IEnemyState* Update(Enemy& enemy) override;
+};

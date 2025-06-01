@@ -11,21 +11,27 @@ const int SCREEN_HEIGHT = 1080;
 
 class IGameState;
 
+
 class Game
 {
 private:
 	EntityManager *entityManager;
 	IGameState *currentState;
 	IGameState *preveriousState;
+	int currentLevelIndex = 0;
+	std::vector<std::string> levels;
 
 public:
 	Game();
 	
 	void ChangeState(IGameState* newState);
 	void ChangeToPreState();
+	void ChangeToNextLevel();
+	void ResetLevel();
 	void SaveState();
 	IGameState *getPreState();
 	IGameState *getCurrentState();
+	std::string getLevel();
 	void Update();
 	void Draw();
 	void Run();

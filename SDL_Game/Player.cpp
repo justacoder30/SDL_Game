@@ -17,7 +17,7 @@ Player::Player(int level, Vector pos)
 		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.1, false)},
 		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.1, false)},
 		{Defend, Animation("resource/img/Knight/Defend.png", 5, 0.1)},
-		{Protect, Animation("resource/img/Knight/Protect.png", 5, 0.2, false)},
+		{Protect, Animation("resource/img/Knight/Protect.png", 1, 0.1, false)},
 		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.2, false)},
 		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
 	};
@@ -28,6 +28,9 @@ Player::Player(int level, Vector pos)
 	gravity = 800;
 	jump = 400;
 	current = Idle;
+	damage = 10;
+	hp = 100;
+	currentHp = hp;
 
 	texture_width = animationManger.animation.FrameWidth;
 	texture_height = animationManger.animation.FrameHeight;
@@ -60,11 +63,18 @@ Player::Player(int level, Vector pos)
 
 }
 
+void Player::SetMapRect(Rect rect)
+{
+	mapRect = rect;
+}
+
 void Player::UpdateVelocity()
 {
 	UpdateGravity();
 
 	velocity.x = 0;
+
+	if (current == Hurt) return;
 
 	if (Key[SDL_SCANCODE_A]) {
 		velocity.x = -moveSpeed;
@@ -76,7 +86,7 @@ void Player::UpdateVelocity()
 		animationManger.flip = SDL_FLIP_NONE;
 	}
 
-	if (!PreKey[SDL_SCANCODE_SPACE] && Key[SDL_SCANCODE_SPACE] && isOnGround) {
+	if (!PreKey[SDL_SCANCODE_SPACE] && Key[SDL_SCANCODE_SPACE] && isOnGround && current != Death) {
 		velocity.y = -jump;
 	}
 }
@@ -96,6 +106,8 @@ void Player::UpdatePosition()
 
 void Player::UpdateState()
 {
+	if (isOutOfMap()) state = new DeathState();
+
 	state = state->Update(*this);
 }
 
@@ -110,6 +122,16 @@ void Player::Update()
 void Player::Draw()
 {
 	Entity::DrawAnimateGroup();
+}
+
+bool Player::isOutOfMap()
+{
+	if (rect.y > mapRect.h) {
+		currentHp = 0;
+		return true;
+	}
+
+	return false;
 }
 
 

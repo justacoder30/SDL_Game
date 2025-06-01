@@ -8,8 +8,8 @@ Texture::Texture()
 Texture::Texture(std::string f_path)
 {
 
-	texure = IMG_LoadTexture(Global.Renderer, f_path.c_str());
-	if (texure == NULL) {
+	texture = IMG_LoadTexture(Global.Renderer, f_path.c_str());
+	if (texture == NULL) {
 		printf("Unable to create texture from %s! SDL Error: %s\n", f_path.c_str(), SDL_GetError());
 		return;
 	}
@@ -20,12 +20,12 @@ Texture::Texture(std::string f_path)
 
 float Texture::getWidth()
 {
-	return texure->w;
+	return texture->w;
 }
 
 float Texture::getHeight()
 {
-	return texure->h;
+	return texture->h;
 }
 
 SDL_Rect Texture::getRect()
@@ -33,8 +33,8 @@ SDL_Rect Texture::getRect()
 	SDL_Rect rect = {
 		0,
 		0,
-		texure->w,
-		texure->h,
+		texture->w,
+		texture->h,
 	};
 	return rect;
 }
@@ -44,23 +44,34 @@ SDL_FRect Texture::getFRect()
 	SDL_FRect rect = {
 		0,
 		0,
-		float(texure->w),
-		float(texure->h),
+		float(texture->w),
+		float(texture->h),
 	};
 	return rect;
 }
 
 SDL_Texture* Texture::getTex()
 {
-	return texure;
+	return texture;
 }
 
-void Texture::SetScaleMode(SDL_ScaleMode scaleMode) 
+Texture Texture::CreateTextTTF(std::string text)
 {
-	SDL_SetTextureScaleMode(texure, scaleMode);
+	SDL_Surface* surface = TTF_RenderText_Solid(Global.font.GetFont(), text.c_str(), 0, {255, 255, 255});
+	texture = SDL_CreateTextureFromSurface(Global.Renderer, surface);
+	SDL_DestroySurface(surface);
+	SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
+	return *this;
 }
 
-void Texture::SetColor(Uint8 r, Uint8 g, Uint8 b)
+Texture Texture::SetScaleMode(SDL_ScaleMode scaleMode)
 {
-	SDL_SetTextureColorMod(texure, r, g, b);
+	SDL_SetTextureScaleMode(texture, scaleMode);
+	return *this;
+}
+
+Texture Texture::SetColor(Uint8 r, Uint8 g, Uint8 b)
+{
+	SDL_SetTextureColorMod(texture, r, g, b);
+	return *this;
 }

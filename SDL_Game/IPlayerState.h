@@ -68,4 +68,9 @@ public:
 	IPlayerState* Update(Player& player) override;
 };
 
+class DeathState : public IPlayerState {
+public:
+	IPlayerState* Update(Player& player) override;
+};
+
 

@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "IEnemyState.h"
 #include "Player.h"
+#include "HealthBar.h"
 
 class IEnemyState;
 
@@ -9,9 +10,12 @@ class Enemy : public Entity
 {
 private:
 	Rect edgeRect;
-	Player* player;
+	
+	float enemyZone = 150;
+	HealthBar *bar;
 	
 public:
+	Player* player;
 	IEnemyState* state;
 	double timer = 0;
 	double timeChangeState = 3;
@@ -24,6 +28,10 @@ public:
 	void Update();
 	void Draw();
 	bool isEdge();
+	bool isHitWall();
+	bool isInEnemyZone();
+	bool isInAttackZone();
+	bool checkTurn();
 	void CollideWithPlayer();
 
 };

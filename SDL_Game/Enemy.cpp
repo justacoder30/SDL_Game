@@ -16,6 +16,8 @@ Enemy::Enemy(int level, Vector pos, Player* player)
 	moveSpeed = 80;
 	gravity = 800;
 	damage = 10;
+	hp = 40;
+	currentHp = hp;
 
 	current = Idle;
 
@@ -44,10 +46,21 @@ Enemy::Enemy(int level, Vector pos, Player* player)
 	timeChangeState = min + std::rand() % (max - min + 1);
 	
 	this->player = player;
+
+	atkBox = Rect(
+		Vector(54, 18),
+		Vector(40, 30)
+	);
+
+	bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
+	bar->SetColor(0, 255, 0);
+	bar->SetErase();
+	
 }
 
 void Enemy::UpdateVelocity()
 {
+	if (current == Hurt || current == Death) return;
 	if (velocity.x > 0) {
 		animationManger.flip = SDL_FLIP_NONE;
 	}
@@ -76,16 +89,20 @@ void Enemy::UpdateState()
 
 void Enemy::Update()
 {
+	Entity::Update();
+	CollideWithPlayer();
 	UpdateVelocity();
 	UpdateState();
 	UpdatePosition();
 	UpdateAnimation();
-	CollideWithPlayer();
+
+	
 }
 
 void Enemy::Draw()
 {
 	Entity::DrawAnimateGroup();
+	Entity::Draw();
 }
 
 bool Enemy::isEdge()
@@ -102,12 +119,50 @@ bool Enemy::isEdge()
 	return true;
 }
 
-void Enemy::CollideWithPlayer()
+bool Enemy::isHitWall()
 {
-	if (rect.checkCollide(player->rect)) {
-		player->isHurt = true;
-		player->damageTaken = damage;
+	float x = animationManger.IsFlip() ? rect.x - 2 : rect.x + rect.w;
+	Rect wall_rect = Rect(x, rect.y, 2, rect.h);
+
+	for (int i = 0; i < Collisions.size(); ++i) {
+		if (wall_rect.checkCollide(Collisions[i]))
+			return true;
 	}
 
-	if(rect.checkCollide(player->getAtkBox()) && player->isAttacking()) removeFromTree();
+	return false;
+}
+
+bool Enemy::isInEnemyZone()
+{
+	float distance = sqrt(pow(center_pos.x - player->center_pos.x, 2) + pow(center_pos.y - player->center_pos.y, 2));
+	return distance <= enemyZone && player->current != Death;
+}
+
+bool Enemy::isInAttackZone()
+{
+	return player->rect.checkCollide(getAtkBox());
+}
+
+bool Enemy::checkTurn()
+{
+	float d = center_pos.x - player->center_pos.x;
+	if (animationManger.IsFlip() && d < 0) return true;
+	else if (!animationManger.IsFlip() && d > 0) return true;
+	return false;
+}
+
+void Enemy::CollideWithPlayer()
+{
+	if (rect.checkCollide(player->rect) && current != Death) {
+		player->beingAttacked(damage, center_pos);
+	}
+
+	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
+		add(bar);
+		beingAttacked(damage, player->center_pos);
+	}
+
+	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {
+		player->beingAttacked(damage, center_pos);
+	}
 }

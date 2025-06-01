@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/pugixml-x64-windows-1.15-134a7281-0f88-42d4-b286-0a210375d6b6",
-  "name": "pugixml:x64-windows@1.15 cc383f8d68bda9824c871de2aac23856836142aee8843bd99e286d932d3c5f8d",
+  "documentNamespace": "https://spdx.org/spdxdocs/pugixml-x64-windows-1.15-068828ad-3820-4e65-8332-ea02d106cc83",
+  "name": "pugixml:x64-windows@1.15 f6c781db6c5688169934d61e29c7753b7424227f732f9bf0045902bef7f07b6c",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-04-26T14:33:36Z"
+    "created": "2025-05-29T09:52:32Z"
   },
   "relationships": [
     {
@@ -53,7 +53,7 @@
       "name": "pugixml",
       "SPDXID": "SPDXRef-port",
       "versionInfo": "1.15",
-      "downloadLocation": "git+https://github.com/microsoft/vcpkg@a3181de4dee35567b45611a938eb0f44f5ee016d",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/pugixml",
       "homepage": "https://github.com/zeux/pugixml",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
@@ -64,7 +64,7 @@
     {
       "name": "pugixml:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "cc383f8d68bda9824c871de2aac23856836142aee8843bd99e286d932d3c5f8d",
+      "versionInfo": "f6c781db6c5688169934d61e29c7753b7424227f732f9bf0045902bef7f07b6c",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",

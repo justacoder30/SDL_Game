@@ -27,20 +27,21 @@ enum State
 class Entity
 {
 private:
+	bool changeLevel = false;
+	bool removed = false;
 protected:
 	int texture_width;
-	int texture_height;
-	bool removed = false;
-	Rect atkBox;
-	
+	int texture_height;	
+	Rect atkBox;	
 	Rect OFFSET;
 	std::unordered_map<State, Animation> animations;
 	std::vector<Entity*> Entities;
 
 	bool IsOnGround();
+	void ChangeLevel();
 	void UpdateGravity();
 	void UpdateAnimation();
-	void DrawRectTransform(Rect r);
+	
 
 public:	
 	Vector size;
@@ -55,7 +56,6 @@ public:
 	Rect old_rect;
 	bool backDrop = false;
 	bool isHurt = false;
-	float damageTaken = 10;
 	bool isOnGround;
 	float gravity;
 	float moveSpeed;
@@ -63,6 +63,11 @@ public:
 	float rotate;
 	float damage;
 	float attackFrame = 0;
+	float damageTaken;
+	float hp;
+	float currentHp;
+	int hurtDirection;
+	
 
 	Entity();
 
@@ -74,8 +79,16 @@ public:
 	void SetCollision(float _left, float _top, float _right, float _bottom);
 	void DrawAnimateGroup();
 	void removeFromTree();
+	void setRemove();
 	bool isRemoved();
 	bool isAttacking();
+	bool isChangLevel();
+	void DrawRectTransform(Rect r);
+	void DrawFillRectTransform(Rect r);
+	void DrawFillRectStatic(Rect r);
+	void DrawRectStatic(Rect r);
+	void beingAttacked(float damage, Vector postisition);
+	void beingHurt();
 	Rect getAtkBox();
 	Vector GetPos();
 	Rect GravityRect();

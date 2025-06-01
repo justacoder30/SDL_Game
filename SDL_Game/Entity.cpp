@@ -13,6 +13,11 @@ bool Entity::IsOnGround()
     return false;
 }
 
+void Entity::ChangeLevel()
+{
+    changeLevel = true;
+}
+
 void Entity::UpdateGravity()
 {
     isOnGround = IsOnGround();
@@ -32,6 +37,38 @@ void Entity::DrawRectTransform(Rect r)
     window.DrawRect(newR);
 }
 
+void Entity::DrawFillRectTransform(Rect r)
+{
+    Rect newR = r;
+    newR.x += Global.camera.transform.x;
+    newR.y += Global.camera.transform.y;
+    window.DrawFillRect(newR);
+}
+
+void Entity::DrawFillRectStatic(Rect r)
+{
+    window.DrawFillRect(r);
+}
+
+void Entity::DrawRectStatic(Rect r)
+{
+    window.DrawRect(r);
+}
+
+
+void Entity::beingAttacked(float damage, Vector postisition)
+{
+    isHurt = true;
+    damageTaken = damage;
+    hurtDirection = postisition.x > center_pos.x ? -1 : 1;
+}
+
+void Entity::beingHurt()
+{
+    velocity.y = -250;
+    currentHp -= damageTaken;
+}
+
 Entity::Entity()
 {}
 
@@ -40,9 +77,13 @@ void Entity::Update()
     for (int i = 0; i < Entities.size(); ++i)
     {
         Entities[i]->Update();
+        if (Entities[i]->isChangLevel()) {
+            ChangeLevel();
+        }
         if (Entities[i]->isRemoved()) {
             Entities.erase(Entities.begin() + i--);
         }
+        
     }
 }
 
@@ -53,14 +94,11 @@ void Entity::Draw()
         if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
         Entities[i]->Draw();
     }
-
-    /*Rect newR = Rect(GetPos().x, GetPos().y, texture_width, texture_height);
-    DrawRectTransform(getAtkBox());
-    DrawRectTransform(newR);*/
 }
 
 void Entity::add(Entity* entity)
 {
+    entity->setRemove();
     Entities.push_back(entity);
 }
 
@@ -93,7 +131,7 @@ void Entity::Collision(std::string direction)
                 rect.x = Collisions[i].right;
             }
 
-            velocity.x *= -1;
+            //velocity.x *= -1;
         }
     }
 }
@@ -129,6 +167,11 @@ bool Entity::isRemoved()
     return removed;
 }
 
+void Entity::setRemove()
+{
+    removed = false;
+}
+
 bool Entity::isAttacking()
 {
     if (animationManger.animation.CurrentFrame != attackFrame) return false;
@@ -142,6 +185,11 @@ bool Entity::isAttacking()
         return false;
 
     return true;
+}
+
+bool Entity::isChangLevel()
+{
+    return changeLevel;
 }
 
 Rect Entity::getAtkBox()

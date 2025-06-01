@@ -6,7 +6,7 @@
 class Texture
 {
 private:
-	SDL_Texture* texure;
+	SDL_Texture* texture;
 public:
 	Texture();
 	Texture(std::string f_path);
@@ -15,7 +15,8 @@ public:
 	SDL_Rect getRect();
 	SDL_FRect getFRect();
 	SDL_Texture* getTex();
-	void SetScaleMode(SDL_ScaleMode scaleMode);
-	void SetColor(Uint8 r, Uint8 g, Uint8 b);
+	Texture CreateTextTTF(std::string text);
+	Texture SetScaleMode(SDL_ScaleMode scaleMode);
+	Texture SetColor(Uint8 r, Uint8 g, Uint8 b);
 };
 

@@ -8,8 +8,9 @@ private:
 	Player* player;
 public:
 	Coin();
-	Coin(int level, Vector pos, Player player);
+	Coin(Vector pos, Player *player);
 	void Update();
+	void Draw();
 	void OnCollideWithPlayer();
 };
 

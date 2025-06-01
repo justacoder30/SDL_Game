@@ -32,7 +32,7 @@ Rect getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize) {
     return src;
 }
 
-void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures, std::vector<Entity*>& Entities) {
+void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures) {
     const auto& layers = map.getLayers();
     const auto& layer = layers[layerIndex]->getLayerAs<tmx::TileLayer>();
     const auto mapSize = map.getTileCount();
@@ -178,9 +178,9 @@ float Map::CaculateRotate(uint8_t flags, SDL_FlipMode& flip)
     return rotation;
 }
 
-Map::Map(int level, std::vector<Entity*>& Entities)
+Map::Map(std::string level)
 {
-    InitMap("resource/Map/map" + std::to_string(level) + ".tmx");
+    InitMap("resource/Map/" + level);
 
     auto tileSets = map.getTilesets();
 	std::vector<Texture*> texure = GetTextures(map.getTilesets());
@@ -190,9 +190,10 @@ Map::Map(int level, std::vector<Entity*>& Entities)
 	{
         if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
 		{
-			CreateMap(map, i, texure, Entities);
+			CreateMap(map, i, texure);
 		}
 	}
+    backDrop = true;
 }
 
 TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_FlipMode _flip)
