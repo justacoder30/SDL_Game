@@ -234,7 +234,12 @@ IPlayerState* HurtState::Update(Player& player)
 	player.isHurt = false;
 	player.velocity.x = player.moveSpeed/2 * player.hurtDirection;
 
-	if (player.animationManger.IsDone()) {
+	/*if (player.animationManger.IsDone()) {
+		if (player.currentHp <= 0) return new DeathState();
+		return new IdleState();
+	}*/
+
+	if (player.isOnGround) {
 		if (player.currentHp <= 0) return new DeathState();
 		return new IdleState();
 	}
