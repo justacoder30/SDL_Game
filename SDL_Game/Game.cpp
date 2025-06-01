@@ -10,7 +10,7 @@ Game::Game()
 
 	levels = { "map1.tmx", "map2.tmx" };
 
-	currentState = new PlayGameState(this);
+	currentState = new MenuState(this);
 	preveriousState = currentState;
 }
 

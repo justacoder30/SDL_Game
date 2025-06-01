@@ -32,7 +32,7 @@ public:
 		exitBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
 
 
-		//add(new Background(Vector(Global.camera.rect.w, Global.camera.rect.h)));
+		add(new Background(Vector(Global.camera.rect.w, Global.camera.rect.h)));
 		add(tittle);
 		add(playBtn);
 		add(exitBtn);
