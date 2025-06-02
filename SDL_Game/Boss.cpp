@@ -1,75 +1,72 @@
-#include "Enemy.h"
+#include "Boss.h"
 
+Boss::Boss()
+{}
 
-Enemy::Enemy(int level, Vector pos, Player* player)
+Boss::Boss(Vector pos, Player* player)
 {
+	//framesize = (384, 256)
+	scale = 2;
 	animations = {
-		{Idle, Animation("resource/img/Enemy/Skeleton/Idle.png", 8, 0.08)},
-		{Run, Animation("resource/img/Enemy/Skeleton/Walk.png", 10, 0.08)},
-		{Attack, Animation("resource/img/Enemy/Skeleton/Attack.png", 10, 0.1)},
-		{Death, Animation("resource/img/Enemy/Skeleton/Death.png", 13, 0.08, false)},
-		{Hurt, Animation("resource/img/Enemy/Skeleton/Hurt.png", 5, 0.08, false)},
+		{Idle, Animation("resource/img/Enemy/Frost_Guardian/Idle.png", 6, 0.08)},
+		{Walk, Animation("resource/img/Enemy/Frost_Guardian/Walk.png", 10, 0.08)},
+		{Attack, Animation("resource/img/Enemy/Frost_Guardian/Attack.png", 14, 0.08)},
+		{Death, Animation("resource/img/Enemy/Frost_Guardian/Death.png", 16, 0.12, false)},
+		{Hurt, Animation("resource/img/Enemy/Frost_Guardian/Hurt.png", 7, 0.06, false)},
 	};
 
 	animationManger = AnimationManager(animations[Idle]);
 	tex = animations[Idle].texture;
 	moveSpeed = 80;
 	gravity = 800;
-	damage = 10;
-	hp = 40;
+	damage = 20;
+	getHitJump = 100;
+	hp = 200;
 	currentHp = hp;
-
-	current = Idle;
 
 	texture_width = animationManger.animation.FrameWidth;
 	texture_height = animationManger.animation.FrameHeight;
 
-	SetCollision(40, 16, 40, 0);
+	SetCollision(77 * scale, 36 * scale, 73 * scale, 18 * scale);
 
 	center_pos = GetCenter();
 
-	state = new IdleEnemyState();
+	state = new IdleBossState();
 
 	rect = Rect(
 		pos.x,
 		pos.y,
-		texture_width - OFFSET.left - OFFSET.right, 
-		texture_height - OFFSET.top - OFFSET.bottom
+		texture_width * scale - OFFSET.left - OFFSET.right,
+		texture_height * scale - OFFSET.top - OFFSET.bottom
 	);
 	old_rect = rect;
 
-	damage = 10;
-
-	int min = 2;
-	int max = 6;
-
-	timeChangeState = min + std::rand() % (max - min + 1);
-	
 	this->player = player;
 
 	atkBox = Rect(
-		Vector(54, 18),
-		Vector(40, 30)
+		Vector(5 * scale, 69 * scale),
+		Vector(55 * scale, 20 * scale)
 	);
 
-	bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
-	bar->SetColor(0, 255, 0);
+	bar = new HealthBar(this, Vector(20 * scale, 8 * scale), Vector(50 * scale, 5 * scale));
+	bar->SetColor(0, 255, 255);
 	bar->SetErase();
-	
+
+	//velocity.x = moveSpeed;
 }
 
-void Enemy::UpdateVelocity()
+void Boss::UpdateVelocity()
 {
 	if (current == Hurt || current == Death) return;
 	if (velocity.x > 0) {
-		animationManger.flip = SDL_FLIP_NONE;
+		animationManger.flip = SDL_FLIP_HORIZONTAL;
 	}
 	if (velocity.x < 0) {
-		animationManger.flip = SDL_FLIP_HORIZONTAL;
+		animationManger.flip = SDL_FLIP_NONE;
 	}
 }
 
-void Enemy::UpdatePosition()
+void Boss::UpdatePosition()
 {
 	old_rect = rect;
 
@@ -82,33 +79,34 @@ void Enemy::UpdatePosition()
 	center_pos = GetCenter();
 }
 
-void Enemy::UpdateState()
+void Boss::UpdateState()
 {
 	state = state->Update(*this);
 }
 
-void Enemy::Update()
+void Boss::Update()
 {
-	Entity::Update();
-	CollideWithPlayer();
 	UpdateVelocity();
 	UpdateState();
 	UpdatePosition();
 	UpdateAnimation();
+	CollideWithPlayer();
 
-	
+	Entity::Update();
 }
 
-void Enemy::Draw()
+void Boss::Draw()
 {
-	Entity::DrawAnimateGroup();
+	DrawAnimateGroup();
 	Entity::Draw();
+
+	/*window.SetColor(255, 0, 0);
+	DrawRectTransform();*/
 }
 
-bool Enemy::isEdge()
+bool Boss::isEdge()
 {
-	Rect edgeRect;
-	if (!animationManger.IsFlip()) edgeRect = Rect(rect.right, rect.bottom, 2, 2);
+	if (animationManger.IsFlip()) edgeRect = Rect(rect.right, rect.bottom, 2, 2);
 	else edgeRect = Rect(rect.left - 2, rect.bottom, 2, 2);
 
 	for (int i = 0; i < Collisions.size(); ++i) {
@@ -119,9 +117,9 @@ bool Enemy::isEdge()
 	return true;
 }
 
-bool Enemy::isHitWall()
+bool Boss::isHitWall()
 {
-	float x = animationManger.IsFlip() ? rect.x - 2 : rect.x + rect.w;
+	float x = !animationManger.IsFlip() ? rect.x - 2 : rect.x + rect.w;
 	Rect wall_rect = Rect(x, rect.y, 2, rect.h);
 
 	for (int i = 0; i < Collisions.size(); ++i) {
@@ -132,36 +130,34 @@ bool Enemy::isHitWall()
 	return false;
 }
 
-bool Enemy::isInEnemyZone()
+bool Boss::isInEnemyZone()
 {
 	float distance = sqrt(pow(center_pos.x - player->center_pos.x, 2) + pow(center_pos.y - player->center_pos.y, 2));
 	return distance <= enemyZone && player->current != Death;
 }
 
-bool Enemy::isInAttackZone()
+bool Boss::isInAttackZone()
 {
 	return player->rect.checkCollide(getAtkBox());
 }
 
-bool Enemy::checkTurn()
+bool Boss::checkTurn()
 {
 	float d = center_pos.x - player->center_pos.x;
-	if (animationManger.IsFlip() && d < 0) return true;
-	else if (!animationManger.IsFlip() && d > 0) return true;
+	if (!animationManger.IsFlip() && d < 0) return true;
+	else if (animationManger.IsFlip() && d > 0) return true;
 	return false;
 }
 
-void Enemy::CollideWithPlayer()
+void Boss::CollideWithPlayer()
 {
 	if (rect.checkCollide(player->rect) && current != Death) {
 		player->beingAttacked(damage, center_pos);
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
-		add(bar);
 		beingAttacked(player->damage, player->center_pos);
 	}
-
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {
 		player->beingAttacked(damage, center_pos);
 	}

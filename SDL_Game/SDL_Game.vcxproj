@@ -22,6 +22,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="ButtonText.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Coin.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Heart.cpp" />
+    <ClCompile Include="IBossState.cpp" />
     <ClCompile Include="IEnemyState.cpp" />
     <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -51,6 +53,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="ButtonText.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Coin.h" />
@@ -62,6 +65,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="Heart.h" />
+    <ClInclude Include="IBossState.h" />
     <ClInclude Include="IEnemyState.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="Input.h" />

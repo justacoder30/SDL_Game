@@ -10,6 +10,7 @@ enum State
 	Idle1,
 	Idle2,
 	Idle3,
+	Walk,
 	Run,
 	Jump,
 	Fall,
@@ -32,6 +33,9 @@ private:
 protected:
 	int texture_width;
 	int texture_height;	
+	float getHitJump = 250;
+	float scale = 1;
+	float score = 0;
 	Rect atkBox;	
 	Rect OFFSET;
 	std::unordered_map<State, Animation> animations;

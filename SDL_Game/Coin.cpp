@@ -7,7 +7,7 @@ Coin::Coin(Vector pos, Player *player)
 	};
 
 	current = Idle;
-
+	score = 15;
 	this->player = player;
 
 	size = Vector(animations[Idle].FrameWidth, animations[Idle].FrameHeight);
@@ -29,6 +29,7 @@ void Coin::Draw()
 void Coin::OnCollideWithPlayer()
 {
 	if (rect.checkCollide(player->rect)) {
+		Global.Score += score;
 		removeFromTree();
 	}
 }

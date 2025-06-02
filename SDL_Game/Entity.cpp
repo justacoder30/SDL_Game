@@ -65,7 +65,7 @@ void Entity::beingAttacked(float damage, Vector postisition)
 
 void Entity::beingHurt()
 {
-    velocity.y = -250;
+    velocity.y = -getHitJump;
     currentHp -= damageTaken;
 }
 
@@ -153,6 +153,7 @@ void Entity::DrawAnimateGroup()
             int(GetPos().y + Global.camera.transform.y)
         ),
         animationManger.getRect(),
+        scale,
         animationManger.flip
     );
 }
@@ -198,7 +199,7 @@ Rect Entity::getAtkBox()
 
     if (!animationManger.IsFlip())
         return Rect(Pos.x + atkBox.x, Pos.y + atkBox.y, atkBox.w, atkBox.h);
-    return Rect(Pos.x + texture_width - atkBox.x - atkBox.w, Pos.y + atkBox.y, atkBox.w, atkBox.h);
+    return Rect(Pos.x + texture_width * scale - atkBox.x - atkBox.w, Pos.y + atkBox.y, atkBox.w, atkBox.h);
 }
 
 Vector Entity::GetPos()

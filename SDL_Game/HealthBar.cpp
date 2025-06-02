@@ -57,16 +57,17 @@ void HealthBar::Update()
 	
 	UpdateLength();
 	if (!erase) return;
-	
 	if (time < durationTime) time += Global.DeltaTime;
 	if (time >= durationTime) {
 		time = 0;
 		removeFromTree();
 	}
+	Entity::Update();
 }
 
 void HealthBar::UpdateLength()
 {
+	if (entity->currentHp <= 0) entity->currentHp = 0;
 	size.x = og_x * entity->currentHp / entity->hp;
 }
 
@@ -76,8 +77,7 @@ void HealthBar::Draw()
 	else {
 		DrawStatic();
 	}
-	
-
+	Entity::Draw();
 }
 
 HealthBar HealthBar::SetErase()

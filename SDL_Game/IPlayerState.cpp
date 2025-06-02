@@ -253,7 +253,7 @@ IPlayerState* DeathState::Update(Player& player)
 	player.current = Death;
 
 	player.velocity.x = 0;
-	if (player.animationManger.IsDone()) Global.gameLoop = false;
+	if (player.animationManger.IsDone()) player.isDeath = true;
 
 	return this;
 }

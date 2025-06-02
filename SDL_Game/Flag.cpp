@@ -29,8 +29,6 @@ void Flag::Draw()
 void Flag::OnCollideWithPlayer()
 {
 	if (rect.checkCollide(player->rect)) {
-		////removeFromTree();
-		//Global.gameLoop = false;
 		ChangeLevel();
 	}
 }

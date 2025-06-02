@@ -13,6 +13,9 @@ public:
 	Font font;
 	float scale;
 	double DeltaTime;
+	bool gameWin;
+	bool gameLose;
+	float Score = 0;
 	bool gameLoop = true;
 
 	void Update();

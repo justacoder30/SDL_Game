@@ -28,9 +28,13 @@ void PlayGameState::Update()
 		game->SaveState();
 		game->ChangeState(new PauseState(game));
 	}
+
+	if (entityManager->LoseGame()) {
+		game->ChangeState(new LoseGameState(game));
+	}
+
 	if (entityManager->isChangLevel()) {
-		game->ChangeToNextLevel();
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(new WinGameState(game));
 	}
 	Entity::Update();
 }
@@ -42,6 +46,33 @@ void PauseState::Update()
 	}
 	if (newGameBtn->Clicked()) {
 		game->ResetLevel();
+		game->ChangeState(new PlayGameState(game));
+	}
+	if (exitBtn->Clicked()) {
+		Global.gameLoop = false;
+	}
+	Entity::Update();
+}
+
+void LoseGameState::Update()
+{
+	if (tryAgainBtn->Clicked()) {
+		game->ChangeState(new PlayGameState(game));
+	}
+	if (newGameBtn->Clicked()) {
+		game->ResetLevel();
+		game->ChangeState(new PlayGameState(game));
+	}
+	if (exitBtn->Clicked()) {
+		Global.gameLoop = false;
+	}
+	Entity::Update();
+}
+
+void WinGameState::Update()
+{
+	if (continueBtn->Clicked()) {
+		game->ChangeToNextLevel();
 		game->ChangeState(new PlayGameState(game));
 	}
 	if (exitBtn->Clicked()) {

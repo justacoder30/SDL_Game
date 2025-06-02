@@ -74,3 +74,66 @@ public:
 	PlayGameState(Game* game);
 	void Update();
 };
+
+class LoseGameState : public IGameState {
+private:
+	EntityManager* entityManager;
+	ButtonText* tryAgainBtn;
+	ButtonText* newGameBtn;
+	ButtonText* exitBtn;
+	Vector btnSize = Vector(99.00, 54.00);
+public:
+	LoseGameState(Game* game) : IGameState(game) {
+		tryAgainBtn = new ButtonText("Try Again", Vector(304.00, 192.00), Vector(208.00, 64.00));
+		tryAgainBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
+
+		newGameBtn = new ButtonText("New Game", Vector(304.00, 272.00), Vector(208.00, 64.00));
+		newGameBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
+
+		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
+
+		ButtonText* text = new ButtonText("You Death!", Vector(192.00, 16.00), Vector(416.00, 128.00));
+		text->SetColor(255, 0, 0);
+
+		add(text);
+		add(tryAgainBtn);
+		add(newGameBtn);
+		add(exitBtn);
+
+	}
+	void Update();
+};
+
+class WinGameState : public IGameState {
+private:
+	EntityManager* entityManager;
+	ButtonText* continueBtn;
+	ButtonText* exitBtn;
+	Vector btnSize = Vector(99.00, 54.00);
+public:
+	WinGameState(Game* game) : IGameState(game) {
+		continueBtn = new ButtonText("Continue", Vector(304.00, 272.00), Vector(208.00, 64.00));
+		continueBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
+
+		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
+
+		ButtonText* text = new ButtonText("SCORE: " + std::to_string(int(Global.Score)), Vector(192.00, 16.00), Vector(416.00, 128.00));
+		text->SetColor(255, 0, 0);
+
+		add(text);
+		add(continueBtn);
+		add(exitBtn);
+
+	}
+	void Update();
+};
+
+//class PlayGameState : public IGameState {
+//private:
+//	EntityManager* entityManager;
+//public:
+//	PlayGameState(Game* game);
+//	void Update();
+//};

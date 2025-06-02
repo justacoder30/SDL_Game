@@ -4,13 +4,13 @@
 Game::Game()
 {
 	Global.camera = Camera(800, 450);	
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
 
 
 	levels = { "map1.tmx", "map2.tmx" };
 
-	currentState = new MenuState(this);
+	currentState = new PlayGameState(this);
 	preveriousState = currentState;
 }
 

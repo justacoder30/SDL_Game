@@ -58,7 +58,10 @@ IEnemyState* DeathEnemyState::Update(Enemy& enemy)
 {
     enemy.current = Death;
     enemy.velocity.x = 0;
-    if (enemy.animationManger.IsDone()) enemy.removeFromTree();
+    if (enemy.animationManger.IsDone()) {
+        Global.Score += enemy.hp;
+        enemy.removeFromTree();
+    }
     return this;
 }
 
@@ -89,7 +92,7 @@ IEnemyState* AttackEnemyState::Update(Enemy& enemy)
         return new HurtEnemyState();
     }
 
-    if (enemy.animationManger.IsDone()) {
+    if (enemy.animationManger.IsDone() && !enemy.isInAttackZone()) {
         enemy.velocity.x = enemy.animationManger.IsFlip() ? -enemy.moveSpeed : enemy.moveSpeed;
         return new RunEnemyState();
     }

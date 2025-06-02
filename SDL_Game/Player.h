@@ -10,6 +10,7 @@ private:
 	Rect mapRect;
 public:
 	IPlayerState* state;
+	bool isDeath = false;
 
 	Player();
 	Player(int level, Vector pos);

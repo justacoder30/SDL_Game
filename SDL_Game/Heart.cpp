@@ -7,7 +7,7 @@ Heart::Heart(Vector pos, Player* player)
 	};
 
 	current = Idle;
-
+	score = 35;
 	this->player = player;
 
 	size = Vector(animations[Idle].FrameWidth, animations[Idle].FrameHeight);
@@ -32,6 +32,7 @@ void Heart::OnCollideWithPlayer()
 	if (rect.checkCollide(player->rect)) {
 		player->currentHp += hp;
 		if (player->currentHp > player->hp) player->currentHp = player->hp;
+		Global.Score += score;
 		removeFromTree();
 	}
 }
