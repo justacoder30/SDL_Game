@@ -17,19 +17,20 @@ IEnemyState* IdleEnemyState::Update(Enemy& enemy)
         return new RunEnemyState();
     }
 
+    enemy.timer += Global.DeltaTime;
     if (enemy.timer >= enemy.timeChangeState) {
         enemy.timer = 0;
-        enemy.velocity.x = enemy.animationManger.IsFlip() ? -enemy.moveSpeed : enemy.moveSpeed;
         return new RunEnemyState();
     }
 
-    enemy.timer += Global.DeltaTime;
+    
     return this;
 }
 
 IEnemyState* RunEnemyState::Update(Enemy& enemy)
 {
     enemy.current = Run;
+    enemy.velocity.x = enemy.animationManger.IsFlip() ? -enemy.moveSpeed : enemy.moveSpeed;
 
     if (enemy.isInEnemyZone()) {
         enemy.velocity.x = enemy.center_pos.x < enemy.player->center_pos.x ? enemy.moveSpeed : -enemy.moveSpeed;

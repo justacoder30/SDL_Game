@@ -50,13 +50,13 @@ private:
 public:
 	PauseState(Game* game) : IGameState(game) {
 		countinueBtn = new ButtonText("Countinue", Vector(304.00, 112.00), Vector(208.00, 64.00));
-		countinueBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
+		countinueBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		newGameBtn = new ButtonText("New Game", Vector(304.00, 192.00), Vector(208.00, 64.00));
-		newGameBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
+		newGameBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		exitBtn = new ButtonText("Exit", Vector(352.00, 272.00), btnSize);
-		exitBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 
 		add(countinueBtn);

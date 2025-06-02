@@ -175,7 +175,7 @@
  <objectgroup id="8" name="EnemyPosition">
   <object id="141" x="5632" y="848" width="16" height="48"/>
   <object id="144" x="1184" y="1072" width="16" height="48"/>
-  <object id="145" x="784" y="672" width="16" height="48"/>
+  <object id="145" x="704" y="672" width="16" height="48"/>
   <object id="146" x="1104" y="672" width="16" height="48"/>
   <object id="147" x="1856" y="656" width="16" height="48"/>
   <object id="148" x="2240" y="320" width="16" height="48"/>
