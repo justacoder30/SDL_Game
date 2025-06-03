@@ -10,7 +10,7 @@ Boss::Boss(Vector pos, Player* player)
 	animations = {
 		{Idle, Animation("resource/img/Enemy/Frost_Guardian/Idle.png", 6, 0.08)},
 		{Walk, Animation("resource/img/Enemy/Frost_Guardian/Walk.png", 10, 0.08)},
-		{Attack, Animation("resource/img/Enemy/Frost_Guardian/Attack.png", 14, 0.08)},
+		{Attack, Animation("resource/img/Enemy/Frost_Guardian/Attack.png", 14, 0.1)},
 		{Death, Animation("resource/img/Enemy/Frost_Guardian/Death.png", 16, 0.12, false)},
 		{Hurt, Animation("resource/img/Enemy/Frost_Guardian/Hurt.png", 7, 0.06, false)},
 	};

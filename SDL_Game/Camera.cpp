@@ -37,6 +37,11 @@ void Camera::SetCamera(Vector _windowSize)
 
 	pos.x = abs(_windowSize.x - window_size.x) / 2.f;
 	pos.y = abs(_windowSize.y - window_size.y) / 2.f;
+
+	rect = Rect(pos.x / Global.scale,
+		pos.y / Global.scale,
+		window_size.x / Global.scale,
+		window_size.y / Global.scale);
 }
 
 void Camera::SetBound(float left, float top, float right, float bottom)

@@ -15,11 +15,16 @@ Rect::Rect()
 
 Rect::Rect(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
 {
+	this->pos = Vector(x, y);
+	this->size = Vector(w, h);
 	setRect();
 }
 
 Rect::Rect(Vector pos, Vector size)
 {
+	this->pos = pos;
+	this->size = size;
+
 	x = pos.x;
 	y = pos.y;
 	w = size.x;

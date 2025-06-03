@@ -30,7 +30,7 @@ ButtonText* ButtonText::SetColorHovering(Uint8 r, Uint8 g, Uint8 b)
 
 void ButtonText::Update()
 {
-	Rect newrect = Rect(pos * Global.scale, size * Global.scale);
+	Rect newrect = Rect((pos + Global.camera.rect.pos) * Global.scale, size * Global.scale);
 
 	if (Input.MouseHovering(newrect)) {
 		currentColor = hoveringColor;
