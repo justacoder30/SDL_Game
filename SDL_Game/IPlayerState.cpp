@@ -239,7 +239,7 @@ IPlayerState* HurtState::Update(Player& player)
 		return new IdleState();
 	}*/
 
-	if (player.isOnGround) {
+	if (player.isOnGround && player.animationManger.IsDone()) {
 		if (player.currentHp <= 0) return new DeathState();
 		return new IdleState();
 	}

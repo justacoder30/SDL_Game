@@ -18,7 +18,7 @@ private:
 	EntityManager *entityManager;
 	IGameState *currentState;
 	IGameState *preveriousState;
-	int currentLevelIndex = 0;
+	int currentLevelIndex = 1;
 	std::vector<std::string> levels;
 
 public:

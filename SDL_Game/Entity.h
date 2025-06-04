@@ -68,6 +68,7 @@ public:
 	float damage;
 	float attackFrame = 0;
 	float damageTaken;
+	double beingAttackTime = 0;
 	float hp;
 	float currentHp;
 	int hurtDirection;
@@ -78,6 +79,7 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
+	float AttackStepTime(Entity entity);
 	void add(Entity* entity);
 	void Collision(std::string direction);
 	void SetCollision(float _left, float _top, float _right, float _bottom);
@@ -91,7 +93,7 @@ public:
 	void DrawFillRectTransform(Rect r);
 	void DrawFillRectStatic(Rect r);
 	void DrawRectStatic(Rect r);
-	void beingAttacked(float damage, Vector postisition);
+	void beingAttacked(Entity entity);
 	void beingHurt();
 	Rect getAtkBox();
 	Vector GetPos();

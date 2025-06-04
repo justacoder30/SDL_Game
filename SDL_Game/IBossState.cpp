@@ -6,8 +6,17 @@ IBossState* IdleBossState::Update(Boss& boss)
     boss.velocity.x = 0;
 
     if (boss.isHurt) {
-        boss.beingHurt();
-        return new HurtBossState();
+        boss.hurtCnt++;
+        if (boss.hurtCnt > 2) {
+            boss.beingHurt();
+            boss.hurtCnt = 0;
+            return new HurtBossState();
+        }
+        else {
+            boss.currentHp -= boss.damageTaken;
+            boss.isHurt = false;
+        }
+        
     }
 
     if (boss.isInEnemyZone()) {
@@ -37,11 +46,10 @@ IBossState* HurtBossState::Update(Boss& boss)
     boss.current = Hurt;
     boss.isHurt = false;
 
-    boss.velocity.x = boss.moveSpeed / 3 * boss.hurtDirection;
+    boss.velocity.x = boss.moveSpeed / 2 * boss.hurtDirection;
     if (boss.animationManger.IsDone()) {
         if (boss.currentHp <= 0) {
             boss.current = Death;
-            Global.Score += boss.hp;
             return new DeathBossState();
         }
         return new AttackBossState();
@@ -57,8 +65,19 @@ IBossState* AttackBossState::Update(Boss& boss)
     boss.velocity.x = 0;
 
     if (boss.isHurt) {
-        boss.beingHurt();
-        return new HurtBossState();
+        /*boss.beingHurt();
+        return new HurtBossState();*/
+
+        boss.hurtCnt++;
+        if (boss.hurtCnt > 2) {
+            boss.beingHurt();
+            boss.hurtCnt = 0;
+            return new HurtBossState();
+        }
+        else {
+            boss.currentHp -= boss.damageTaken;
+            boss.isHurt = false;
+        }
     }
 
     if (boss.animationManger.IsDone() && !boss.isInAttackZone()) {
@@ -73,7 +92,10 @@ IBossState* DeathBossState::Update(Boss& boss)
 {
     boss.current = Death;
     boss.velocity.x = 0;
-    if (boss.animationManger.IsDone()) boss.removeFromTree();
+    if (boss.animationManger.IsDone()) {
+        boss.removeFromTree();
+        Global.Score += boss.hp;
+    }
 
     return this;
 }

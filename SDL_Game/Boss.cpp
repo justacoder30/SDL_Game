@@ -10,8 +10,8 @@ Boss::Boss(Vector pos, Player* player)
 	animations = {
 		{Idle, Animation("resource/img/Enemy/Frost_Guardian/Idle.png", 6, 0.08)},
 		{Walk, Animation("resource/img/Enemy/Frost_Guardian/Walk.png", 10, 0.08)},
-		{Attack, Animation("resource/img/Enemy/Frost_Guardian/Attack.png", 14, 0.1)},
-		{Death, Animation("resource/img/Enemy/Frost_Guardian/Death.png", 16, 0.12, false)},
+		{Attack, Animation("resource/img/Enemy/Frost_Guardian/Attack.png", 14, 0.14)},
+		{Death, Animation("resource/img/Enemy/Frost_Guardian/Death.png", 16, 0.14, false)},
 		{Hurt, Animation("resource/img/Enemy/Frost_Guardian/Hurt.png", 7, 0.06, false)},
 	};
 
@@ -20,7 +20,7 @@ Boss::Boss(Vector pos, Player* player)
 	moveSpeed = 80;
 	gravity = 800;
 	damage = 20;
-	getHitJump = 100;
+	getHitJump = 150;
 	hp = 200;
 	currentHp = hp;
 
@@ -81,6 +81,7 @@ void Boss::UpdatePosition()
 
 void Boss::UpdateState()
 {
+	if (currentHp <= 0) state = new DeathBossState();
 	state = state->Update(*this);
 }
 
@@ -91,7 +92,7 @@ void Boss::Update()
 	UpdatePosition();
 	UpdateAnimation();
 	CollideWithPlayer();
-
+	std::cout << currentHp << std::endl;
 	Entity::Update();
 }
 
@@ -152,13 +153,13 @@ bool Boss::checkTurn()
 void Boss::CollideWithPlayer()
 {
 	if (rect.checkCollide(player->rect) && current != Death) {
-		player->beingAttacked(damage, center_pos);
+		player->beingAttacked(*this);
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
-		beingAttacked(player->damage, player->center_pos);
+		beingAttacked(*player);
 	}
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {
-		player->beingAttacked(damage, center_pos);
+		player->beingAttacked(*this);
 	}
 }

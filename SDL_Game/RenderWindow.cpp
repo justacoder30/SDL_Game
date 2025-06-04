@@ -40,7 +40,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 	Global.camera.SetCamera(GetWindowSize());
-	SDL_SetRenderVSync(renderer, 1);
+	//SDL_SetRenderVSync(renderer, 1);
 	//SDL_SetWindowSurfaceVSync(window, 1);
 	
 }

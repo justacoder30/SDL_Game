@@ -69,8 +69,13 @@ IEnemyState* DeathEnemyState::Update(Enemy& enemy)
 IEnemyState* HurtEnemyState::Update(Enemy& enemy)
 {
     enemy.current = Hurt;
-    enemy.isHurt = false;
     enemy.velocity.x = enemy.moveSpeed/2 * enemy.hurtDirection;
+
+    //if (enemy.isHurt) {
+    //    //enemy.beingHurt();
+    //    return new HurtEnemyState();
+    //}
+
     if (enemy.animationManger.IsDone()) {
         if (enemy.currentHp <= 0) {
             enemy.current = Death;
@@ -78,7 +83,6 @@ IEnemyState* HurtEnemyState::Update(Enemy& enemy)
         }
         return new IdleEnemyState();
     }
-
     return this;
 }
 

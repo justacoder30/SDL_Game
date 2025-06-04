@@ -37,7 +37,7 @@ HealthBar::HealthBar(Entity * entity, Vector pos, Vector size)
 	og_x = size.x;
 	rect = Rect(pos, size);
 	backDrop = true;
-	durationTime = 50;
+	durationTime = 200;
 }
 
 HealthBar HealthBar::SetColor(Uint8 r, Uint8 g, Uint8 b)
@@ -52,14 +52,19 @@ HealthBar HealthBar::SetStatic()
 	return *this;
 }
 
+void HealthBar::resetTime()
+{
+	timer = 0;
+}
+
 void HealthBar::Update()
 {
 	
 	UpdateLength();
 	if (!erase) return;
-	if (time < durationTime) time += Global.DeltaTime;
-	if (time >= durationTime) {
-		time = 0;
+	if (timer < durationTime) timer += Global.DeltaTime;
+	if (timer >= durationTime) {
+		timer = 0;
 		removeFromTree();
 	}
 	Entity::Update();

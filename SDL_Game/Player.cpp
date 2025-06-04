@@ -18,7 +18,7 @@ Player::Player(int level, Vector pos)
 		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.1, false)},
 		{Defend, Animation("resource/img/Knight/Defend.png", 5, 0.1)},
 		{Protect, Animation("resource/img/Knight/Protect.png", 1, 0.1, false)},
-		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.2, false)},
+		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.1, false)},
 		{Death, Animation("resource/img/Knight/Dead.png", 6, 0.1, false)},
 	};
 
@@ -29,7 +29,7 @@ Player::Player(int level, Vector pos)
 	jump = 400;
 	current = Idle;
 	damage = 10;
-	hp = 100;
+	hp = 150;
 	currentHp = hp;
 
 	texture_width = animationManger.animation.FrameWidth;

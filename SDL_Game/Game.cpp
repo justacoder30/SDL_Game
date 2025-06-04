@@ -4,7 +4,7 @@
 Game::Game()
 {
 	float scale = 0;
-	Global.camera = Camera(784 + 16* scale, 441 + 9* scale);
+	Global.camera = Camera(784, 441);
 	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
 
@@ -72,7 +72,7 @@ void Game::Draw()
 	currentState->Draw();
 	
 	window.Render();
-	//Global.fpsShow();
+	Global.fpsShow();
 }
 
 void Game::Run()

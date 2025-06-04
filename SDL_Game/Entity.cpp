@@ -56,17 +56,22 @@ void Entity::DrawRectStatic(Rect r)
 }
 
 
-void Entity::beingAttacked(float damage, Vector postisition)
+void Entity::beingAttacked(Entity entity)
 {
+    beingAttackTime += Global.DeltaTime;
+    if (beingAttackTime < AttackStepTime(entity)) return;
+
+    beingAttackTime = 0;
     isHurt = true;
-    damageTaken = damage;
-    hurtDirection = postisition.x > center_pos.x ? -1 : 1;
+    damageTaken = entity.damage;
+    hurtDirection = entity.center_pos.x > center_pos.x ? -1 : 1;
 }
 
 void Entity::beingHurt()
 {
     velocity.y = -getHitJump;
     currentHp -= damageTaken;
+    isHurt = false;
 }
 
 Entity::Entity()
@@ -94,6 +99,12 @@ void Entity::Draw()
         if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
         Entities[i]->Draw();
     }
+}
+
+float Entity::AttackStepTime(Entity entity)
+{
+    return entity.animations[current].FrameSpeed;
+    return 0.0f;
 }
 
 void Entity::add(Entity* entity)
@@ -148,10 +159,7 @@ void Entity::DrawAnimateGroup()
 {
     window.blit(
         animationManger.animation.texture,
-        Vector(
-            int(GetPos().x + Global.camera.transform.x),
-            int(GetPos().y + Global.camera.transform.y)
-        ),
+        GetPos() + Global.camera.transform,
         animationManger.getRect(),
         scale,
         animationManger.flip
@@ -214,7 +222,7 @@ Rect Entity::GravityRect()
     return Rect(rect.x,
         rect.y + rect.h,
         rect.w,
-        3
+        1
     );
 }
 

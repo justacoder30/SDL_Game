@@ -5,7 +5,7 @@ class HealthBar : public Entity
 private:
 	Entity* entity;
 	SDL_Color color;
-	float time = 0;
+	double timer = 0;
 	float durationTime;
 	bool erase = false;
 	bool staticDraw = false;
@@ -17,6 +17,7 @@ public:
 	HealthBar(Entity *entity, Vector pos, Vector size);
 	HealthBar SetColor(Uint8 r, Uint8 g, Uint8 b);
 	HealthBar SetStatic();
+	void resetTime();
 	void Update();
 	void UpdateLength();
 	void Draw();

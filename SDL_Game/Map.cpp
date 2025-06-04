@@ -212,8 +212,8 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_Fli
 
 void TiledMap::Update()
 {
-    dst.x = rect.x + Global.camera.transform.x;
-    dst.y = rect.y + Global.camera.transform.y;
+    dst.x = int(rect.x + Global.camera.transform.x);
+    dst.y = int(rect.y + Global.camera.transform.y);
 }
 
 void TiledMap::Draw()
