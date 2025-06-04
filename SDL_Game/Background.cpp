@@ -40,7 +40,7 @@ Background::Background(Vector size)
 
 	};
 
-	moveSpeed = 10;
+	moveSpeed = 15;
 }
 
 void Background::Update()
