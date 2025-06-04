@@ -15,9 +15,14 @@ void AnimationManager::Play(Animation _animation)
 	if (animation.texture.getTex() == _animation.texture.getTex())
 		return;
 	animation = _animation;
+	loop = animation.loop;
+	ResetFrame();
+}
+
+void AnimationManager::ResetFrame()
+{
 	animation.CurrentFrame = 0;
 	timer = 0;
-	loop = animation.loop;
 }
 
 void AnimationManager::Update()

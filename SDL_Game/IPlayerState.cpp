@@ -184,9 +184,12 @@ IPlayerState* RunAttackState::Update(Player& player)
 		return new HurtState();
 	}
 
-	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new Attack1State();
+	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) comboAtk = true;
 
-	if (player.animationManger.IsDone()) return new IdleState();
+	if (player.animationManger.IsDone()) {
+		if(comboAtk) return new Attack1State();
+		return new IdleState();
+	}
 
 	return this;
 }

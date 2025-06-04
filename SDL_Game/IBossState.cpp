@@ -6,7 +6,10 @@ IBossState* IdleBossState::Update(Boss& boss)
     boss.velocity.x = 0;
 
     if (boss.isHurt) {
-        boss.hurtCnt++;
+        boss.beingHurt();
+        return new HurtBossState();
+
+        /*boss.hurtCnt++;
         if (boss.hurtCnt > 2) {
             boss.beingHurt();
             boss.hurtCnt = 0;
@@ -15,7 +18,7 @@ IBossState* IdleBossState::Update(Boss& boss)
         else {
             boss.currentHp -= boss.damageTaken;
             boss.isHurt = false;
-        }
+        }*/
         
     }
 
@@ -77,6 +80,7 @@ IBossState* AttackBossState::Update(Boss& boss)
         else {
             boss.currentHp -= boss.damageTaken;
             boss.isHurt = false;
+            std::cout << boss.currentHp << std::endl;
         }
     }
 
@@ -92,6 +96,7 @@ IBossState* DeathBossState::Update(Boss& boss)
 {
     boss.current = Death;
     boss.velocity.x = 0;
+
     if (boss.animationManger.IsDone()) {
         boss.removeFromTree();
         Global.Score += boss.hp;

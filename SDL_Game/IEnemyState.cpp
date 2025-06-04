@@ -70,6 +70,7 @@ IEnemyState* HurtEnemyState::Update(Enemy& enemy)
 {
     enemy.current = Hurt;
     enemy.velocity.x = enemy.moveSpeed/2 * enemy.hurtDirection;
+    enemy.isHurt = false;
 
     //if (enemy.isHurt) {
     //    //enemy.beingHurt();

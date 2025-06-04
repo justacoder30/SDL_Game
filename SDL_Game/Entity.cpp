@@ -59,8 +59,9 @@ void Entity::DrawRectStatic(Rect r)
 void Entity::beingAttacked(Entity entity)
 {
     beingAttackTime += Global.DeltaTime;
-    if (beingAttackTime < AttackStepTime(entity)) return;
+    isHurt = false;
 
+    if (beingAttackTime < AttackStepTime(entity)) return;
     beingAttackTime = 0;
     isHurt = true;
     damageTaken = entity.damage;
@@ -71,7 +72,6 @@ void Entity::beingHurt()
 {
     velocity.y = -getHitJump;
     currentHp -= damageTaken;
-    isHurt = false;
 }
 
 Entity::Entity()
@@ -103,7 +103,7 @@ void Entity::Draw()
 
 float Entity::AttackStepTime(Entity entity)
 {
-    return entity.animations[current].FrameSpeed;
+    return entity.animationManger.animation.FrameSpeed;
     return 0.0f;
 }
 

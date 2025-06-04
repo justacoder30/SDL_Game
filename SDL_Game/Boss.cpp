@@ -92,7 +92,7 @@ void Boss::Update()
 	UpdatePosition();
 	UpdateAnimation();
 	CollideWithPlayer();
-	std::cout << currentHp << std::endl;
+	//std::cout << currentHp << std::endl;
 	Entity::Update();
 }
 

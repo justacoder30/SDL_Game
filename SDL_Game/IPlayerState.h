@@ -49,6 +49,8 @@ public:
 };
 
 class RunAttackState : public IPlayerState {
+private:
+	bool comboAtk = false;
 public:
 	IPlayerState* Update(Player& player) override;
 };

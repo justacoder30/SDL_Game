@@ -135,7 +135,7 @@ void EntityManager::Update()
 	
 	if (boss != NULL) {
 		if (boss->isInEnemyZone() && boss->currentHp > 0) add(bossHealthBar);
-		else if (boss->currentHp <= 0 || !boss->isInEnemyZone()) bossHealthBar->removeFromTree();
+		else if (boss->isRemoved() || !boss->isInEnemyZone()) bossHealthBar->removeFromTree();
 
 		if (boss->isRemoved()) ChangeLevel();
 	}
