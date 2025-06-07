@@ -51,8 +51,6 @@ Boss::Boss(Vector pos, Player* player)
 	bar = new HealthBar(this, Vector(20 * scale, 8 * scale), Vector(50 * scale, 5 * scale));
 	bar->SetColor(0, 255, 255);
 	bar->SetErase();
-
-	//velocity.x = moveSpeed;
 }
 
 void Boss::UpdateVelocity()
@@ -92,7 +90,6 @@ void Boss::Update()
 	UpdatePosition();
 	UpdateAnimation();
 	CollideWithPlayer();
-	//std::cout << currentHp << std::endl;
 	Entity::Update();
 }
 
@@ -100,9 +97,6 @@ void Boss::Draw()
 {
 	DrawAnimateGroup();
 	Entity::Draw();
-
-	/*window.SetColor(255, 0, 0);
-	DrawRectTransform();*/
 }
 
 bool Boss::isEdge()

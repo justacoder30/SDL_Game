@@ -11,7 +11,6 @@ Player::Player(int level, Vector pos)
 		{Run, Animation("resource/img/Knight/Run.png", 7, 0.09)},
 		{Fall, Animation("resource/img/Knight/Fall.png", 4, 0.135, false)},
 		{Jump, Animation("resource/img/Knight/Jump.png", 2, 0.12, false)},
-		//{Jump, Animation("resource/img/Knight/Jump1.png", 6, 0.2, false)},
 		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.1, false)},
 		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.1, false)},
 		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.1, false)},
@@ -47,14 +46,10 @@ Player::Player(int level, Vector pos)
 		texture_width - OFFSET.left - OFFSET.right,
 		texture_height - OFFSET.top - OFFSET.bottom
 	);
+
 	old_rect = rect;
 
 	backDrop = true;
-
-	atkBox.left = 57;
-	atkBox.top = 74;
-	atkBox.right = 19;
-	atkBox.bottom = 0;
 
 	atkBox = Rect(
 		Vector(57, 54),

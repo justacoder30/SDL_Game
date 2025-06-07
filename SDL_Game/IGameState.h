@@ -7,11 +7,8 @@ class Game;
 class IGameState: public Entity
 {
 protected:
-	Game* game;
-public:
+	Game* game;public:
 	IGameState(Game *game);
-	/*virtual void Update() {}
-	virtual void Draw() {}*/
 };
 
 class MenuState : public IGameState {
