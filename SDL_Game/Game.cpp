@@ -1,13 +1,30 @@
 #include "Game.h"
 #include "Text.h"
+#include <SDL3/SDL_mixer.h>
+
+Mix_Music* gMusic = NULL;
+
+//The sound effects that will be used
+Mix_Chunk* gScratch = NULL;
+Mix_Chunk* gHigh = NULL;
+Mix_Chunk* gMedium = NULL;
+Mix_Chunk* gLow = NULL;
 
 Game::Game()
 {
 	float scale = 0;
 	Global.camera = Camera(784, 441);
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
 
+	SDL_AudioSpec spec;
+	spec.freq = 44100;
+	spec.format = MIX_DEFAULT_FORMAT;
+	spec.channels = 2;
+	if (Mix_OpenAudio(0, &spec))
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", SDL_GetError());
+	}
 
 	levels = { "map1.tmx", "map2.tmx" };
 
