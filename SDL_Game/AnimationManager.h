@@ -10,7 +10,7 @@ private:
 public:
 	Animation animation;
 	bool loop;
-	SDL_FlipMode flip;
+	SDL_RendererFlip flip;
 
 	AnimationManager();
 	AnimationManager(Animation Animation);

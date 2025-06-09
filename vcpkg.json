@@ -1,10 +1,11 @@
 {
   "dependencies": [
-    "sdl3",
-    "sdl3-image",
-    "sdl3-ttf",
+    "sdl2",
+    "sdl2-image",
+    "sdl2-ttf",
     "tmxlite",
     "zlib",
-    "zstd"
+    "zstd",
+    "sdl2-mixer"
   ]
 }

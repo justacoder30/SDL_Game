@@ -67,7 +67,7 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
                     //tex coords
                     auto idIndex = (tileIDs[idx].ID - ts.getFirstGID());  
                     
-                    SDL_FlipMode flip;
+                    SDL_RendererFlip flip;
                     float rotate = CaculateRotate(tileIDs[idx].flipFlags, flip);
 
                     Rect src = getSrcById(idIndex, tileCountX, tileCountY, mapTileSize.x);
@@ -125,7 +125,7 @@ void Map::InitMap(std::string f_path)
         std::cout << "Failed to load map: " << f_path << std::endl;
 }
 
-float Map::CaculateRotate(uint8_t flags, SDL_FlipMode& flip)
+float Map::CaculateRotate(uint8_t flags, SDL_RendererFlip& flip)
 {
     flip = SDL_FLIP_NONE;
 
@@ -196,7 +196,7 @@ Map::Map(std::string level)
     backDrop = true;
 }
 
-TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_FlipMode _flip)
+TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_RendererFlip _flip)
 {
 	tex = _texure;
     dst = _dst;

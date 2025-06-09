@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-#include "SDL3_ttf/SDL_ttf.h"
+#include "SDL2/SDL_ttf.h"
 
 //FreeSans.ttf
 class Text : public Entity

@@ -1,6 +1,6 @@
 #include "RenderWindow.h"
 #include <iostream>
-#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 RenderWindow window;
 
@@ -21,7 +21,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	}
 
 	//Create window
-	window = SDL_CreateWindow(tittle, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	window = SDL_CreateWindow(tittle, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	SDL_SetWindowFullscreen(window, fullscreen);
 	
 	if (window == NULL)
@@ -30,7 +30,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Failed to initialize!\n");
 	}
 
-	renderer = SDL_CreateRenderer(window, NULL);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	Global.Renderer = renderer;
 
 	if (renderer == NULL)
@@ -40,7 +40,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 	Global.camera.SetCamera(GetWindowSize());
-	SDL_SetRenderVSync(renderer, 1);
+	//SDL_SetRenderVSync(renderer, 1);
 	//SDL_SetWindowSurfaceVSync(window, 1);
 	
 }
@@ -48,7 +48,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 void RenderWindow::SetViewPort(Rect view)
 {
 	SDL_Rect Viewport = view.getRect();
-	SDL_SetRenderViewport(renderer, &Viewport);
+	SDL_RenderSetViewport(renderer, &Viewport);
 }
 
 Vector RenderWindow::GetWindowSize()
@@ -58,77 +58,77 @@ Vector RenderWindow::GetWindowSize()
 	return Vector(w, h);
 }
 
-void RenderWindow::blit(Texture texture, Rect dest, Rect area, float rotate, SDL_FlipMode flip)
+void RenderWindow::blit(Texture texture, Rect dest, Rect area, float rotate, SDL_RendererFlip  flip)
 {
-	SDL_FRect src, dst;
+	SDL_Rect src, dst;
 
-	dst = dest.getFRect();
-	src = area.getFRect();
+	dst = dest.getRect();
+	src = area.getRect();
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, rotate, NULL, flip);
+	SDL_RenderCopyEx(renderer, texture.getTex(), &src, &dst, rotate, NULL, flip);
 }
 
-void RenderWindow::blit(Texture texture, Vector pos, Rect area, float scale, SDL_FlipMode flip)
+void RenderWindow::blit(Texture texture, Vector pos, Rect area, float scale, SDL_RendererFlip  flip)
 {
-	SDL_FRect src = area.getFRect();
+	SDL_Rect src = area.getRect();
 
-	SDL_FRect dst = {
+	SDL_Rect dst = {
 		pos.x,
 		pos.y,
 		src.w * scale,
 		src.h * scale
 	};
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, flip);
+	SDL_RenderCopyEx(renderer, texture.getTex(), &src, &dst, 0.0, NULL, flip);
 }
 
 void RenderWindow::blit(Texture texture, Vector pos, Rect area, Vector size)
 {
-	SDL_FRect src = area.getFRect();
+	SDL_Rect src = area.getRect();
 
-	SDL_FRect dst = {
+	SDL_Rect dst = {
 		pos.x,
 		pos.y,
 		size.x,
 		size.y
 	};
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture.getTex(), &src, &dst, 0.0, NULL, SDL_FLIP_NONE);
 }
 
 void RenderWindow::blit(Texture texture, Vector pos, Vector size)
 {
-	SDL_FRect dst = {
+	SDL_Rect dst = {
 		pos.x,
 		pos.y,
 		size.x,
 		size.y
 	};
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
 }
 
 void RenderWindow::blit(Texture texture, Vector pos)
 {
-	SDL_FRect dst = {
+	SDL_Rect dst = {
 		0,
 		0,
 		texture.getWidth(),
 		texture.getHeight()
 	};
 
-	SDL_RenderTextureRotated(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture.getTex(), NULL, &dst, 0.0, NULL, SDL_FLIP_NONE);
 }
 
 void RenderWindow::DrawRect(Rect rect)
 {
-	SDL_FRect frect = rect.getFRect();
-	SDL_RenderRect(renderer, &frect);
+	SDL_Rect frect = rect.getRect();
+	SDL_RenderDrawRect(renderer, &frect);
 }
 
 void RenderWindow::DrawFillRect(Rect rect)
 {
-	SDL_FRect frect = rect.getFRect();
+	SDL_Rect frect = rect.getRect();
 	SDL_RenderFillRect(renderer, &frect);
 }
 
@@ -165,7 +165,7 @@ void RenderWindow::Clear()
 
 void RenderWindow::Render()
 {
-	SDL_SetRenderScale(renderer, Global.scale, Global.scale);
+	SDL_RenderSetScale(renderer, Global.scale, Global.scale);
 	SetViewPort(Global.camera.rect);
 	SDL_RenderPresent(renderer);
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 #include "Rect.h"
 
 class INPUT
@@ -18,5 +18,5 @@ public:
 };
 
 extern INPUT Input;
-extern const bool* Key;
-extern bool PreKey[SDL_SCANCODE_COUNT];
+extern const Uint8* Key;
+extern Uint8 PreKey[SDL_NUM_SCANCODES];

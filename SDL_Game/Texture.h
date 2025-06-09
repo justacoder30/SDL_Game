@@ -1,12 +1,13 @@
 #pragma once
 #include <iostream>
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 #include "Global.h"
 
 class Texture
 {
 private:
 	SDL_Texture* texture;
+	int w, h;
 public:
 	Texture();
 	Texture(std::string f_path);

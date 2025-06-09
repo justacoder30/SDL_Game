@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL3/SDL.h>
+#include <SDL2/SDL.h>
 #include "Texture.h"
 #include "Rect.h"
 #include "Vector.h"
@@ -17,8 +17,8 @@ public:
 	RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen);
 	void SetViewPort(Rect view);
 	Vector GetWindowSize();
-	void blit(Texture texture, Rect dest, Rect area, float rotate = 0.0, SDL_FlipMode flip = SDL_FLIP_NONE);
-	void blit(Texture texture, Vector pos, Rect area, float scale = 1, SDL_FlipMode flip = SDL_FLIP_NONE);
+	void blit(Texture texture, Rect dest, Rect area, float rotate = 0.0, SDL_RendererFlip  flip = SDL_FLIP_NONE);
+	void blit(Texture texture, Vector pos, Rect area, float scale = 1, SDL_RendererFlip  flip = SDL_FLIP_NONE);
 	void blit(Texture texture, Vector pos, Rect area, Vector size);
 	void blit(Texture texture, Vector pos, Vector size);
 	void blit(Texture texture, Vector pos);

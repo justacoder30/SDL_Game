@@ -10,9 +10,9 @@ private:
 	Rect src;
 	Rect dst;
 public:
-	SDL_FlipMode flip;
+	SDL_RendererFlip flip;
 	TiledMap() {}
-	TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate = 0.0, SDL_FlipMode _flip = SDL_FLIP_NONE);
+	TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate = 0.0, SDL_RendererFlip _flip = SDL_FLIP_NONE);
 	void Update();
 	void Draw();
 };
@@ -26,7 +26,7 @@ private:
 	static tmx::Map map;
 
 	void InitMap(std::string f_path);
-	float CaculateRotate(uint8_t flags, SDL_FlipMode& flip);
+	float CaculateRotate(uint8_t flags, SDL_RendererFlip& flip);
 public:
 	Map() {}
 	Map(std::string level);

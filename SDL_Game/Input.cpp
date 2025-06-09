@@ -3,12 +3,12 @@
 #include "RenderWindow.h"
 
 INPUT Input = INPUT();
-const bool* Key = SDL_GetKeyboardState(NULL);
-bool PreKey[SDL_SCANCODE_COUNT];
+const Uint8* Key = SDL_GetKeyboardState(NULL);
+Uint8 PreKey[SDL_NUM_SCANCODES];
 
 void INPUT::CopyKey()
 {
-	for (int i = 0; i < SDL_SCANCODE_COUNT; i++) { // init them all to false
+	for (int i = 0; i < SDL_NUM_SCANCODES; i++) { // init them all to false
 		PreKey[i] = Key[i];
 	}
 }
@@ -16,7 +16,7 @@ void INPUT::CopyKey()
 void INPUT::setMouse()
 {
 	onRelease = false;
-	float x, y;
+	int x, y;
 	SDL_GetMouseState(&x, &y);
 
 	mouseRect = Rect(x, y, 1, 1);
@@ -30,10 +30,10 @@ void INPUT::Update()
 
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
-		case SDL_EVENT_QUIT:
+		case SDL_QUIT:
 			Global.gameLoop = false;
 			break;
-		case SDL_EVENT_MOUSE_BUTTON_UP:
+		case SDL_MOUSEBUTTONUP:
 			onRelease = true;
 			break;
 		}
