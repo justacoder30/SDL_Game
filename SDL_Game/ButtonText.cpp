@@ -48,5 +48,7 @@ void ButtonText::Draw()
 
 bool ButtonText::Clicked()
 {
-	return isClicked;
+	if (!isClicked) return false;
+	SoundManager::PlaySoundEffect("button_click");
+	return true;
 }

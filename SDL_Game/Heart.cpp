@@ -33,6 +33,7 @@ void Heart::OnCollideWithPlayer()
 		player->currentHp += hp;
 		if (player->currentHp > player->hp) player->currentHp = player->hp;
 		Global.Score += score;
+		SoundManager::PlaySoundEffect("coin");
 		removeFromTree();
 	}
 }

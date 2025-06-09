@@ -70,6 +70,7 @@ void Entity::beingAttacked(Entity entity)
 
 void Entity::beingHurt()
 {
+    SoundManager::PlaySoundEffect("Hurt");
     velocity.y = -getHitJump;
     currentHp -= damageTaken;
 }

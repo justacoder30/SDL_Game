@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "ButtonText.h"
+#include "SoundManager.h"
 
 class Game;
 
@@ -59,7 +60,7 @@ public:
 		add(countinueBtn);
 		add(newGameBtn);
 		add(exitBtn);
-
+		SoundManager::PauseMusic();
 	}
 	void Update();
 };
@@ -97,6 +98,8 @@ public:
 		add(tryAgainBtn);
 		add(newGameBtn);
 		add(exitBtn);
+		SoundManager::StopMusic();
+		SoundManager::PlaySoundEffect("LoseGame");
 
 	}
 	void Update();
@@ -122,7 +125,8 @@ public:
 		add(text);
 		add(continueBtn);
 		add(exitBtn);
-
+		SoundManager::StopMusic();
+		SoundManager::PlaySoundEffect("WinGame");
 	}
 	void Update();
 };

@@ -40,7 +40,7 @@ Background::Background(Vector size)
 
 	};
 
-	moveSpeed = 15;
+	moveSpeed = 26;
 }
 
 void Background::Update()
@@ -76,6 +76,6 @@ void Background::Draw()
 			
 			Entities[i]->pos.x = og_pos;
 		}
-		speed += 0.08 ;
+		speed += 0.09 ;
 	}
 }

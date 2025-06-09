@@ -1,11 +1,11 @@
 {
-  "dependencies": [
-    "sdl2",
-    "sdl2-image",
-    "sdl2-ttf",
-    "tmxlite",
-    "zlib",
-    "zstd",
-    "sdl2-mixer"
-  ]
+    "dependencies": [
+        "tmxlite",
+        "zlib",
+        "zstd",
+        "sdl2",
+        "sdl2-image",
+        "sdl2-ttf",
+        "sdl2-mixer"
+    ]
 }

@@ -30,6 +30,7 @@ void Coin::OnCollideWithPlayer()
 {
 	if (rect.checkCollide(player->rect)) {
 		Global.Score += score;
+		SoundManager::PlaySoundEffect("coin");
 		removeFromTree();
 	}
 }

@@ -1,6 +1,7 @@
 #include "RenderWindow.h"
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 RenderWindow window;
 
@@ -9,7 +10,7 @@ RenderWindow::RenderWindow()
 
 RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen) :fullscreen(_fullscreen)
 {
-	if (!TTF_Init())
+	if (TTF_Init() == -1)
 	{
 		SDL_Log("SDL_ttf could not initialize! SDL_ttf error: %s\n", SDL_GetError());
 	}
@@ -20,8 +21,14 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Failed to initialize!\n");
 	}
 
+	/*int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) & imgFlags))
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", SDL_GetError());
+	}*/
+
 	//Create window
-	window = SDL_CreateWindow(tittle, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	window = SDL_CreateWindow(tittle, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_SetWindowFullscreen(window, fullscreen);
 	
 	if (window == NULL)
@@ -30,7 +37,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Failed to initialize!\n");
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 	Global.Renderer = renderer;
 
 	if (renderer == NULL)

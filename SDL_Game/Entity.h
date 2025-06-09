@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "Texture.h"
 #include "AnimationManager.h"
+#include "SoundManager.h"
 
 enum State
 {

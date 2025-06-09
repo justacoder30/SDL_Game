@@ -1,4 +1,5 @@
 #include "LoadingScreen.h"
+#include "SoundManager.h"
 
 LoadingScreen::LoadingScreen(Vector size, double durationTime)
 {
@@ -64,7 +65,7 @@ void LoadingScreen::Draw()
 bool LoadingScreen::isEnd()
 {
 	if (time < durationTime) return false;
-
+	//SoundManager::PlayMusic();
 	removeFromTree();
 	return true;
 }

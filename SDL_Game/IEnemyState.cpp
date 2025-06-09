@@ -35,7 +35,10 @@ IEnemyState* RunEnemyState::Update(Enemy& enemy)
     if (enemy.isInEnemyZone()) {
         enemy.velocity.x = enemy.center_pos.x < enemy.player->center_pos.x ? enemy.moveSpeed : -enemy.moveSpeed;
         if (enemy.isEdge() || enemy.isHitWall()) return new IdleEnemyState;
-        if (enemy.isInAttackZone()) return new AttackEnemyState();
+        if (enemy.isInAttackZone()) {
+            SoundManager::PlaySoundEffect("attack");
+            return new AttackEnemyState();
+        }
     }
 
 
@@ -61,6 +64,7 @@ IEnemyState* DeathEnemyState::Update(Enemy& enemy)
     enemy.velocity.x = 0;
     if (enemy.animationManger.IsDone()) {
         Global.Score += enemy.hp;
+        SoundManager::PlaySoundEffect("coin");
         enemy.removeFromTree();
     }
     return this;

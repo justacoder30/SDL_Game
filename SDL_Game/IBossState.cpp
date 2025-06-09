@@ -23,7 +23,10 @@ IBossState* IdleBossState::Update(Boss& boss)
     }
 
     if (boss.isInEnemyZone()) {
-        if (boss.isInAttackZone()) return new AttackBossState();
+        if (boss.isInAttackZone()) {
+            SoundManager::PlaySoundEffect("attack");
+            return new AttackBossState();
+        }
         if (boss.isEdge() && !boss.checkTurn() || boss.isHitWall() && !boss.checkTurn()) return this;
         return new WalkBossState();
     }
@@ -38,7 +41,10 @@ IBossState* WalkBossState::Update(Boss& boss)
     if (boss.isInEnemyZone()) {
         boss.velocity.x = boss.center_pos.x < boss.player->center_pos.x ? boss.moveSpeed : -boss.moveSpeed;
         if (boss.isEdge() || boss.isHitWall()) return new IdleBossState;
-        if (boss.isInAttackZone()) return new AttackBossState();
+        if (boss.isInAttackZone()) {
+            SoundManager::PlaySoundEffect("attack");
+            return new AttackBossState();
+        }
     }
 
     return this;
@@ -55,6 +61,7 @@ IBossState* HurtBossState::Update(Boss& boss)
             boss.current = Death;
             return new DeathBossState();
         }
+        SoundManager::PlaySoundEffect("attack");
         return new AttackBossState();
     }
 

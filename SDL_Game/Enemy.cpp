@@ -15,7 +15,7 @@ Enemy::Enemy(int level, Vector pos, Player* player)
 	tex = animations[Idle].texture;
 	moveSpeed = 80;
 	gravity = 800;
-	damage = 10;
+	damage = 20;
 	hp = 40;
 	currentHp = hp;
 

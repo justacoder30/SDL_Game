@@ -14,7 +14,10 @@ IPlayerState* IdleState::Update(Player& player)
 		
 	if (player.velocity.x != 0) return new RunState();
 
-	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new Attack1State();
+	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) {
+		SoundManager::PlaySoundEffect("attack");
+		return new Attack1State();
+	}
 
 	if (!PreKey[SDL_SCANCODE_F] && Key[SDL_SCANCODE_F]) return new DefendState();
 
@@ -39,7 +42,10 @@ IPlayerState* RunState::Update(Player& player)
 
 	if (player.velocity.x == 0) return new IdleState();
 
-	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) return new RunAttackState;
+	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) {
+		SoundManager::PlaySoundEffect("attack");
+		return new RunAttackState;
+	}
 
 	if (player.isHurt) {
 		player.beingHurt();
@@ -103,7 +109,10 @@ IPlayerState* Attack1State::Update(Player& player)
 		comboAtk = true;
 
 	if (player.animationManger.IsDone()) {
-		if (comboAtk) return new Attack2State();
+		if (comboAtk) {
+			SoundManager::PlaySoundEffect("attack");
+			return new Attack2State();
+		} 
 		return new IdleState();
 	}
 
@@ -134,7 +143,10 @@ IPlayerState* Attack2State::Update(Player& player)
 		comboAtk = true;
 
 	if (player.animationManger.IsDone()) {
-		if (comboAtk) return new Attack3State();
+		if (comboAtk) {
+			SoundManager::PlaySoundEffect("attack");
+			return new Attack3State();
+		}  
 		return new IdleState();
 	}
 
@@ -187,7 +199,10 @@ IPlayerState* RunAttackState::Update(Player& player)
 	if (!PreKey[SDL_SCANCODE_J] && Key[SDL_SCANCODE_J]) comboAtk = true;
 
 	if (player.animationManger.IsDone()) {
-		if(comboAtk) return new Attack1State();
+		if (comboAtk) {
+			SoundManager::PlaySoundEffect("attack");
+			return new Attack1State();
+		}
 		return new IdleState();
 	}
 
@@ -256,7 +271,10 @@ IPlayerState* DeathState::Update(Player& player)
 	player.current = Death;
 
 	player.velocity.x = 0;
-	if (player.animationManger.IsDone()) player.isDeath = true;
+	if (player.animationManger.IsDone()) {
+		SoundManager::StopMusic();
+		player.isDeath = true;
+	}
 
 	return this;
 }

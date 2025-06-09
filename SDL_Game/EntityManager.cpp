@@ -4,13 +4,14 @@
 #include "Coin.h"
 #include "Heart.h"
 #include "ButtonText.h"
+#include "SoundManager.h"
 
 
 //std::cout<< <<std::endl;
 
 void EntityManager::addObjects()
 {
-	std::string objects_pos[] = { "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition", "BossPosition", "PlayerPosition", };
+	std::string objects_pos[] = {"PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition", "BossPosition", };
 
 	Entities.push_back(
 		new Background(
@@ -108,6 +109,8 @@ EntityManager::EntityManager(std::string level)
 
 	backDrop = true;
 	setCamera();
+
+	SoundManager::PlayMusic();
 }
 
 bool EntityManager::LoseGame() {

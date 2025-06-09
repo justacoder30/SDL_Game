@@ -42,6 +42,7 @@ void PlayGameState::Update()
 void PauseState::Update()
 {
 	if (countinueBtn->Clicked()) {
+		SoundManager::PlayMusic();
 		game->ChangeToPreState();
 	}
 	if (newGameBtn->Clicked()) {

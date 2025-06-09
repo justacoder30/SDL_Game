@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Text.h"
 #include <SDL2/SDL_mixer.h>
+#include "SoundManager.h"
 
 Mix_Music* gMusic = NULL;
 
@@ -9,14 +10,15 @@ Mix_Chunk* gScratch = NULL;
 Mix_Chunk* gHigh = NULL;
 Mix_Chunk* gMedium = NULL;
 Mix_Chunk* gLow = NULL;
+Sound sound;
 
 Game::Game()
 {
 	float scale = 0;
 	Global.camera = Camera(784, 441);
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
-
+	SoundManager::init();
 
 	levels = { "map1.tmx", "map2.tmx" };
 
