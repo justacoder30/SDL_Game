@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-x64-windows-2.32.6-4f2366c1-2d3a-4ba0-9f80-1788e47fd89c",
-  "name": "sdl2:x64-windows@2.32.6 e81d38348c54591d24f4e059e3e2f0f925142e6ebab2c04024dbefebffd8cb46",
+  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-x64-windows-2.32.6-c579025d-65c4-4425-b407-78749f8b153c",
+  "name": "sdl2:x64-windows@2.32.6 298bca2d3c3818dec0a867a8c5c44e7f509418a7434fe812f5db251771737a59",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-06-09T12:27:31Z"
+    "created": "2025-06-09T18:42:34Z"
   },
   "relationships": [
     {
@@ -104,7 +104,7 @@
     {
       "name": "sdl2:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "e81d38348c54591d24f4e059e3e2f0f925142e6ebab2c04024dbefebffd8cb46",
+      "versionInfo": "298bca2d3c3818dec0a867a8c5c44e7f509418a7434fe812f5db251771737a59",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",

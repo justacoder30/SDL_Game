@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-mixer-x64-windows-2.8.1#1-12dcf41a-a26f-4bb9-903c-121ee2125338",
-  "name": "sdl2-mixer:x64-windows@2.8.1#1 7c2cc4f0319ab1db70ff84d2175272d7d0096895b0485dfdc163f69c76bfba3e",
+  "documentNamespace": "https://spdx.org/spdxdocs/sdl2-mixer-x64-windows-2.8.1#1-7274b188-38b0-4505-8198-f5ed1b5d4ae1",
+  "name": "sdl2-mixer:x64-windows@2.8.1#1 750451412b59754941ec9e12ed7c25d96419407bcc176139728745c12dc91f8e",
   "creationInfo": {
     "creators": [
       "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-06-09T12:28:18Z"
+    "created": "2025-06-09T18:43:47Z"
   },
   "relationships": [
     {
@@ -84,7 +84,7 @@
     {
       "name": "sdl2-mixer:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "7c2cc4f0319ab1db70ff84d2175272d7d0096895b0485dfdc163f69c76bfba3e",
+      "versionInfo": "750451412b59754941ec9e12ed7c25d96419407bcc176139728745c12dc91f8e",
       "downloadLocation": "NONE",
       "licenseConcluded": "Zlib",
       "licenseDeclared": "NOASSERTION",

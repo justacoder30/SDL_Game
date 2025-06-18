@@ -21,7 +21,8 @@ Boss::Boss(Vector pos, Player* player)
 	gravity = 800;
 	damage = 20;
 	getHitJump = 150;
-	hp = 200;
+	//hp = 200;
+	hp = 100;
 	currentHp = hp;
 
 	texture_width = animationManger.animation.FrameWidth;

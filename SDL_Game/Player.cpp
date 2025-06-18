@@ -11,10 +11,10 @@ Player::Player(int level, Vector pos)
 		{Run, Animation("resource/img/Knight/Run.png", 7, 0.09)},
 		{Fall, Animation("resource/img/Knight/Fall.png", 4, 0.135, false)},
 		{Jump, Animation("resource/img/Knight/Jump.png", 2, 0.12, false)},
-		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.1, false)},
-		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.1, false)},
-		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.1, false)},
-		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.1, false)},
+		{Attack1, Animation("resource/img/Knight/Attack 1.png", 5, 0.08, false)},
+		{Attack2, Animation("resource/img/Knight/Attack 2.png", 4, 0.08, false)},
+		{Attack3, Animation("resource/img/Knight/Attack 3.png", 4, 0.08, false)},
+		{RunAttack, Animation("resource/img/Knight/Run+Attack.png", 6, 0.08, false)},
 		{Defend, Animation("resource/img/Knight/Defend.png", 5, 0.1)},
 		{Protect, Animation("resource/img/Knight/Protect.png", 1, 0.1, false)},
 		{Hurt, Animation("resource/img/Knight/Hurt.png", 2, 0.1, false)},
@@ -92,7 +92,7 @@ void Player::UpdatePosition()
 
 	rect.x += velocity.x * Global.DeltaTime;
 	Collision("x");
-	rect.y += velocity.y * Global.DeltaTime + gravity * Global.DeltaTime * Global.DeltaTime;
+	rect.y += velocity.y * Global.DeltaTime + 0.5 * gravity * Global.DeltaTime * Global.DeltaTime;
 	velocity.y += gravity * Global.DeltaTime;
 	Collision("y");
 
