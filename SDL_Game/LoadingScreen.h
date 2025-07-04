@@ -12,6 +12,8 @@ public:
 	double durationTime = 0;
 	double time = 0;
 	LoadingScreen(Vector size, double durationTime);
+	LoadingScreen();
+	~LoadingScreen();
 	void Update();
 	void UpdateState();
 	void Draw();

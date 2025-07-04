@@ -31,6 +31,7 @@ class Entity
 private:
 	bool changeLevel = false;
 	bool removed = false;
+	bool breakLoop = false;
 protected:
 	int texture_width;
 	int texture_height;	
@@ -41,8 +42,12 @@ protected:
 	Rect OFFSET;
 	std::unordered_map<State, Animation> animations;
 	std::vector<Entity*> Entities;
+	
+	void BreakLoop();
+	void Loop();
 
 	bool IsOnGround();
+	bool IsBreakLoop();
 	void ChangeLevel();
 	void UpdateGravity();
 	void UpdateAnimation();
@@ -81,7 +86,8 @@ public:
 	virtual void Draw();
 
 	float AttackStepTime(Entity entity);
-	void add(Entity* entity);
+	Entity add(Entity* entity);
+	void add_NoPoitner(Entity& entity);
 	void Collision(std::string direction);
 	void SetCollision(float _left, float _top, float _right, float _bottom);
 	void DrawAnimateGroup();

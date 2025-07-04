@@ -12,7 +12,7 @@ private:
 	Rect edgeRect;
 	
 	float enemyZone = 150;
-	HealthBar *bar;
+	HealthBar bar;
 	
 public:
 	Player* player;

@@ -12,8 +12,7 @@ AnimationManager::AnimationManager(Animation Animation)
 
 void AnimationManager::Play(Animation _animation)
 {
-	if (animation.texture.getTex() == _animation.texture.getTex())
-		return;
+	if (animation.texture.getTex() != NULL && animation.texture.getTex() == _animation.texture.getTex()) return;
 	animation = _animation;
 	loop = animation.loop;
 	ResetFrame();

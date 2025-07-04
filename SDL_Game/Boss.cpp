@@ -52,6 +52,8 @@ Boss::Boss(Vector pos, Player* player)
 	bar = new HealthBar(this, Vector(20 * scale, 8 * scale), Vector(50 * scale, 5 * scale));
 	bar->SetColor(0, 255, 255);
 	bar->SetErase();
+
+	center_pos = GetCenter();
 }
 
 void Boss::UpdateVelocity()

@@ -6,7 +6,7 @@
 class Texture
 {
 private:
-	SDL_Texture* texture;
+	SDL_Texture* texture = NULL;
 	int w, h;
 public:
 	Texture();

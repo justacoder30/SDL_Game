@@ -1,6 +1,6 @@
 #include "Coin.h"
 
-Coin::Coin(Vector pos, Player *player)
+Coin::Coin(Vector pos, Player &player)
 {
 	animations = {
 		{ Idle, Animation("resource/img/Item/Coin.png", 5, 0.08) },
@@ -8,7 +8,7 @@ Coin::Coin(Vector pos, Player *player)
 
 	current = Idle;
 	score = 15;
-	this->player = player;
+	this->player = &player;
 
 	size = Vector(animations[Idle].FrameWidth, animations[Idle].FrameHeight);
 
@@ -28,6 +28,7 @@ void Coin::Draw()
 
 void Coin::OnCollideWithPlayer()
 {
+	if (player == NULL) return;
 	if (rect.checkCollide(player->rect)) {
 		Global.Score += score;
 		SoundManager::PlaySoundEffect("coin");

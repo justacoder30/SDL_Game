@@ -23,4 +23,3 @@ public:
 };
 
 extern GLOBAL Global;
-

@@ -6,15 +6,16 @@
 #include "LoadingScreen.h"
 #include "Flag.h"
 #include "Boss.h"
+#include <future>
 
 class EntityManager: public Entity
 {
 private:
-	Player* player;
+	std::future<void> initFuture;
+	Player player;
 	Boss* boss;
-	LoadingScreen * loading;
 	HealthBar* playerHealthBar;
-	HealthBar* bossHealthBar;
+	HealthBar *bossHealthBar;
 	Map *map;
 	Flag *flag;
 	void addObjects();
@@ -26,6 +27,7 @@ public:
 	EntityManager(std::string level);
 	bool LoseGame();
 	bool WinGame();
+	void WaitForInit();
 	void Update();
 	void Draw();
 };

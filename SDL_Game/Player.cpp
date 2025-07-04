@@ -56,6 +56,8 @@ Player::Player(int level, Vector pos)
 		Vector(52, 74)
 	);
 
+	center_pos = GetCenter();
+
 }
 
 void Player::SetMapRect(Rect rect)

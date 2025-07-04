@@ -13,6 +13,7 @@ LoadingScreen::LoadingScreen(Vector size, double durationTime)
 
 	LoadingScreen::size = size;
 	LoadingScreen::durationTime = durationTime;
+	//animationManger = AnimationManager(animations[Idle1]);
 
 	states = {
 		Idle1,
@@ -30,6 +31,14 @@ LoadingScreen::LoadingScreen(Vector size, double durationTime)
 	backDrop = true;
 }
 
+LoadingScreen::LoadingScreen()
+{}
+
+LoadingScreen::~LoadingScreen()
+{
+	std::cout << "LoadingScreen destroyed" << std::endl;
+}
+
 void LoadingScreen::Update()
 {
 	if (time < durationTime) time += Global.DeltaTime;
@@ -45,13 +54,14 @@ void LoadingScreen::UpdateState()
 
 	current = states[currentIndex];
 	UpdateAnimation();
+	if (!isEnd()) BreakLoop();
+	else Loop();
 }
 
 void LoadingScreen::Draw()
 {
 	window.SetColor(0, 0, 0);
 	window.Clear();
-	
 
 	window.blit(
 		animationManger.animation.texture,
@@ -65,7 +75,6 @@ void LoadingScreen::Draw()
 bool LoadingScreen::isEnd()
 {
 	if (time < durationTime) return false;
-	//SoundManager::PlayMusic();
 	removeFromTree();
 	return true;
 }

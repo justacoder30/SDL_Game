@@ -13,13 +13,14 @@ void EntityManager::addObjects()
 {
 	std::string objects_pos[] = {"PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition", "BossPosition", };
 
-	Entities.push_back(
+	
+	add(
 		new Background(
 			Vector(Global.camera.rect.w, Global.camera.rect.h)
 		)
 	);
-	Entities.push_back(map);
-	player = new Player(0, Vector(0, 0));
+	add(map);
+	player = Player(0, Vector(0, 0));
 	for (auto obj : objects_pos) {
 		auto positions = map->GetObjectGroup(obj);
 
@@ -27,44 +28,46 @@ void EntityManager::addObjects()
 
 		if (obj == "PlayerPosition") {
 			for (auto pos : positions) {
-				player->rect = Rect(Vector(pos.x, pos.y), Vector(player->rect.w, player->rect.h));
-				player->SetMapRect(Rect(0, 0, map->getWidth(), map->getHeight()));
-				Entities.push_back(player);
+				player.rect = Rect(Vector(pos.x, pos.y), Vector(player.rect.w, player.rect.h));
+				player.center_pos = player.GetCenter();
+				player.SetMapRect(Rect(0, 0, map->getWidth(), map->getHeight()));
+				add(&player);
 			}
 		}
 		else if (obj == "EnemyPosition") {
 			for (auto pos : positions) {
-				Entities.push_back(new Enemy(0, Vector(pos.x, pos.y), player));
+				add(new Enemy(0, Vector(pos.x, pos.y), &player));
 			}
 		}
 		else if (obj == "CoinPosition") {
 			for (auto pos : positions) {
-				Entities.push_back(new Coin(Vector(pos.x, pos.y), player));
+				Coin coin = Coin(Vector(pos.x, pos.y), player);
+				add(&coin);
 			}
 		}
 		else if (obj == "HeartPosition") {
 			for (auto pos : positions) {
-				Entities.push_back(new Heart(Vector(pos.x, pos.y), player));
+				add(&*new Heart(Vector(pos.x, pos.y), &player));
 			}
 		}
 		else if (obj == "FlagPosition") {
 			for (auto pos : positions) {
-				flag = new Flag(Vector(pos.x, pos.y), player);
-				Entities.push_back(flag);
+				flag = new Flag(Vector(pos.x, pos.y), &player);
+				add(flag);
 			}
 		}
 		else if (obj == "BossPosition") {
 			for (auto pos : positions) {
-				boss = new Boss(Vector(pos.x, pos.y), player);
-				Entities.push_back(boss);
+				boss = new Boss(Vector(pos.x, pos.y), &player);
+				add(boss);
 			}
 		}
 
 	}
-	playerHealthBar = new HealthBar(player, Vector(20, 10), Vector(150, 15));
+	playerHealthBar = new HealthBar(&player, Vector(20, 10), Vector(150, 15));
 	playerHealthBar->SetStatic();
 	playerHealthBar->SetColor(255, 0, 0);
-	Entities.push_back(playerHealthBar);
+	add(playerHealthBar);
 
 	//ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 352.00), Vector(80.00, 16.00));
 	ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
@@ -75,11 +78,11 @@ void EntityManager::addObjects()
 	bossHealthBar->SetColor(0, 255, 255);
 	bossHealthBar->add(text);
 
+	//add(new LoadingScreen(Vector(64, 64), 1.5));
 
 	//Entities.push_back(bossHealthBar);
 
-	loading = new LoadingScreen(Vector(64, 64), 1.5);
-	Entities.push_back(loading);
+	
 }
 
 void EntityManager::addCollisions()
@@ -98,7 +101,7 @@ void EntityManager::setCamera()
 		map->getWidth() - size.w / 2,
 		map->getHeight() - size.h / 2
 	);
-	Global.camera.Follow(&player->center_pos);
+	Global.camera.Follow(&player.center_pos);
 }
 
 EntityManager::EntityManager(std::string level)
@@ -111,10 +114,29 @@ EntityManager::EntityManager(std::string level)
 	setCamera();
 
 	SoundManager::PlayMusic();
+	 
+
+	//// Start async initialization
+	//initFuture = std::async(std::launch::async, [this, level]() {
+	//	map = new Map(level);
+	//	addObjects();
+	//	addCollisions();
+	//	backDrop = true;
+	//	setCamera();
+	//	SoundManager::PlayMusic();
+	//}); // Wait for the async task to complete
+
 }
 
 bool EntityManager::LoseGame() {
-	return player->isDeath;
+	return player.isDeath;
+}
+
+void EntityManager::WaitForInit()
+{
+	//if (initFuture.valid()) {
+	//	initFuture.get(); // Wait for the async task to complete
+	//}
 }
 
 void EntityManager::Update()
@@ -124,17 +146,14 @@ void EntityManager::Update()
 
 	if (Key[SDL_SCANCODE_E]) {
 		Global.scale += speed * Global.DeltaTime;
-	}
+	} 
 
 	if (Key[SDL_SCANCODE_Q]) {
 		Global.scale -= speed * Global.DeltaTime;
 		if (Global.scale < scale) Global.scale = scale;
 	}*/
 
-	loading->Update();
-	if (!loading->isEnd()) return;	
-
-	Entity::Update();
+	
 	
 	if (boss != NULL) {
 		if (boss->isInEnemyZone() && boss->currentHp > 0) add(bossHealthBar);
@@ -142,11 +161,12 @@ void EntityManager::Update()
 
 		if (boss->isRemoved()) ChangeLevel();
 	}
-	
 
+	Entity::Update();
 	Global.camera.Update();
 }
 
 void EntityManager::Draw() {
 	Entity::Draw();
+	//loading.Draw();
 }

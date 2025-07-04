@@ -1,7 +1,18 @@
 #include "Entity.h"
+#include <algorithm>
 
 //std::vector<Entity*> Collisions;
 std::vector<Rect> Collisions;
+
+void Entity::BreakLoop()
+{
+	breakLoop = true;
+}
+
+void Entity::Loop()
+{
+    breakLoop = false;
+}
 
 bool Entity::IsOnGround()
 {
@@ -11,6 +22,11 @@ bool Entity::IsOnGround()
             return true;
     }
     return false;
+}
+
+bool Entity::IsBreakLoop()
+{
+    return breakLoop;
 }
 
 void Entity::ChangeLevel()
@@ -80,17 +96,38 @@ Entity::Entity()
 
 void Entity::Update()
 {
-    for (int i = 0; i < Entities.size(); ++i)
+    /*for (int i = 0; i < Entities.size(); ++i)
     {
         Entities[i]->Update();
+        if (Entities[i]->IsBreakLoop()) break;
+
         if (Entities[i]->isChangLevel()) {
             ChangeLevel();
         }
         if (Entities[i]->isRemoved()) {
+            delete Entities[i];
+			Entities[i] = nullptr;
             Entities.erase(Entities.begin() + i--);
         }
         
+    }*/
+
+    for (int i = Entities.size() - 1; i >= 0; --i)
+    {
+        Entities[i]->Update();
+        if (Entities[i]->IsBreakLoop()) return;
+
+        if (Entities[i]->isChangLevel()) {
+            ChangeLevel();
+        }
+        if (Entities[i]->isRemoved()) {
+            Entities.erase(Entities.begin() + i);
+        }
     }
+
+    /*std::sort(Entities.begin(), Entities.end(), [](Entity* a, Entity* b) {
+        return a->rect.y < b->rect.y;
+    });*/
 }
 
 void Entity::Draw()
@@ -105,13 +142,20 @@ void Entity::Draw()
 float Entity::AttackStepTime(Entity entity)
 {
     return entity.animationManger.animation.FrameSpeed;
-    return 0.0f;
 }
 
-void Entity::add(Entity* entity)
+Entity Entity::add(Entity* entity)
 {
     entity->setRemove();
     Entities.push_back(entity);
+
+    return *this;
+}
+
+void Entity::add_NoPoitner(Entity& entity)
+{
+    entity.setRemove();
+    Entities.push_back(&entity);
 }
 
 void Entity::Collision(std::string direction)

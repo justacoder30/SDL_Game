@@ -16,7 +16,7 @@ public:
 	Rect rect;
 	Vector transform;
 	Vector previous;
-	Vector* dst_pos;
+	Vector* dst_pos = new Vector(0, 0);
 	float speed = 0.05;
 
 	Camera();

@@ -6,8 +6,8 @@ GLOBAL Global = GLOBAL();
 void GLOBAL::Update() {
 	
 
-	DeltaTime = (SDL_GetTicks() - startTime) / 1000.0;
-	startTime = SDL_GetTicks();
+	DeltaTime = (SDL_GetTicks64() - startTime) / 1000.0;
+	startTime = SDL_GetTicks64();
 }
 
 void GLOBAL::fpsShow()

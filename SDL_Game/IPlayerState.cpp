@@ -22,8 +22,9 @@ IPlayerState* IdleState::Update(Player& player)
 	if (!PreKey[SDL_SCANCODE_F] && Key[SDL_SCANCODE_F]) return new DefendState();
 
 	if (player.isHurt) {
-		player.beingHurt();
-		return new HurtState();
+		player.isHurt = false;
+		//player.beingHurt();
+		//return new HurtState();
 	}
 
     return this;
@@ -48,8 +49,9 @@ IPlayerState* RunState::Update(Player& player)
 	}
 
 	if (player.isHurt) {
-		player.beingHurt();
-		return new HurtState();
+		player.isHurt = false;
+		//player.beingHurt();
+		//return new HurtState();
 	}
 
     return this;

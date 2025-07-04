@@ -37,7 +37,7 @@ HealthBar::HealthBar(Entity * entity, Vector pos, Vector size)
 	og_x = size.x;
 	rect = Rect(pos, size);
 	backDrop = true;
-	durationTime = 200;
+	durationTime = 5;
 }
 
 HealthBar HealthBar::SetColor(Uint8 r, Uint8 g, Uint8 b)

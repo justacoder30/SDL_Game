@@ -52,9 +52,9 @@ Enemy::Enemy(int level, Vector pos, Player* player)
 		Vector(40, 30)
 	);
 
-	bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
-	bar->SetColor(0, 255, 0);
-	bar->SetErase();
+	bar = HealthBar(this, Vector(20, 8), Vector(50, 5))
+		.SetColor(0, 255, 0)
+		.SetErase();
 	
 }
 
@@ -158,9 +158,9 @@ void Enemy::CollideWithPlayer()
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
-		bar->resetTime();
+		bar.resetTime();
 		beingAttacked(*player);
-		if(isHurt) add(bar);
+		if(isHurt) add(&bar);
 	}
 
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {

@@ -28,7 +28,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	}*/
 
 	//Create window
-	window = SDL_CreateWindow(tittle, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow(tittle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	SDL_SetWindowFullscreen(window, fullscreen);
 	
 	if (window == NULL)
@@ -37,7 +37,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Failed to initialize!\n");
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | 0);
 	Global.Renderer = renderer;
 
 	if (renderer == NULL)
@@ -47,8 +47,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 	
 	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
 	Global.camera.SetCamera(GetWindowSize());
-	//SDL_SetRenderVSync(renderer, 1);
-	//SDL_SetWindowSurfaceVSync(window, 1);
+	/*SDL_SetRenderVSync(renderer, 1);
+	SDL_SetWindowSurfaceVSync(window, 1);*/
 	
 }
 

@@ -40,7 +40,7 @@ Background::Background(Vector size)
 
 	};
 
-	moveSpeed = 26;
+	moveSpeed = 19;
 }
 
 void Background::Update()
@@ -50,13 +50,7 @@ void Background::Update()
 		if (clouds[i]->pos.x <= -size.x) clouds[i]->pos.x = size.x;
 	}
 
-	for (int i = 0; i < Entities.size(); ++i)
-	{
-		Entities[i]->Update();
-		if (Entities[i]->isRemoved()) {
-			Entities.erase(Entities.begin() + i--);
-		}
-	}
+	Entity::Update();
 }
 
 void Background::Draw()
@@ -76,6 +70,6 @@ void Background::Draw()
 			
 			Entities[i]->pos.x = og_pos;
 		}
-		speed += 0.09 ;
+		speed += 0.09;
 	}
 }
