@@ -39,21 +39,21 @@ LoadingScreen::~LoadingScreen()
 	std::cout << "LoadingScreen destroyed" << std::endl;
 }
 
-void LoadingScreen::Update()
+void LoadingScreen::Update(const float& dt)
 {
-	if (time < durationTime) time += Global.DeltaTime;
+	if (time < durationTime) time += dt;
 
-	UpdateState();
+	UpdateState(dt);
 }
 
-void LoadingScreen::UpdateState()
+void LoadingScreen::UpdateState(const float& dt)
 {
 	if (animationManger.IsDone()) currentIndex++;
 
 	if (currentIndex >= states.size()) currentIndex = 0;
 
 	current = states[currentIndex];
-	UpdateAnimation();
+	UpdateAnimation(dt);
 	if (!isEnd()) BreakLoop();
 	else Loop();
 }

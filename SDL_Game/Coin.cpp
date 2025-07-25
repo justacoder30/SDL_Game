@@ -15,9 +15,9 @@ Coin::Coin(Vector pos, Player &player)
 	rect = Rect(pos, size);
 }
 
-void Coin::Update()
+void Coin::Update(const float& dt)
 {
-	UpdateAnimation();
+	UpdateAnimation(dt);
 	OnCollideWithPlayer();
 }
 

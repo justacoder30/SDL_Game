@@ -57,12 +57,12 @@ void HealthBar::resetTime()
 	timer = 0;
 }
 
-void HealthBar::Update()
+void HealthBar::Update(const float& dt)
 {
 	
 	UpdateLength();
 	if (!erase) return;
-	if (timer < durationTime) timer += Global.DeltaTime;
+	if (timer < durationTime) timer += dt;
 	if (timer >= durationTime) {
 		timer = 0;
 		removeFromTree();
@@ -71,7 +71,7 @@ void HealthBar::Update()
 		erase = false;
 		return;
 	}*/
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void HealthBar::UpdateLength()

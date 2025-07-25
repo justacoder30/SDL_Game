@@ -14,8 +14,8 @@ public:
 	LoadingScreen(Vector size, double durationTime);
 	LoadingScreen();
 	~LoadingScreen();
-	void Update();
-	void UpdateState();
+	void Update(const float& dt);
+	void UpdateState(const float& dt);
 	void Draw();
 	bool isEnd();
 };

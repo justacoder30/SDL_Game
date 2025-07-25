@@ -21,16 +21,15 @@ public:
 	Boss();
 	Boss(Vector pos, Player* player);
 	void UpdateVelocity();
-	void UpdatePosition();
+	void UpdatePosition(const float& dt);
 	void UpdateState();
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 	bool isEdge();
 	bool isHitWall();
 	bool isInEnemyZone();
 	bool isInAttackZone();
 	bool checkTurn();
-	void CollideWithPlayer();
-
+	void CollideWithPlayer(const float& dt);
 };
 

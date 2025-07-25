@@ -40,7 +40,6 @@ void EntityManager::addObjects()
 		else if (obj == "CoinPosition") {
 			for (auto pos : positions) {
 				add(new Coin(Vector(pos.x, pos.y), player));
-				//add_NoPoitner(Coin(Vector(pos.x, pos.y), player));
 			}
 		}
 		else if (obj == "HeartPosition") {
@@ -78,7 +77,7 @@ void EntityManager::addObjects()
 
 	add(bossHealthBar);*/
 
-	//add(new LoadingScreen(Vector(64, 64), 1.5));
+	add(new LoadingScreen(Vector(64, 64), 1.5));
 
 	
 }
@@ -147,7 +146,10 @@ EntityManager::EntityManager(std::string level)
 	this->level = level;
 	/*loadGame = std::thread(&EntityManager::loadResources, this, level);
 	loadGame.join();*/
-
+	/*Global.pool.enqueue([this, level]() {
+		this->loadResources(level);
+	});*/
+	//Global.pool.wait();
 	//LOG(Collisions.size());
 
 	loadResources(level);
@@ -159,22 +161,23 @@ bool EntityManager::LoseGame() {
 
 void EntityManager::watForInit()
 {
-	loadResources(level);
+	loadGame = std::thread(&EntityManager::loadResources, this, level);
+	loadGame.join();
 }
 
-void EntityManager::Update()
+void EntityManager::Update(const float& dt)
 {
-	/*static float scale = Global.scale;
+	static float scale = Global.scale;
 	float speed = 10;
 
 	if (Key[SDL_SCANCODE_E]) {
-		Global.scale += speed * Global.DeltaTime;
+		Global.scale += speed * dt;
 	} 
 
 	if (Key[SDL_SCANCODE_Q]) {
-		Global.scale -= speed * Global.DeltaTime;
+		if (Global.scale >= scale) Global.scale -= speed * dt;
 		if (Global.scale < scale) Global.scale = scale;
-	}*/	
+	}
 	
 	if (boss) {
 		if (boss->current == Death && boss->animationManger.IsDone()) {
@@ -187,7 +190,7 @@ void EntityManager::Update()
 		//else if (!boss->isInEnemyZone() || boss->currentHp <= 0) bossHealthBar->removeFromTree();
 	}
 
-	Entity::Update();
+	Entity::Update(dt);
 	Global.camera.Update();
 }
 

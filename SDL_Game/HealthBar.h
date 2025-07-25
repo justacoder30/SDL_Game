@@ -18,7 +18,7 @@ public:
 	HealthBar SetColor(Uint8 r, Uint8 g, Uint8 b);
 	HealthBar SetStatic();
 	void resetTime();
-	void Update();
+	void Update(const float& dt);
 	void UpdateLength();
 	void Draw();
 	HealthBar SetErase();

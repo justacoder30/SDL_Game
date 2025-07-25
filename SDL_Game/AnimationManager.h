@@ -16,7 +16,7 @@ public:
 	AnimationManager(Animation Animation);
 	void Play(Animation _animation);
 	void ResetFrame();
-	void Update();
+	void Update(const float& dt);
 	void stop();
 	bool IsFlip();
 	bool IsDone();

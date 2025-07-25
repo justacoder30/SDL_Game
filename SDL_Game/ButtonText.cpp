@@ -28,7 +28,7 @@ ButtonText ButtonText::SetColorHovering(Uint8 r, Uint8 g, Uint8 b)
 	return *this;
 }
 
-void ButtonText::Update()
+void ButtonText::Update(const float& dt)
 {
 	Rect newrect = Rect((pos + Global.camera.rect.pos) * Global.scale, size * Global.scale);
 

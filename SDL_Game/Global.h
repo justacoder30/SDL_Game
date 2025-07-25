@@ -8,14 +8,14 @@
 class GLOBAL
 {
 private:
-	Uint64 startTime;
-	Uint64 lastTime;
+	Uint64 startTime = SDL_GetPerformanceCounter();
+	Uint64 lastTime = 0;
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
 	Font font;
 	float scale;
-	float DeltaTime;
+	float DeltaTime = 0;
 	//double DeltaTime;
 	bool gameWin;
 	bool gameLose;

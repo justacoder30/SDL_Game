@@ -67,14 +67,14 @@ void Boss::UpdateVelocity()
 	}
 }
 
-void Boss::UpdatePosition()
+void Boss::UpdatePosition(const float& dt)
 {
 	old_rect = rect;
 
-	rect.x += velocity.x * Global.DeltaTime;
+	rect.x += velocity.x * dt;
 	Collision("x");
-	rect.y += velocity.y * Global.DeltaTime + gravity * Global.DeltaTime * Global.DeltaTime;
-	velocity.y += gravity * Global.DeltaTime;
+	rect.y += velocity.y * dt + gravity * dt * dt;
+	velocity.y += gravity * dt;
 	Collision("y");
 
 	center_pos = GetCenter();
@@ -86,14 +86,14 @@ void Boss::UpdateState()
 	state = state->Update(*this);
 }
 
-void Boss::Update()
+void Boss::Update(const float& dt)
 {
 	UpdateVelocity();
 	UpdateState();
-	UpdatePosition();
-	UpdateAnimation();
-	CollideWithPlayer();
-	Entity::Update();
+	UpdatePosition(dt);
+	UpdateAnimation(dt);
+	CollideWithPlayer(dt);
+	Entity::Update(dt);
 }
 
 void Boss::Draw()
@@ -147,16 +147,16 @@ bool Boss::checkTurn()
 	return false;
 }
 
-void Boss::CollideWithPlayer()
+void Boss::CollideWithPlayer(const float& dt)
 {
 	if (rect.checkCollide(player->rect) && current != Death) {
-		player->beingAttacked(*this);
+		player->beingAttacked(*this, dt);
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
-		beingAttacked(*player);
+		beingAttacked(*player, dt);
 	}
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {
-		player->beingAttacked(*this);
+		player->beingAttacked(*this, dt);
 	}
 }
