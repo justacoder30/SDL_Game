@@ -14,7 +14,7 @@ private:
 	void DrawStatic();
 public:
 	HealthBar();
-	HealthBar(Entity *entity, Vector pos, Vector size);
+	HealthBar(Entity* entity, Vector pos, Vector size);
 	HealthBar SetColor(Uint8 r, Uint8 g, Uint8 b);
 	HealthBar SetStatic();
 	void resetTime();

@@ -16,7 +16,7 @@ Game::Game()
 {
 	float scale = 0;
 	Global.camera = Camera(784, 441);
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
 	SoundManager::init();
 
@@ -28,12 +28,16 @@ Game::Game()
 
 void Game::ChangeState(IGameState* newState)
 {
-	currentState = newState;
+	if (nextState == newState) return;
+	delete nextState;
+	nextState = newState;
 }
 
 void Game::ChangeToPreState()
 {
-	currentState = preveriousState;
+	if (nextState == preveriousState) return;
+	delete nextState;
+	nextState = preveriousState;
 }
 
 void Game::ChangeToNextLevel()
@@ -72,6 +76,11 @@ void Game::Update()
 	Input.Update();
 	Global.Update();
 
+	if(nextState != nullptr) {
+		currentState = nextState;
+		nextState = nullptr;
+	}
+
 	currentState->Update();
 }
 
@@ -83,7 +92,8 @@ void Game::Draw()
 	currentState->Draw();
 	
 	window.Render();
-	//Global.fpsShow();
+	Global.fpsShow();
+	//LOG(Global.DeltaTime);
 }
 
 void Game::Run()

@@ -91,8 +91,8 @@ void Entity::beingHurt()
     currentHp -= damageTaken;
 }
 
-Entity::Entity()
-{}
+//Entity::Entity()
+//{}
 
 void Entity::Update()
 {
@@ -112,6 +112,21 @@ void Entity::Update()
         
     }*/
 
+    /*for (int i = Entities.size() - 1; i >= 0; --i)
+    {
+        Entities[i]->Update();
+        if (Entities[i]->IsBreakLoop()) return;
+
+        if (Entities[i]->isChangLevel()) {
+            ChangeLevel();
+        }
+        if (Entities[i]->isRemoved()) {
+			Entities[i] = nullptr;
+			delete Entities[i];
+            Entities.erase(Entities.begin() + i);
+        }
+    }*/
+
     for (int i = Entities.size() - 1; i >= 0; --i)
     {
         Entities[i]->Update();
@@ -121,13 +136,13 @@ void Entity::Update()
             ChangeLevel();
         }
         if (Entities[i]->isRemoved()) {
+            delete Entities[i];
             Entities.erase(Entities.begin() + i);
+			//delete it;
         }
     }
 
-    /*std::sort(Entities.begin(), Entities.end(), [](Entity* a, Entity* b) {
-        return a->rect.y < b->rect.y;
-    });*/
+    
 }
 
 void Entity::Draw()
@@ -147,7 +162,10 @@ float Entity::AttackStepTime(Entity entity)
 Entity Entity::add(Entity* entity)
 {
     entity->setRemove();
-    Entities.push_back(entity);
+    if (std::find(Entities.begin(), Entities.end(), entity) == Entities.end())
+    {
+        Entities.push_back(entity);
+    }
 
     return *this;
 }
@@ -160,6 +178,7 @@ void Entity::add_NoPoitner(Entity& entity)
 
 void Entity::Collision(std::string direction)
 {
+	
     rect = Rect(rect.x, rect.y, rect.w, rect.h);
 
     for (int i = 0; i < Collisions.size(); ++i) {
@@ -167,24 +186,28 @@ void Entity::Collision(std::string direction)
             continue;
         if (direction == "y") {
 
-            if (velocity.y > 0) {
-                rect.y = Collisions[i].top - rect.h;
+            if (rect.bottom >= Collisions[i].top && old_rect.bottom <= Collisions[i].top) {
+                rect.y += Collisions[i].top - rect.bottom;
+                rect.bottom = Collisions[i].top;
                 isOnGround = true;
             }
 
-            if (velocity.y < 0) {
-                rect.y = Collisions[i].bottom;
+            if (rect.top <= Collisions[i].bottom && rect.top >= Collisions[i].bottom) {
+                rect.y += Collisions[i].bottom - rect.top;
+                rect.top = Collisions[i].bottom;
             }
 
             velocity.y = 0;
         }
         else {
-            if (velocity.x > 0) {
-                rect.x = Collisions[i].left - rect.w;
+            if (rect.right >= Collisions[i].left && old_rect.right <= Collisions[i].left) {
+                rect.x += Collisions[i].left - rect.right;
+                rect.right = Collisions[i].left;
             }
 
-            if (velocity.x < 0) {
-                rect.x = Collisions[i].right;
+            if (rect.left <= Collisions[i].right && old_rect.left >= Collisions[i].right) {
+                rect.x += Collisions[i].right - rect.left;
+                rect.left = Collisions[i].right;
             }
 
             //velocity.x *= -1;
@@ -211,9 +234,9 @@ void Entity::DrawAnimateGroup()
     );
 }
 
-void Entity::removeFromTree()
-{
-    removed = true;
+void Entity::removeFromTree()  
+{  
+    removed = true;  
 }
 
 bool Entity::isRemoved()

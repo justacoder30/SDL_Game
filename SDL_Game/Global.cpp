@@ -1,16 +1,15 @@
-#include "Global.h"
 #include <iostream>
+#include "Global.h"
 
 GLOBAL Global = GLOBAL();
 
 void GLOBAL::Update() {
-	
-
-	DeltaTime = (SDL_GetTicks64() - startTime) / 1000.0;
-	startTime = SDL_GetTicks64();
+	startTime = SDL_GetPerformanceCounter();
+	DeltaTime = (float)(startTime - lastTime) / SDL_GetPerformanceFrequency();
+	lastTime = startTime;
 }
 
 void GLOBAL::fpsShow()
 {
-	std::cout << round(1.0 / Global.DeltaTime) << std::endl;
+	std::cout << int(1.0 / DeltaTime) << std::endl;
 }

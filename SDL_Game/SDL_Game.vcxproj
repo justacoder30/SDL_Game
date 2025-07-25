@@ -45,6 +45,7 @@
     </ClCompile>
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayGameState.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayGameState.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RenderWindow.h" />
     <ClInclude Include="Sound.h" />
@@ -187,6 +189,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

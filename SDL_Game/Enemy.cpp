@@ -1,6 +1,16 @@
 #include "Enemy.h"
 
 
+void Enemy::addHealthBar()
+{
+	HealthBar* bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
+	bar->SetColor(0, 255, 0);
+	bar->SetErase();
+	add(bar);
+	bar = nullptr;
+	delete bar;
+}
+
 Enemy::Enemy(int level, Vector pos, Player* player)
 {
 	animations = {
@@ -160,7 +170,7 @@ void Enemy::CollideWithPlayer()
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
 		bar.resetTime();
 		beingAttacked(*player);
-		if(isHurt) add(&bar);
+		if (isHurt) addHealthBar();
 	}
 
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {

@@ -106,7 +106,7 @@ IBossState* DeathBossState::Update(Boss& boss)
 
     if (boss.animationManger.IsDone()) {
         boss.removeFromTree();
-        Global.Score += boss.hp;
+        //Global.Score += boss.hp;
     }
 
     return this;

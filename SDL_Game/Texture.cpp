@@ -5,7 +5,7 @@
 Texture::Texture()
 {}
 
-Texture::Texture(std::string f_path)
+Texture::Texture(const std::string& f_path)
 {
 
 	texture = IMG_LoadTexture(Global.Renderer, f_path.c_str());
@@ -16,20 +16,21 @@ Texture::Texture(std::string f_path)
 	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
 
 	SetScaleMode(SDL_ScaleModeNearest);
+	//SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	//SetScaleMode(SDL_SCALEMODE_LINEAR);
 }
 
-float Texture::getWidth()
+float Texture::getWidth() const
 {
 	return w;
 }
 
-float Texture::getHeight()
+float Texture::getHeight() const
 {
 	return h;
 }
 
-SDL_Rect Texture::getRect()
+SDL_Rect Texture::getRect() const
 {
 	SDL_Rect rect = {
 		0,
@@ -40,7 +41,7 @@ SDL_Rect Texture::getRect()
 	return rect;
 }
 
-SDL_FRect Texture::getFRect()
+SDL_FRect Texture::getFRect() const
 {
 	SDL_FRect rect = {
 		0,
@@ -51,28 +52,30 @@ SDL_FRect Texture::getFRect()
 	return rect;
 }
 
-SDL_Texture* Texture::getTex()
+SDL_Texture* Texture::getTex() const
 {
 	return texture;
 }
 
-Texture Texture::CreateTextTTF(std::string text)
+Texture Texture::CreateTextTTF(const std::string& text)
 {
 	SDL_Surface* surface = TTF_RenderText_Solid(Global.font.GetFont(), text.c_str(), {255, 255, 255});
 	texture = SDL_CreateTextureFromSurface(Global.Renderer, surface);
 	SDL_FreeSurface(surface);
+	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
 	SDL_SetTextureScaleMode(texture, SDL_ScaleModeNearest);
 	return *this;
 }
 
-Texture Texture::SetScaleMode(SDL_ScaleMode scaleMode)
+Texture Texture::SetScaleMode(const SDL_ScaleMode& scaleMode)
 {
 	SDL_SetTextureScaleMode(texture, scaleMode);
 	return *this;
 }
 
-Texture Texture::SetColor(Uint8 r, Uint8 g, Uint8 b)
+Texture Texture::SetColor(const Uint8& r, const Uint8& g, const Uint8& b)
 {
-	SDL_SetTextureColorMod(texture, r, g, b);
+	//SDL_SetTextureColorMod(texture, r, g, b);
+	color = { r, g, b, 255};
 	return *this;
 }

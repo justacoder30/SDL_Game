@@ -23,14 +23,14 @@ private:
 	float width;
 	float height;
 	std::vector<TiledMap*> tiledmap;
-	static tmx::Map map;
+	inline static tmx::Map map;
 
 	void InitMap(std::string f_path);
 	float CaculateRotate(uint8_t flags, SDL_RendererFlip& flip);
 public:
 	Map() {}
 	Map(std::string level);
-	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures);
+	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture>& textures);
 	std::vector<Rect> GetObjectGroup(std::string name);
 	float getWidth();
 	float getHeight();

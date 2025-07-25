@@ -2,14 +2,12 @@
 #include <tmxlite/TileLayer.hpp>
 #include <filesystem>
 
-tmx::Map Map::map;
-
-std::vector<Texture*> GetTextures(std::vector<tmx::Tileset> tileSets) {
-	std::vector<Texture*> texure;
+std::vector<Texture> GetTextures(std::vector<tmx::Tileset> tileSets) {
+	std::vector<Texture> texure;
 
 	for (auto ts : tileSets)
 	{
-		texure.push_back(new Texture(ts.getImagePath()));
+		texure.push_back(Texture(ts.getImagePath()));
 	}
 
 	return texure;
@@ -33,7 +31,7 @@ Rect getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize) {
     return src;
 }
 
-void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture*> textures) {
+void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture>& textures) {
     const auto& layers = map.getLayers();
     const auto& layer = layers[layerIndex]->getLayerAs<tmx::TileLayer>();
     const auto mapSize = map.getTileCount();
@@ -50,8 +48,8 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
         const auto& ts = tileSets[i];
         const auto& tileIDs = layer.getTiles();
 
-        const auto tileCountX = textures[i]->getWidth() / mapTileSize.x;
-        const auto tileCountY = textures[i]->getHeight() / mapTileSize.y;
+        const auto tileCountX = textures[i].getWidth() / mapTileSize.x;
+        const auto tileCountY = textures[i].getHeight() / mapTileSize.y;
 
         for (auto y = 0u; y < mapSize.y; ++y)
         {
@@ -74,7 +72,7 @@ void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::ve
                     Rect src = getSrcById(idIndex, tileCountX, tileCountY, mapTileSize.x);
                     Rect dst = Rect(x * mapTileSize.x, y * mapTileSize.x, mapTileSize.x, mapTileSize.x);
 
-                    TiledMap* tiled = new TiledMap(*textures[i], dst, src, rotate, flip);
+                    TiledMap* tiled = new TiledMap(textures[i], dst, src, rotate, flip);
                     Entities.push_back(tiled);
 
                     /*if (layers[layerIndex]->getName() == "Terrain")
@@ -184,7 +182,7 @@ Map::Map(std::string level)
     InitMap("resource/Map/" + level);
 
     auto tileSets = map.getTilesets();
-	std::vector<Texture*> texure = GetTextures(map.getTilesets());
+	std::vector<Texture> texure = GetTextures(map.getTilesets());
 
 	const auto& mapLayers = map.getLayers();
 	for (auto i = 0u; i < mapLayers.size(); ++i)
@@ -213,8 +211,8 @@ TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_Ren
 
 void TiledMap::Update()
 {
-    dst.x = rect.x + Global.camera.transform.x;
-    dst.y = rect.y + Global.camera.transform.y;
+    dst.x = rect.x + (int)Global.camera.transform.x;
+    dst.y = rect.y + (int)Global.camera.transform.y;
 }
 
 void TiledMap::Draw()

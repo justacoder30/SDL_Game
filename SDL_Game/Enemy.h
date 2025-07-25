@@ -13,6 +13,7 @@ private:
 	
 	float enemyZone = 150;
 	HealthBar bar;
+	void addHealthBar();
 	
 public:
 	Player* player;

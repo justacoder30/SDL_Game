@@ -3,16 +3,20 @@
 #include "Camera.h"
 #include "Font.h"
 
+#define LOG(x) std::cout << x << std::endl
+
 class GLOBAL
 {
 private:
 	Uint64 startTime;
+	Uint64 lastTime;
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
 	Font font;
 	float scale;
-	double DeltaTime;
+	float DeltaTime;
+	//double DeltaTime;
 	bool gameWin;
 	bool gameLose;
 	float Score = 0;
@@ -23,3 +27,4 @@ public:
 };
 
 extern GLOBAL Global;
+

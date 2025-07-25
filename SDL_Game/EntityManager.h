@@ -12,6 +12,8 @@ class EntityManager: public Entity
 {
 private:
 	std::future<void> initFuture;
+	std::thread loadGame;
+	std::string level;
 	Player player;
 	Boss* boss;
 	HealthBar* playerHealthBar;
@@ -21,13 +23,16 @@ private:
 	void addObjects();
 	void addCollisions();
 	void setCamera();
+	void addBossHealthBar();
+	void loadResources(std::string level);
+	void addGameLoading();
 
 public:
 	EntityManager() {}
 	EntityManager(std::string level);
 	bool LoseGame();
 	bool WinGame();
-	void WaitForInit();
+	void watForInit();
 	void Update();
 	void Draw();
 };

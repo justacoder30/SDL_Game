@@ -13,14 +13,14 @@ void Rect::setRect()
 Rect::Rect()
 {}
 
-Rect::Rect(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h)
+Rect::Rect(const float& _x, const float& _y, const float& _w, const float& _h) : x(_x), y(_y), w(_w), h(_h)
 {
 	this->pos = Vector(x, y);
 	this->size = Vector(w, h);
 	setRect();
 }
 
-Rect::Rect(Vector pos, Vector size)
+Rect::Rect(const Vector& pos, const Vector& size)
 {
 	this->pos = pos;
 	this->size = size;
@@ -33,7 +33,7 @@ Rect::Rect(Vector pos, Vector size)
 	setRect();
 }
 
-bool Rect::checkCollide(Rect rect)
+bool Rect::checkCollide(const Rect& rect)
 {
 	return (top < rect.bottom and
 		bottom > rect.top and

@@ -40,6 +40,14 @@ void AnimationManager::Update()
 	}
 }
 
+void AnimationManager::stop()
+{
+	animation.CurrentFrame = animation.LastFrame();
+	loop = false;
+	timer = 0;
+	flip = SDL_FLIP_NONE;
+}
+
 bool AnimationManager::IsFlip()
 {
 	if (flip != SDL_FLIP_NONE)

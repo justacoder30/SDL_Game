@@ -8,86 +8,112 @@ class Game;
 class IGameState: public Entity
 {
 protected:
-	Game* game;public:
+	Game* game;
+public:
 	IGameState(Game *game);
+	IGameState() {}
+
 };
 
 class MenuState : public IGameState {
 private:
-	ButtonText tittle;
-	ButtonText playBtn;
-	ButtonText exitBtn;
+	ButtonText* tittle;
+	ButtonText* playBtn;
+	ButtonText* exitBtn;
 	Vector btnSize = Vector(99.00, 54.00);
 public:
 	MenuState(Game* game): IGameState(game) {
-		tittle = ButtonText("The Metal Knight", Vector(112.00, 0), Vector(608.00, 192.00)).SetColor(46, 58, 89);
+		tittle = new ButtonText("The Metal Knight", Vector(112.00, 0), Vector(608.00, 192.00));
+		tittle->SetColor(46, 58, 89);
 
-		playBtn = ButtonText("Play", Vector(352.00, 272.00), btnSize).SetColor(255, 0, 0).SetColorHovering(255, 255, 0);
+		playBtn = new ButtonText("Play", Vector(352.00, 272.00), btnSize);
+		playBtn->SetColor(255, 0, 0);
+		playBtn->SetColorHovering(255, 255, 0);
 
-		exitBtn = ButtonText("Exit", Vector(352.00, 352.00), btnSize).SetColor(255, 0, 0).SetColorHovering(255, 255, 0);
+		exitBtn = new ButtonText("Exit", Vector(352.00, 352.00), btnSize);
+		exitBtn->SetColor(255, 0, 0);
+		exitBtn->SetColorHovering(255, 255, 0);
 
 
 		add(new Background(Vector(Global.camera.rect.w, Global.camera.rect.h)));
-		add(&tittle);
-		add(&playBtn);
-		add(&exitBtn);
+		add(tittle);
+		add(playBtn);
+		add(exitBtn);
 
+	}
+	~MenuState() {
+		delete tittle;
+		delete playBtn;
+		delete exitBtn;
 	}
 	void Update();
 };
 
 class PauseState : public IGameState {
 private:
-	ButtonText countinueBtn;
-	ButtonText newGameBtn;
-	ButtonText exitBtn;
+	ButtonText* countinueBtn;
+	ButtonText* newGameBtn;
+	ButtonText* exitBtn;
 	Vector btnSize = Vector(99.00, 54.00);
 public:
 	PauseState(Game* game) : IGameState(game) {
-		countinueBtn = ButtonText("Countinue", Vector(304.00, 112.00), Vector(208.00, 64.00)).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		countinueBtn = new ButtonText("Countinue", Vector(304.00, 112.00), Vector(208.00, 64.00));
+		countinueBtn->SetColor(255, 255, 255);
+		countinueBtn->SetColorHovering(255, 255, 0);
 
-		newGameBtn = ButtonText("New Game", Vector(304.00, 192.00), Vector(208.00, 64.00)).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		newGameBtn = new ButtonText("New Game", Vector(304.00, 192.00), Vector(208.00, 64.00));
+		newGameBtn->SetColor(255, 255, 255); 
+		newGameBtn->SetColorHovering(255, 255, 0);
 
-		exitBtn = ButtonText("Exit", Vector(352.00, 272.00), btnSize).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		exitBtn = new ButtonText("Exit", Vector(352.00, 272.00), btnSize);
+		exitBtn->SetColor(255, 255, 255);
+		exitBtn->SetColorHovering(255, 255, 0);
 
 
-		add(&countinueBtn);
-		add(&newGameBtn);
-		add(&exitBtn);
+		add(countinueBtn);
+		add(newGameBtn);
+		add(exitBtn);
 		SoundManager::PauseMusic();
 	}
 	void Update();
 };
 
-class PlayGameState : public IGameState {
-private:
-	EntityManager *entityManager;
-public:
-	PlayGameState(Game* game);
-	void Update();
-};
+//class PlayGameState : public IGameState {
+//private:
+//	EntityManager *entityManager;
+//public:
+//	PlayGameState(Game* game);
+//	void Update();
+//};
 
 class LoseGameState : public IGameState {
 private:
-	EntityManager entityManager;
-	ButtonText tryAgainBtn;
-	ButtonText newGameBtn;
-	ButtonText exitBtn;
+	EntityManager* entityManager;
+	ButtonText* tryAgainBtn;
+	ButtonText* newGameBtn;
+	ButtonText* exitBtn;
 	Vector btnSize = Vector(99.00, 54.00);
 public:
 	LoseGameState(Game* game) : IGameState(game) {
-		tryAgainBtn = ButtonText("Try Again", Vector(304.00, 192.00), Vector(208.00, 64.00)).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		tryAgainBtn = new ButtonText("Try Again", Vector(304.00, 192.00), Vector(208.00, 64.00));
+		tryAgainBtn->SetColor(255, 255, 255);
+		tryAgainBtn->SetColorHovering(255, 255, 0);
 
-		newGameBtn = ButtonText("New Game", Vector(304.00, 272.00), Vector(208.00, 64.00)).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		newGameBtn = new ButtonText("New Game", Vector(304.00, 272.00), Vector(208.00, 64.00));
+		newGameBtn->SetColor(255, 255, 255);
+		newGameBtn->SetColorHovering(255, 255, 0);
 
-		exitBtn = ButtonText("Exit", Vector(352.00, 352), btnSize).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
+		exitBtn->SetColor(255, 255, 255);
+		exitBtn->SetColorHovering(255, 255, 0);
 
-		ButtonText text = ButtonText("You Death!", Vector(192.00, 16.00), Vector(416.00, 128.00)).SetColor(255, 0, 0);
+		ButtonText* text = new ButtonText("You Death!", Vector(192.00, 16.00), Vector(416.00, 128.00));
+		text->SetColor(255, 0, 0);
 
-		add(&text);
-		add(&tryAgainBtn);
-		add(&newGameBtn);
-		add(&exitBtn);
+		add(text);
+		add(tryAgainBtn);
+		add(newGameBtn);
+		add(exitBtn);
 		SoundManager::StopMusic();
 		SoundManager::PlaySoundEffect("LoseGame");
 
@@ -97,21 +123,25 @@ public:
 
 class WinGameState : public IGameState {
 private:
-	EntityManager entityManager;
-	ButtonText continueBtn;
-	ButtonText exitBtn;
+	EntityManager* entityManager;
+	ButtonText* continueBtn;
+	ButtonText* exitBtn;
 	Vector btnSize = Vector(99.00, 54.00);
 public:
 	WinGameState(Game* game) : IGameState(game) {
-		continueBtn = ButtonText("Continue", Vector(304.00, 272.00), Vector(208.00, 64.00)).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		continueBtn = new ButtonText("Continue", Vector(304.00, 272.00), Vector(208.00, 64.00));
+		continueBtn->SetColor(255, 255, 255);
+		continueBtn->SetColorHovering(255, 255, 0);
 
-		exitBtn = ButtonText("Exit", Vector(352.00, 352), btnSize).SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
+		exitBtn->SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
 
-		ButtonText text = ButtonText("SCORE: " + std::to_string(int(Global.Score)), Vector(192.00, 16.00), Vector(416.00, 128.00)).SetColor(255, 0, 0);
+		ButtonText* text = new ButtonText("SCORE: " + std::to_string(int(Global.Score)), Vector(192.00, 16.00), Vector(416.00, 128.00));
+		text->SetColor(255, 0, 0);
 
-		add(&text);
-		add(&continueBtn);
-		add(&exitBtn);
+		add(text);
+		add(continueBtn);
+		add(exitBtn);
 		SoundManager::StopMusic();
 		SoundManager::PlaySoundEffect("WinGame");
 	}

@@ -80,7 +80,7 @@ public:
 	int hurtDirection;
 	
 
-	Entity();
+	//virtual ~Entity() = 0;
 
 	virtual void Update();
 	virtual void Draw();

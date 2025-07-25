@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/zstd-x64-windows-1.5.7-265413dc-67ec-4844-b4c0-7950c67480d1",
-  "name": "zstd:x64-windows@1.5.7 c4d1518d4dd5305eac77612418038f9ed2f8d812c9b1f1e32cd3e589734e3f12",
+  "documentNamespace": "https://spdx.org/spdxdocs/zstd-x64-windows-1.5.7-b64fe99c-4ce3-4f62-b82c-75d956721d88",
+  "name": "zstd:x64-windows@1.5.7 311053c7633ab4f93cb72d7a69540a780c0955256e68085fc0b028dbdeb6e655",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
+      "Tool: vcpkg-2025-06-02-145689e84b7637525510e2c9b4ee603fda046b56"
     ],
-    "created": "2025-05-29T13:51:47Z"
+    "created": "2025-06-18T10:38:33Z"
   },
   "relationships": [
     {
@@ -104,7 +104,7 @@
     {
       "name": "zstd:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "c4d1518d4dd5305eac77612418038f9ed2f8d812c9b1f1e32cd3e589734e3f12",
+      "versionInfo": "311053c7633ab4f93cb72d7a69540a780c0955256e68085fc0b028dbdeb6e655",
       "downloadLocation": "NONE",
       "licenseConcluded": "BSD-3-Clause OR GPL-2.0-only",
       "licenseDeclared": "NOASSERTION",

@@ -80,7 +80,7 @@ void Camera::Update()
 	transform.y = clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top);
 	//transform.y = int(clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top));
 
-	float increase = 0;
+	float increase = 10;
 
 	visibleWoldRect = Rect(
 		-transform.x - increase/2,

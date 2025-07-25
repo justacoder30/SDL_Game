@@ -28,7 +28,7 @@ void HealthBar::DrawStatic()
 HealthBar::HealthBar()
 {}
 
-HealthBar::HealthBar(Entity * entity, Vector pos, Vector size)
+HealthBar::HealthBar(Entity* entity, Vector pos, Vector size)
 {
 	this->entity = entity;
 	this->pos = pos;
@@ -67,6 +67,10 @@ void HealthBar::Update()
 		timer = 0;
 		removeFromTree();
 	}
+	/*if(entity == nullptr) {
+		erase = false;
+		return;
+	}*/
 	Entity::Update();
 }
 

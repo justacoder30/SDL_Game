@@ -5,9 +5,7 @@
 #include "Heart.h"
 #include "ButtonText.h"
 #include "SoundManager.h"
-
-
-//std::cout<< <<std::endl;
+#include <thread>
 
 void EntityManager::addObjects()
 {
@@ -41,13 +39,13 @@ void EntityManager::addObjects()
 		}
 		else if (obj == "CoinPosition") {
 			for (auto pos : positions) {
-				Coin coin = Coin(Vector(pos.x, pos.y), player);
-				add(&coin);
+				add(new Coin(Vector(pos.x, pos.y), player));
+				//add_NoPoitner(Coin(Vector(pos.x, pos.y), player));
 			}
 		}
 		else if (obj == "HeartPosition") {
 			for (auto pos : positions) {
-				add(&*new Heart(Vector(pos.x, pos.y), &player));
+				add(new Heart(Vector(pos.x, pos.y), &player));
 			}
 		}
 		else if (obj == "FlagPosition") {
@@ -64,13 +62,13 @@ void EntityManager::addObjects()
 		}
 
 	}
+
 	playerHealthBar = new HealthBar(&player, Vector(20, 10), Vector(150, 15));
 	playerHealthBar->SetStatic();
 	playerHealthBar->SetColor(255, 0, 0);
 	add(playerHealthBar);
 
-	//ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 352.00), Vector(80.00, 16.00));
-	ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
+	/*ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
 	text->SetColor(255, 255, 255);
 
 	bossHealthBar = new HealthBar(boss, Vector(160.00, 368.00), Vector(496.00, 16.00));
@@ -78,9 +76,9 @@ void EntityManager::addObjects()
 	bossHealthBar->SetColor(0, 255, 255);
 	bossHealthBar->add(text);
 
-	//add(new LoadingScreen(Vector(64, 64), 1.5));
+	add(bossHealthBar);*/
 
-	//Entities.push_back(bossHealthBar);
+	//add(new LoadingScreen(Vector(64, 64), 1.5));
 
 	
 }
@@ -104,39 +102,64 @@ void EntityManager::setCamera()
 	Global.camera.Follow(&player.center_pos);
 }
 
-EntityManager::EntityManager(std::string level)
+void EntityManager::addBossHealthBar()
+{
+	ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
+	text->SetColor(255, 255, 255);
+
+	HealthBar* bossHealthBar = new HealthBar(boss, Vector(160.00, 368.00), Vector(496.00, 16.00));
+	bossHealthBar->SetStatic();
+	bossHealthBar->SetColor(0, 255, 255);
+	bossHealthBar->add(text);
+
+	add(bossHealthBar);
+	text = nullptr; 
+	bossHealthBar = nullptr;
+
+	delete text;
+	delete bossHealthBar;
+}
+
+void EntityManager::loadResources(std::string level)
 {
 	map = new Map(level);
+	/*std::thread addObjectsThread(&EntityManager::addObjects, this);
+	std::thread addCollisionsThread(&EntityManager::addCollisions, this);
+
+	addObjectsThread.join();
+	addCollisionsThread.join();*/
+
 	addObjects();
 	addCollisions();
 
 	backDrop = true;
 	setCamera();
-
 	SoundManager::PlayMusic();
-	 
+}
 
-	//// Start async initialization
-	//initFuture = std::async(std::launch::async, [this, level]() {
-	//	map = new Map(level);
-	//	addObjects();
-	//	addCollisions();
-	//	backDrop = true;
-	//	setCamera();
-	//	SoundManager::PlayMusic();
-	//}); // Wait for the async task to complete
+void EntityManager::addGameLoading()
+{
+	add(new LoadingScreen(Vector(64, 64), 1.5));
+}
 
+EntityManager::EntityManager(std::string level)
+{
+	this->level = level;
+	/*loadGame = std::thread(&EntityManager::loadResources, this, level);
+	loadGame.join();*/
+
+	//LOG(Collisions.size());
+
+	loadResources(level);
 }
 
 bool EntityManager::LoseGame() {
 	return player.isDeath;
 }
 
-void EntityManager::WaitForInit()
+void EntityManager::watForInit()
 {
-	//if (initFuture.valid()) {
-	//	initFuture.get(); // Wait for the async task to complete
-	//}
+	loadResources(level);
 }
 
 void EntityManager::Update()
@@ -151,15 +174,17 @@ void EntityManager::Update()
 	if (Key[SDL_SCANCODE_Q]) {
 		Global.scale -= speed * Global.DeltaTime;
 		if (Global.scale < scale) Global.scale = scale;
-	}*/
-
+	}*/	
 	
-	
-	if (boss != NULL) {
-		if (boss->isInEnemyZone() && boss->currentHp > 0) add(bossHealthBar);
-		else if (boss->isRemoved() || !boss->isInEnemyZone()) bossHealthBar->removeFromTree();
-
-		if (boss->isRemoved()) ChangeLevel();
+	if (boss) {
+		if (boss->current == Death && boss->animationManger.IsDone()) {
+			ChangeLevel();
+			return;
+		}
+		if (boss->isInEnemyZone() && boss->currentHp > 0) {
+			addBossHealthBar();
+		}
+		//else if (!boss->isInEnemyZone() || boss->currentHp <= 0) bossHealthBar->removeFromTree();
 	}
 
 	Entity::Update();
@@ -168,5 +193,4 @@ void EntityManager::Update()
 
 void EntityManager::Draw() {
 	Entity::Draw();
-	//loading.Draw();
 }
