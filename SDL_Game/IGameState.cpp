@@ -6,7 +6,7 @@ IGameState::IGameState(Game* game)
 	this->game = game;
 }
 
-void MenuState::Update()
+void MenuState::Update(const float& dt)
 {
 	if (playBtn->Clicked()) {
 		game->ChangeState(new PlayGameState(game));
@@ -15,7 +15,7 @@ void MenuState::Update()
 		Global.gameLoop = false;
 	}
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 //PlayGameState::PlayGameState(Game* game) :IGameState(game)
@@ -41,7 +41,7 @@ void MenuState::Update()
 //	Entity::Update();
 //}
 
-void PauseState::Update()
+void PauseState::Update(const float& dt)
 {
 	if (countinueBtn->Clicked()) {
 		SoundManager::PlayMusic();
@@ -54,10 +54,10 @@ void PauseState::Update()
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
 	}
-	Entity::Update();
+	Entity::Update(dt);
 }
 
-void LoseGameState::Update()
+void LoseGameState::Update(const float& dt)
 {
 	if (tryAgainBtn->Clicked()) {
 		game->ChangeState(new PlayGameState(game));
@@ -69,10 +69,10 @@ void LoseGameState::Update()
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
 	}
-	Entity::Update();
+	Entity::Update(dt);
 }
 
-void WinGameState::Update()
+void WinGameState::Update(const float& dt)
 {
 	if (continueBtn->Clicked()) {
 		game->ChangeToNextLevel();
@@ -81,5 +81,5 @@ void WinGameState::Update()
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
 	}
-	Entity::Update();
+	Entity::Update(dt);
 }

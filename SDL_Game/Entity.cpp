@@ -1,4 +1,4 @@
-#include "Entity.h"
+﻿#include "Entity.h"
 #include <algorithm>
 
 //std::vector<Entity*> Collisions;
@@ -39,10 +39,10 @@ void Entity::UpdateGravity()
     isOnGround = IsOnGround();
 }
 
-void Entity::UpdateAnimation()
+void Entity::UpdateAnimation(const float& dt)
 {
     animationManger.Play(animations[current]);
-    animationManger.Update();
+    animationManger.Update(dt);
 }
 
 void Entity::DrawRectTransform(Rect r)
@@ -72,9 +72,9 @@ void Entity::DrawRectStatic(Rect r)
 }
 
 
-void Entity::beingAttacked(Entity entity)
+void Entity::beingAttacked(const Entity& entity, const float& dt)
 {
-    beingAttackTime += Global.DeltaTime;
+    beingAttackTime += dt;
     isHurt = false;
 
     if (beingAttackTime < AttackStepTime(entity)) return;
@@ -94,55 +94,40 @@ void Entity::beingHurt()
 //Entity::Entity()
 //{}
 
-void Entity::Update()
+void Entity::Update(const float& dt)
 {
-    /*for (int i = 0; i < Entities.size(); ++i)
-    {
-        Entities[i]->Update();
-        if (Entities[i]->IsBreakLoop()) break;
+    std::vector<int> toRemove;
 
-        if (Entities[i]->isChangLevel()) {
-            ChangeLevel();
-        }
-        if (Entities[i]->isRemoved()) {
-            delete Entities[i];
-			Entities[i] = nullptr;
-            Entities.erase(Entities.begin() + i--);
-        }
-        
-    }*/
+    //std::vector<Entity*> entitiesCopy = Entities; // clone để tránh crash
 
-    /*for (int i = Entities.size() - 1; i >= 0; --i)
-    {
-        Entities[i]->Update();
-        if (Entities[i]->IsBreakLoop()) return;
+    //for (Entity* e : entitiesCopy) {
+    //    Global.pool.enqueue([e, dt]() {
+    //        e->Update(dt); // logic từng entity
+    //        });
+    //}
 
-        if (Entities[i]->isChangLevel()) {
-            ChangeLevel();
-        }
-        if (Entities[i]->isRemoved()) {
-			Entities[i] = nullptr;
-			delete Entities[i];
-            Entities.erase(Entities.begin() + i);
-        }
-    }*/
+    //Global.pool.wait();
 
     for (int i = Entities.size() - 1; i >= 0; --i)
     {
-        Entities[i]->Update();
+        Entities[i]->Update(dt);
         if (Entities[i]->IsBreakLoop()) return;
 
         if (Entities[i]->isChangLevel()) {
             ChangeLevel();
         }
+
         if (Entities[i]->isRemoved()) {
-            delete Entities[i];
-            Entities.erase(Entities.begin() + i);
-			//delete it;
+            toRemove.push_back(i);
         }
     }
 
+    for (int i : toRemove) {
+        delete Entities[i];
+        Entities.erase(Entities.begin() + i);
+    }
     
+    //Global.pool.wait();
 }
 
 void Entity::Draw()
@@ -174,13 +159,11 @@ void Entity::add_NoPoitner(Entity& entity)
 {
     entity.setRemove();
     Entities.push_back(&entity);
-}
+}// Define a mutex for the Collisions vector
 
 void Entity::Collision(std::string direction)
 {
-	
     rect = Rect(rect.x, rect.y, rect.w, rect.h);
-
     for (int i = 0; i < Collisions.size(); ++i) {
         if (!rect.checkCollide(Collisions[i]))
             continue;

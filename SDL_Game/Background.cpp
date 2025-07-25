@@ -43,14 +43,14 @@ Background::Background(Vector size)
 	moveSpeed = 14;
 }
 
-void Background::Update()
+void Background::Update(const float& dt)
 {
 	for (int i = 0; i < clouds.size(); i++) {
-		clouds[i]->pos.x -= moveSpeed * Global.DeltaTime;
+		clouds[i]->pos.x -= moveSpeed * dt;
 		if (clouds[i]->pos.x <= -size.x) clouds[i]->pos.x = size.x;
 	}
 
-	Entity::Update();
+	Entity::Update(dt);
 }
 
 void Background::Draw()

@@ -1,4 +1,4 @@
-#include "Map.h"
+﻿#include "Map.h"
 #include <tmxlite/TileLayer.hpp>
 #include <filesystem>
 
@@ -31,191 +31,204 @@ Rect getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize) {
     return src;
 }
 
-void Map::CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture>& textures) {
-    const auto& layers = map.getLayers();
-    const auto& layer = layers[layerIndex]->getLayerAs<tmx::TileLayer>();
-    const auto mapSize = map.getTileCount();
-    const auto mapTileSize = map.getTileSize();
-
+void Map::BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex)
+{
+    const auto& layer = map.getLayers()[layerIndex]->getLayerAs<tmx::TileLayer>();
+    const auto& tileIDs = layer.getTiles();
+    const auto& mapSize = map.getTileCount();
+    const auto& mapTileSize = map.getTileSize();
     const auto& tileSets = map.getTilesets();
 
-    int max_X = 0;
-    int max_Y = 0;
+    int maxX = 0, maxY = 0;
 
-    for (auto i = 0u; i < tileSets.size(); ++i)
+    for (size_t i = 0; i < tileSets.size(); ++i)
     {
-        //check tile ID to see if it falls within the current tile set
         const auto& ts = tileSets[i];
-        const auto& tileIDs = layer.getTiles();
+        int tileCountX = textures[i].getWidth() / mapTileSize.x;
+        int tileCountY = textures[i].getHeight() / mapTileSize.y;
 
-        const auto tileCountX = textures[i].getWidth() / mapTileSize.x;
-        const auto tileCountY = textures[i].getHeight() / mapTileSize.y;
+        SDL_Texture* texPtr = textures[i].getTex();
+        auto& batch = batches[texPtr];
 
-        for (auto y = 0u; y < mapSize.y; ++y)
+        for (uint32_t y = 0; y < mapSize.y; ++y)
         {
-            if (max_Y < y) max_Y = y;
-            for (auto x = 0u; x < mapSize.x; ++x)
+            for (uint32_t x = 0; x < mapSize.x; ++x)
             {
-                if (max_X < x) max_X = x;
                 const auto idx = y * mapSize.x + x;
-                //auto idIndex = (tileIDs[idx].ID - ts.getFirstGID());
-                if (idx < tileIDs.size() &&
-                    tileIDs[idx].ID >= ts.getFirstGID() &&
-                    tileIDs[idx].ID < (ts.getFirstGID() + ts.getTileCount()))
-                {
-                    //tex coords
-                    auto idIndex = (tileIDs[idx].ID - ts.getFirstGID());  
-                    
-                    SDL_RendererFlip flip;
-                    float rotate = CaculateRotate(tileIDs[idx].flipFlags, flip);
+                if (idx >= tileIDs.size()) continue;
 
-                    Rect src = getSrcById(idIndex, tileCountX, tileCountY, mapTileSize.x);
-                    Rect dst = Rect(x * mapTileSize.x, y * mapTileSize.x, mapTileSize.x, mapTileSize.x);
+                const auto& tile = tileIDs[idx];
+                if (tile.ID < ts.getFirstGID() || tile.ID >= ts.getFirstGID() + ts.getTileCount())
+                    continue;
 
-                    TiledMap* tiled = new TiledMap(textures[i], dst, src, rotate, flip);
-                    Entities.push_back(tiled);
+                int idIndex = tile.ID - ts.getFirstGID();
+                SDL_RendererFlip flip;
+                float rotate = CaculateRotate(tile.flipFlags, flip);
 
-                    /*if (layers[layerIndex]->getName() == "Terrain")
-                        Collisions.push_back(tiled);*/
+                Rect src = getSrcById(idIndex, tileCountX, tileCountY, mapTileSize.x);
+                Rect dst(x * mapTileSize.x, y * mapTileSize.y, mapTileSize.x, mapTileSize.y);
 
+                SDL_Vertex verts[4];
+                float px[4] = { dst.x, dst.x + dst.w, dst.x + dst.w, dst.x };
+                float py[4] = { dst.y, dst.y, dst.y + dst.h, dst.y + dst.h };
+
+                Vector center(dst.w / 2.0f, dst.h / 2.0f);
+                float cx = dst.x + center.x;
+                float cy = dst.y + center.y;
+                float angleRad = rotate * M_PI / 180.0f;
+                float cosA = cosf(angleRad), sinA = sinf(angleRad);
+
+                for (int j = 0; j < 4; ++j) {
+                    float dx = px[j] - cx;
+                    float dy = py[j] - cy;
+                    verts[j].position.x = cosA * dx - sinA * dy + cx;
+                    verts[j].position.y = sinA * dx + cosA * dy + cy;
                 }
+
+                float texW = textures[i].getWidth();
+                float texH = textures[i].getHeight();
+                float u0 = src.x / texW, u1 = (src.x + src.w) / texW;
+                float v0 = src.y / texH, v1 = (src.y + src.h) / texH;
+
+                float u[4] = { u0, u1, u1, u0 };
+                float v[4] = { v0, v0, v1, v1 };
+
+                if (flip & SDL_FLIP_HORIZONTAL) { std::swap(u[0], u[1]); std::swap(u[3], u[2]); }
+                if (flip & SDL_FLIP_VERTICAL) { std::swap(v[0], v[3]); std::swap(v[1], v[2]); }
+
+                for (int j = 0; j < 4; ++j) {
+                    verts[j].tex_coord = { u[j], v[j] };
+                    verts[j].color = textures[i].color;
+                }
+
+                int indexOffset = batch.vertices.size();
+                batch.vertices.insert(batch.vertices.end(), std::begin(verts), std::end(verts));
+
+                int quad[6] = { 0, 1, 2, 2, 3, 0 };
+                for (int j = 0; j < 6; ++j) {
+                    batch.indices.push_back(indexOffset + quad[j]);
+                }
+
+                maxX = std::max(maxX, (int)x);
+                maxY = std::max(maxY, (int)y);
             }
         }
     }
 
-    width = max_X * mapTileSize.x;
-    height = max_Y * mapTileSize.y;
+    width = maxX * mapTileSize.x;
+    height = maxY * mapTileSize.y;
 }
 
-std::vector<Rect> Map::GetObjectGroup(std::string name)
+void Map::Draw()
 {
-    std::vector<Rect> rect;
+    /*for (auto& [texture, batch] : batches)
+    {
+        SDL_RenderGeometry(Global.Renderer, texture,
+            batch.vertices.data(), batch.vertices.size(),
+            batch.indices.data(), batch.indices.size());
+    }*/
 
-    auto tileSets = Map::map.getTilesets();
-    const auto& mapLayers = Map::map.getLayers();
+    Vector cameraOffset = Global.camera.transform;
 
+    for (auto& [texture, batch] : batches)
+    {
+         //Clone vertices để không ảnh hưởng batch gốc
+        std::vector<SDL_Vertex> transformedVerts = batch.vertices;
+
+        for (auto& v : transformedVerts)
+        {
+            v.position.x += cameraOffset.x;
+            v.position.y += cameraOffset.y;
+        }
+
+        SDL_RenderGeometry(
+            Global.Renderer,
+            texture,
+            transformedVerts.data(),
+            transformedVerts.size(),
+            batch.indices.data(),
+            batch.indices.size()
+        );
+    }
+}
+
+
+
+
+
+Map::Map(const std::string& level)
+{
+    InitMap("resource/Map/" + level);
+    textures = GetTextures(map.getTilesets());
+
+    const auto& mapLayers = map.getLayers();
     for (auto i = 0u; i < mapLayers.size(); ++i)
     {
-        if (mapLayers[i]->getName() == name) {
-            const auto& layer1 = mapLayers[i]->getLayerAs<tmx::ObjectGroup>();
-            const auto& objs = layer1.getObjects();
-            for (auto obj : objs) {
-                rect.push_back(Rect(obj.getPosition().x, obj.getPosition().y, obj.getAABB().width, obj.getAABB().height));
-            }
+        if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
+        {
+            BuildGeometryBatches(map, i);
         }
     }
 
-    return rect;
-}
-
-float Map::getWidth()
-{
-    return width;
-}
-
-float Map::getHeight()
-{
-    return height;
-}
-
-void Map::InitMap(std::string f_path)
-{
-    if (!Map::map.load(f_path))
-        std::cout << "Failed to load map: " << f_path << std::endl;
+    backDrop = true;
 }
 
 float Map::CaculateRotate(uint8_t flags, SDL_RendererFlip& flip)
 {
     flip = SDL_FLIP_NONE;
+    bool h = flags & tmx::TileLayer::FlipFlag::Horizontal;
+    bool v = flags & tmx::TileLayer::FlipFlag::Vertical;
+    bool d = flags & tmx::TileLayer::FlipFlag::Diagonal;
+    float r = 0.f;
 
-    bool flippedHorizontally = (flags & tmx::TileLayer::FlipFlag::Horizontal);
-    bool flippedVertically = (flags & tmx::TileLayer::FlipFlag::Vertical);
-    bool flippedDiagonally = (flags & tmx::TileLayer::FlipFlag::Diagonal);
-    float rotation = 0.f;
-
-    if (flippedDiagonally)
-    {
-        if (flippedHorizontally && !flippedVertically)
-        {
-            rotation = 90.f;
-        }
-        else if (!flippedHorizontally && flippedVertically)
-        {
-            rotation = 270.f;
-        }
-        else if (flippedHorizontally && flippedVertically)
-        {
-            rotation = 270.f; 
-            flip = SDL_FLIP_VERTICAL;
-        }
-        else
-        {
-            rotation = 90.f; 
-            flip = SDL_FLIP_VERTICAL;
-        }
+    if (d) {
+        if (h && !v) r = 90.f;
+        else if (!h && v) r = 270.f;
+        else if (h && v) { r = 270.f; flip = SDL_FLIP_VERTICAL; }
+        else { r = 90.f; flip = SDL_FLIP_VERTICAL; }
     }
-    else
-    {
-        if (flippedHorizontally && flippedVertically)
-        {
-            rotation = 180.f;
-        }
-        else if (flippedHorizontally)
-        {
-            // flip X
-            rotation = 0.f; 
-            flip = SDL_FLIP_HORIZONTAL;
-        }
-        else if (flippedVertically)
-        {
-            // flip Y
-            rotation = 0.f;
-            flip = SDL_FLIP_VERTICAL;
-        }
+    else {
+        if (h && v) r = 180.f;
+        else if (h) { r = 0.f; flip = SDL_FLIP_HORIZONTAL; }
+        else if (v) { r = 0.f; flip = SDL_FLIP_VERTICAL; }
     }
 
-    return rotation;
+    return r;
 }
 
-Map::Map(std::string level)
+Rect Map::getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize)
 {
-    InitMap("resource/Map/" + level);
-
-    auto tileSets = map.getTilesets();
-	std::vector<Texture> texure = GetTextures(map.getTilesets());
-
-	const auto& mapLayers = map.getLayers();
-	for (auto i = 0u; i < mapLayers.size(); ++i)
-	{
-        if (mapLayers[i]->getType() == tmx::Layer::Type::Tile)
-		{
-			CreateMap(map, i, texure);
-		}
-	}
-    backDrop = true;
+    Rect src;
+    src.w = src.h = mapTileSize;
+    src.x = (index % tileCountX) * mapTileSize;
+    src.y = (index / tileCountX) * mapTileSize;
+    return src;
 }
 
-TiledMap::TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate, SDL_RendererFlip _flip)
+void Map::InitMap(const std::string& f_path)
 {
-	tex = _texure;
-    dst = _dst;
-	src = _src;
-
-    rect = dst;
-    old_rect = rect;
-
-    rotate = _rotate;
-
-    flip = _flip;
+    if (!map.load(f_path)) std::cerr << "Failed to load map: " << f_path << "\n";
 }
 
-void TiledMap::Update()
+float Map::getWidth() const { return width; }
+float Map::getHeight() const { return height; }
+
+std::vector<Rect> Map::GetObjectGroup(const std::string& name)
 {
-    dst.x = rect.x + (int)Global.camera.transform.x;
-    dst.y = rect.y + (int)Global.camera.transform.y;
+    std::vector<Rect> rects;
+    const auto& mapLayers = map.getLayers();
+    for (const auto& layer : mapLayers) {
+        if (layer->getName() == name) {
+            for (const auto& obj : layer->getLayerAs<tmx::ObjectGroup>().getObjects()) {
+                rects.emplace_back(obj.getPosition().x, obj.getPosition().y,
+                    obj.getAABB().width, obj.getAABB().height);
+            }
+        }
+    }
+    return rects;
 }
 
-void TiledMap::Draw()
-{   
-    window.blit(tex, dst, src, rotate, flip);
+void Map::Update()
+{
+    // Map-level logic here (e.g., animation tiles later)
 }

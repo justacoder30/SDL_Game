@@ -6,5 +6,5 @@ private:
 	EntityManager *entityManager;
 public:
 	PlayGameState(Game* game);
-	void Update();
+	void Update(const float& dt);
 };

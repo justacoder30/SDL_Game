@@ -46,7 +46,7 @@ public:
 		delete playBtn;
 		delete exitBtn;
 	}
-	void Update();
+	void Update(const float& dt);
 };
 
 class PauseState : public IGameState {
@@ -75,7 +75,7 @@ public:
 		add(exitBtn);
 		SoundManager::PauseMusic();
 	}
-	void Update();
+	void Update(const float& dt);
 };
 
 //class PlayGameState : public IGameState {
@@ -118,7 +118,7 @@ public:
 		SoundManager::PlaySoundEffect("LoseGame");
 
 	}
-	void Update();
+	void Update(const float& dt);
 };
 
 class WinGameState : public IGameState {
@@ -145,5 +145,5 @@ public:
 		SoundManager::StopMusic();
 		SoundManager::PlaySoundEffect("WinGame");
 	}
-	void Update();
+	void Update(const float& dt);
 };

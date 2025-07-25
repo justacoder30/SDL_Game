@@ -17,7 +17,7 @@ public:
 	ButtonText(std::string text, Vector pos, Vector size);
 	ButtonText SetColor(Uint8 r, Uint8 g, Uint8 b);
 	ButtonText SetColorHovering(Uint8 r, Uint8 g, Uint8 b);
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 	bool Clicked();
 };

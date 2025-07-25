@@ -79,14 +79,14 @@ void Enemy::UpdateVelocity()
 	}
 }
 
-void Enemy::UpdatePosition()
+void Enemy::UpdatePosition(const float& dt)
 {
 	old_rect = rect;
 
-	rect.x += velocity.x * Global.DeltaTime;
+	rect.x += velocity.x * dt;
 	Collision("x");
-	rect.y += velocity.y * Global.DeltaTime + gravity * Global.DeltaTime * Global.DeltaTime;
-	velocity.y += gravity * Global.DeltaTime;
+	rect.y += velocity.y * dt + gravity * dt * dt;
+	velocity.y += gravity * dt;
 	Collision("y");
 
 	center_pos = GetCenter();
@@ -97,14 +97,14 @@ void Enemy::UpdateState()
 	state = state->Update(*this);
 }
 
-void Enemy::Update()
+void Enemy::Update(const float& dt)
 {
-	Entity::Update();
-	CollideWithPlayer();
+	Entity::Update(dt);
+	CollideWithPlayer(dt);
 	UpdateVelocity();
 	UpdateState();
-	UpdatePosition();
-	UpdateAnimation();
+	UpdatePosition(dt);
+	UpdateAnimation(dt);
 
 	
 }
@@ -161,19 +161,19 @@ bool Enemy::checkTurn()
 	return false;
 }
 
-void Enemy::CollideWithPlayer()
+void Enemy::CollideWithPlayer(const float& dt)
 {
 	if (rect.checkCollide(player->rect) && current != Death) {
-		player->beingAttacked(*this);
+		player->beingAttacked(*this, dt);
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
 		bar.resetTime();
-		beingAttacked(*player);
+		beingAttacked(*player, dt);
 		if (isHurt) addHealthBar();
 	}
 
 	if (player->rect.checkCollide(getAtkBox()) && isAttacking()) {
-		player->beingAttacked(*this);
+		player->beingAttacked(*this, dt);
 	}
 }

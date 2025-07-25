@@ -8,7 +8,7 @@ private:
 public:
 	Heart();
 	Heart(Vector pos, Player* player);
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 	void OnCollideWithPlayer();
 };

@@ -16,9 +16,9 @@ public:
 	Player(int level, Vector pos);
 	void SetMapRect(Rect rect);
 	void UpdateVelocity();
-	void UpdatePosition();
+	void UpdatePosition(const float& dt);
 	void UpdateState();
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 	bool isOutOfMap();
 };

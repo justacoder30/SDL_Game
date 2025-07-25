@@ -50,7 +50,7 @@ protected:
 	bool IsBreakLoop();
 	void ChangeLevel();
 	void UpdateGravity();
-	void UpdateAnimation();
+	void UpdateAnimation(const float& dt);
 	
 
 public:	
@@ -82,7 +82,7 @@ public:
 
 	//virtual ~Entity() = 0;
 
-	virtual void Update();
+	virtual void Update(const float& dt);
 	virtual void Draw();
 
 	float AttackStepTime(Entity entity);
@@ -100,7 +100,7 @@ public:
 	void DrawFillRectTransform(Rect r);
 	void DrawFillRectStatic(Rect r);
 	void DrawRectStatic(Rect r);
-	void beingAttacked(Entity entity);
+	void beingAttacked(const Entity& entity, const float& dt);
 	void beingHurt();
 	Rect getAtkBox();
 	Vector GetPos();

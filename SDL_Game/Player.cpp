@@ -88,14 +88,14 @@ void Player::UpdateVelocity()
 	}
 }
 
-void Player::UpdatePosition()
+void Player::UpdatePosition(const float& dt)
 {
 	old_rect = rect;
 
-	rect.x += velocity.x * Global.DeltaTime;
+	rect.x += velocity.x * dt;
 	Collision("x");
-	rect.y += velocity.y * Global.DeltaTime + 0.5 * gravity * Global.DeltaTime * Global.DeltaTime;
-	velocity.y += gravity * Global.DeltaTime;
+	rect.y += velocity.y * dt + 0.5 * gravity * dt * dt;
+	velocity.y += gravity * dt;
 	Collision("y");
 
 	center_pos = GetCenter();
@@ -108,12 +108,12 @@ void Player::UpdateState()
 	state = state->Update(*this);
 }
 
-void Player::Update()
+void Player::Update(const float& dt)
 {
 	UpdateVelocity();
 	UpdateState();
-	UpdatePosition();
-	UpdateAnimation();
+	UpdatePosition(dt);
+	UpdateAnimation(dt);
 }
 
 void Player::Draw()

@@ -16,9 +16,9 @@ Heart::Heart(Vector pos, Player* player)
 	hp = 10;
 }
 
-void Heart::Update()
+void Heart::Update(const float& dt)
 {
-	UpdateAnimation();
+	UpdateAnimation(dt);
 	OnCollideWithPlayer();
 }
 

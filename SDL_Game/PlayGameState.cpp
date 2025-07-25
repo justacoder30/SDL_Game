@@ -2,15 +2,15 @@
 
 PlayGameState::PlayGameState(Game* game) :IGameState(game)
 {
-	entityManager = new EntityManager(game->getLevel());
-	/*std::thread t = std::thread(&EntityManager::watForInit, entityManager);
+	entityManager = new EntityManager(game->getLevel());/*
+	std::thread t = std::thread(&EntityManager::watForInit, entityManager);
 	t.join();*/
 	//entityManager->watForInit();
 
 	add(entityManager);
 }
 
-void PlayGameState::Update()
+void PlayGameState::Update(const float& dt)
 {
 	if (Key[SDL_SCANCODE_ESCAPE]) {
 		game->SaveState();
@@ -24,5 +24,5 @@ void PlayGameState::Update()
 	if (entityManager->isChangLevel()) {
 		game->ChangeState(new WinGameState(game));
 	}
-	Entity::Update();
+	Entity::Update(dt);
 }

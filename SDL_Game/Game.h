@@ -6,10 +6,10 @@
 #include "Input.h"
 #include "IGameState.h"
 
-//const int SCREEN_WIDTH = 1920;
-const int SCREEN_WIDTH = 1280;
-//const int SCREEN_HEIGHT = 1080;
-const int SCREEN_HEIGHT = 720;
+const int SCREEN_WIDTH = 1920;
+//const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 1080;
+//const int SCREEN_HEIGHT = 720;
 
 class IGameState;
 

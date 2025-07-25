@@ -33,7 +33,7 @@ public:
 	bool LoseGame();
 	bool WinGame();
 	void watForInit();
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 };
 

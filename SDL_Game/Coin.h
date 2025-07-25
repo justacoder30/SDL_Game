@@ -9,7 +9,7 @@ private:
 public:
 	Coin();
 	Coin(Vector pos, Player& player);
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 	void OnCollideWithPlayer();
 };

@@ -2,27 +2,20 @@
 #include "Text.h"
 #include <SDL2/SDL_mixer.h>
 #include "SoundManager.h"
-
-Mix_Music* gMusic = NULL;
-
-//The sound effects that will be used
-Mix_Chunk* gScratch = NULL;
-Mix_Chunk* gHigh = NULL;
-Mix_Chunk* gMedium = NULL;
-Mix_Chunk* gLow = NULL;
-Sound sound;
+#include "PlayGameState.h"
 
 Game::Game()
 {
 	float scale = 0;
 	Global.camera = Camera(784, 441);
-	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, true);
+	window = RenderWindow("SDL Tutorial", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 	Global.font.SetFont("resource/font/FreeSans.ttf", 20);
 	SoundManager::init();
 
 	levels = { "map1.tmx", "map2.tmx" };
 
-	currentState = new MenuState(this);
+	//currentState = new MenuState(this);
+	currentState = new PlayGameState(this);
 	preveriousState = currentState;
 }
 
@@ -75,13 +68,13 @@ void Game::Update()
 {
 	Input.Update();
 	Global.Update();
-
+	float dt = Global.DeltaTime;
 	if(nextState != nullptr) {
 		currentState = nextState;
 		nextState = nullptr;
 	}
 
-	currentState->Update();
+	currentState->Update(dt);
 }
 
 void Game::Draw()
@@ -99,6 +92,10 @@ void Game::Draw()
 void Game::Run()
 {
 	while (Global.gameLoop) {
+		/*Global.pool.enqueue([this]() {
+			Update();
+		});
+		Global.pool.wait();*/
 		Update();
 		Draw();
 	}

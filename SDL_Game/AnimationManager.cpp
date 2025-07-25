@@ -24,9 +24,9 @@ void AnimationManager::ResetFrame()
 	timer = 0;
 }
 
-void AnimationManager::Update()
+void AnimationManager::Update(const float& dt)
 {
-	timer += Global.DeltaTime;
+	timer += dt;
 
 	if (timer <= animation.FrameSpeed)
 		return;

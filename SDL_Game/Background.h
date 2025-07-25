@@ -9,7 +9,7 @@ private:
 public:
 	Background();
 	Background(Vector size);
-	void Update();
+	void Update(const float& dt);
 	void Draw();
 };
 

@@ -3,36 +3,36 @@
 #include "Vector.h"
 #include "Entity.h"
 #include <tmxlite/Map.hpp>
+#include <unordered_map>
 
-class TiledMap : public Entity
-{
-private:
-	Rect src;
-	Rect dst;
-public:
-	SDL_RendererFlip flip;
-	TiledMap() {}
-	TiledMap(Texture _texure, Rect _dst, Rect _src, float _rotate = 0.0, SDL_RendererFlip _flip = SDL_FLIP_NONE);
-	void Update();
-	void Draw();
+struct GeometryBatch {
+    std::vector<SDL_Vertex> vertices;
+    std::vector<int> indices;
 };
 
 class Map : public Entity
 {
 private:
-	float width;
-	float height;
-	std::vector<TiledMap*> tiledmap;
-	inline static tmx::Map map;
+    float width;
+    float height;
+    inline static tmx::Map map;
 
-	void InitMap(std::string f_path);
-	float CaculateRotate(uint8_t flags, SDL_RendererFlip& flip);
+    std::unordered_map<SDL_Texture*, GeometryBatch> batches;
+    std::vector<Texture> textures;
+
+    void InitMap(const std::string& f_path);
+    float CaculateRotate(uint8_t flags, SDL_RendererFlip& flip);
+    Rect getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize);
+    void BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex);
+
 public:
-	Map() {}
-	Map(std::string level);
-	void CreateMap(const tmx::Map& map, std::uint32_t layerIndex, const std::vector<Texture>& textures);
-	std::vector<Rect> GetObjectGroup(std::string name);
-	float getWidth();
-	float getHeight();
-};
+    Map() {}
+    Map(const std::string& level);
 
+    std::vector<Rect> GetObjectGroup(const std::string& name);
+    float getWidth() const;
+    float getHeight() const;
+
+    void Update();
+    void Draw();
+};

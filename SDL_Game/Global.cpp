@@ -4,9 +4,9 @@
 GLOBAL Global = GLOBAL();
 
 void GLOBAL::Update() {
+	lastTime = startTime;
 	startTime = SDL_GetPerformanceCounter();
 	DeltaTime = (float)(startTime - lastTime) / SDL_GetPerformanceFrequency();
-	lastTime = startTime;
 }
 
 void GLOBAL::fpsShow()

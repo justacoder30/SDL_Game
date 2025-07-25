@@ -15,9 +15,9 @@ Flag::Flag(Vector pos, Player* player)
 	rect = Rect(pos, size);
 }
 
-void Flag::Update()
+void Flag::Update(const float& dt)
 {
-	UpdateAnimation();
+	UpdateAnimation(dt);
 	OnCollideWithPlayer();
 }
 
