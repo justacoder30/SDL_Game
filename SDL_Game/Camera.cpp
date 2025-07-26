@@ -27,7 +27,8 @@ Camera::Camera(float w, float h)
 	window_size.y = h * Global.scale;
 		
 	rect = Rect(0, 0, w, h);
-	visibleWoldRect = rect;
+	size.x = w;
+	size.y = h;
 }
 
 void Camera::SetCamera(Vector _windowSize)
@@ -38,10 +39,10 @@ void Camera::SetCamera(Vector _windowSize)
 	pos.x = abs(_windowSize.x - window_size.x) / 2.f;
 	pos.y = abs(_windowSize.y - window_size.y) / 2.f;
 
-	rect = Rect(pos.x / Global.scale,
+	/*rect = Rect(pos.x / Global.scale,
 		pos.y / Global.scale,
 		window_size.x / Global.scale,
-		window_size.y / Global.scale);
+		window_size.y / Global.scale);*/
 }
 
 void Camera::SetBound(float left, float top, float right, float bottom)
@@ -75,12 +76,23 @@ void Camera::Update()
 				window_size.x / Global.scale, 
 				window_size.y / Global.scale);
 	
-	transform.x = clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left);
+	transformStatic = Vector((rect.w - size.x) / 2, (rect.h - size.y) / 2);
+
+	/*transformStatic.x = clamp((rect.w - size.x) / 2, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left);
+	transformStatic.y = clamp((rect.h - size.y) / 2, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top);
+	*/
+	
+	/*transform.x = rect.w * anchor.x - dst_pos->x;
+	transform.y = rect.h * anchor.y - dst_pos->y;*/
+	transform.x = clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right + transformStatic.x, rect.w * anchor.x - bound.left - transformStatic.x);
+	transform.y = clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom + transformStatic.y, rect.h * anchor.y - bound.top - transformStatic.y);
 	//transform.x = int(clamp(rect.w * anchor.x - dst_pos->x, rect.w * anchor.x - bound.right, rect.w * anchor.x - bound.left));
-	transform.y = clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top);
 	//transform.y = int(clamp(rect.h * anchor.y - dst_pos->y, rect.h * anchor.y - bound.bottom, rect.h * anchor.y - bound.top));
 
-	float increase = 10;
+	
+
+
+	float increase = 30;
 
 	visibleWoldRect = Rect(
 		-transform.x - increase/2,

@@ -55,20 +55,25 @@ void Background::Update(const float& dt)
 
 void Background::Draw()
 {
+	Camera& camera = Global.camera;
+	Vector og_pos;
 	float speed = 0;
 	for (int i = 0; i < Entities.size(); ++i)
 	{
 		if (i == 1 || i == 2) {
+			og_pos = Entities[i]->pos;
+			Entities[i]->pos += camera.transformStatic;
 			Entities[i]->Draw();
+			Entities[i]->pos = og_pos;
 			continue;
 		}
 		for (int j = 0; j < 3; j++) {
-			float og_pos = Entities[i]->pos.x;
-			
+			og_pos = Entities[i]->pos;
+			Entities[i]->pos += camera.transformStatic;
 			Entities[i]->pos.x += j * size.x + Global.camera.transform.x * speed;
 			Entities[i]->Draw();
 			
-			Entities[i]->pos.x = og_pos;
+			Entities[i]->pos = og_pos;
 		}
 		speed += 0.05;
 	}

@@ -13,9 +13,17 @@ void HealthBar::DrawTransform()
 
 void HealthBar::DrawStatic()
 {
+	Camera& camera = Global.camera;
 	Rect newRect = Rect(
-		pos,
+		pos + camera.transformStatic,
 		size
+	);
+
+	rect = Rect(
+		pos.x + camera.transformStatic.x,
+		pos.y + camera.transformStatic.y,
+		rect.w,
+		rect.h
 	);
 
 	window.SetColor(color.r, color.g, color.b);

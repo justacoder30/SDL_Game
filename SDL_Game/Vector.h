@@ -12,6 +12,7 @@ public:
 	Vector operator+(Vector const& v2);
 	Vector operator+(const float& num);
 	Vector operator*(const float& num);
+	Vector operator/(const float& num);
 	void printf();
 };
 

@@ -43,7 +43,7 @@ void ButtonText::Update(const float& dt)
 
 void ButtonText::Draw()
 {
-	window.blit(tex, pos, size);
+	window.blit(tex, pos + Global.camera.transformStatic, size);
 }
 
 bool ButtonText::Clicked()

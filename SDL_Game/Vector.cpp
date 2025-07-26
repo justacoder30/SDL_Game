@@ -35,6 +35,11 @@ Vector Vector::operator*(const float& num)
     return Vector(x * num, y * num);
 }
 
+Vector Vector::operator/(const float& num)
+{
+    return Vector(x / num, y / num);
+}
+
 void Vector::printf()
 {
     std::cout << "(" << x << ", " << y << ")" << std::endl;

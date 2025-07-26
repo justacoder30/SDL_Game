@@ -5,16 +5,18 @@
 class Camera
 {
 private:
-	Rect size;
+	
 	Vector window_size;
 	Vector pos;
 	Rect bound;
 	Vector anchor = Vector::zero();
 	void CaculateWindowSize();
 public:
+	Rect size;
 	Rect visibleWoldRect;
 	Rect rect;
 	Vector transform;
+	Vector transformStatic;
 	Vector previous;
 	Vector* dst_pos = new Vector(0, 0);
 	float speed = 0.05;
