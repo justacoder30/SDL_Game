@@ -10,7 +10,7 @@ void QuangGameRenderer(
 	Texture& texture,
 	const Rect* srcrect,
 	const Rect* dstrect,
-	const float angle,
+	const float& angle,
 	const Vector* center,
 	const SDL_RendererFlip flip)
 {
@@ -38,19 +38,27 @@ void QuangGameRenderer(
 	if (!center) centerPoint = Vector(dstrect->w / 2.0f, dstrect->h / 2.0f);
 	else centerPoint = *center;
 
-	float cx = dstrect->x + centerPoint.x;
-	float cy = dstrect->y + centerPoint.y;
-	float angleRad = angle * M_PI / 180.0f;
-	float cosA = cosf(angleRad);
-	float sinA = sinf(angleRad);
+	if (angle != 0.0f || angle != 360.0f) {
+		float cx = dstrect->x + centerPoint.x;
+		float cy = dstrect->y + centerPoint.y;
+		float angleRad = angle * M_PI / 180.0f;
+		float cosA = cosf(angleRad);
+		float sinA = sinf(angleRad);
 
-	for (int i = 0; i < 4; ++i) {
-		float dx = px[i] - cx;
-		float dy = py[i] - cy;
-
-		verts[i].position.x = cosA * dx - sinA * dy + cx;
-		verts[i].position.y = sinA * dx + cosA * dy + cy;
+		for (int i = 0; i < 4; ++i) {
+			float dx = px[i] - cx;
+			float dy = py[i] - cy;
+			verts[i].position.x = cosA * dx - sinA * dy + cx;
+			verts[i].position.y = sinA * dx + cosA * dy + cy;
+		}
 	}
+	else {
+		for (int i = 0; i < 4; ++i) {
+			verts[i].position.x = px[i];
+			verts[i].position.y = py[i];
+		}
+	}
+	
 
 	float texW = texture.getWidth();
 	float texH = texture.getHeight();
@@ -60,8 +68,8 @@ void QuangGameRenderer(
 	float v0 = src.y / texH;
 	float v1 = (src.y + src.h) / texH;
 
-	float u[4] = { u0, u1, u1, u0 };
-	float v[4] = { v0, v0, v1, v1 };
+	float u[4] = { src.x / texW, (src.x + src.w) / texW, (src.x + src.w) / texW, src.x / texW };
+	float v[4] = { src.y / texH, src.y / texH, (src.y + src.h) / texH, (src.y + src.h) / texH };
 
 	if (flip & SDL_FLIP_HORIZONTAL) {
 		std::swap(u[0], u[1]);
@@ -134,6 +142,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 
 void RenderWindow::SetViewPort(Rect view)
 {
+	/*view.x -= 1;
+	view.y -= 1;*/
 	SDL_Rect Viewport = view.getRect();
 	SDL_RenderSetViewport(renderer, &Viewport);
 }

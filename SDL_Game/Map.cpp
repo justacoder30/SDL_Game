@@ -13,22 +13,12 @@ std::vector<Texture> GetTextures(std::vector<tmx::Tileset> tileSets) {
 	return texure;
 }
 
-Rect getSrcById(int index, int tileCountX, int tileCountY, int mapTileSize) {
-    int cnt = 0;
-    Rect src;
-    for (int y = 0; y < tileCountY; ++y) {
-        for (int x = 0; x < tileCountX; ++x) {
-            if (cnt == index) {
-                src.x = x * mapTileSize;
-                src.y = y * mapTileSize;
-                src.w = mapTileSize;
-                src.h = mapTileSize;
-            }
-            cnt++;
-        }
-    }
+float min(const float& a, const float& b) {
+	return (a < b) ? a : b;
+}
 
-    return src;
+float max(const float& a, const float& b) {
+    return (a > b) ? a : b;
 }
 
 void Map::BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex)
@@ -40,6 +30,7 @@ void Map::BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex)
     const auto& tileSets = map.getTilesets();
 
     int maxX = 0, maxY = 0;
+    this->mapTileSize = mapTileSize.x;
 
     for (size_t i = 0; i < tileSets.size(); ++i)
     {
@@ -47,8 +38,8 @@ void Map::BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex)
         int tileCountX = textures[i].getWidth() / mapTileSize.x;
         int tileCountY = textures[i].getHeight() / mapTileSize.y;
 
-        SDL_Texture* texPtr = textures[i].getTex();
-        auto& batch = batches[texPtr];
+        //SDL_Texture* texPtr = textures[i].getTex();
+        auto& batch = batches[textures[i].getTex()];
 
         for (uint32_t y = 0; y < mapSize.y; ++y)
         {
@@ -119,36 +110,102 @@ void Map::BuildGeometryBatches(const tmx::Map& map, uint32_t layerIndex)
     height = maxY * mapTileSize.y;
 }
 
+//void Map::Draw()
+//{
+//    Vector cameraOffset = Global.camera.transform;
+//
+//    for (auto& [texture, batch] : batches)
+//    {
+//         //Clone vertices để không ảnh hưởng batch gốc
+//        std::vector<SDL_Vertex> transformedVerts = batch.vertices;
+//
+//        for (auto& v : transformedVerts)
+//        {
+//            v.position.x += cameraOffset.x;
+//            v.position.y += cameraOffset.y;
+//        }
+//
+//        SDL_RenderGeometry(
+//            Global.Renderer,
+//            texture,
+//            transformedVerts.data(),
+//            transformedVerts.size(),
+//            batch.indices.data(),
+//            batch.indices.size()
+//        );
+//    }
+//}
+
 void Map::Draw()
 {
-    /*for (auto& [texture, batch] : batches)
-    {
-        SDL_RenderGeometry(Global.Renderer, texture,
-            batch.vertices.data(), batch.vertices.size(),
-            batch.indices.data(), batch.indices.size());
-    }*/
-
-    Vector cameraOffset = Global.camera.transform;
+    Vector& cameraOffset = Global.camera.transform;
+    Rect& visibleRect = Global.camera.visibleWoldRect;
+	std::vector<Rect> rect;
 
     for (auto& [texture, batch] : batches)
     {
-         //Clone vertices để không ảnh hưởng batch gốc
-        std::vector<SDL_Vertex> transformedVerts = batch.vertices;
+        std::vector<SDL_Vertex> transformedVerts;
+        std::vector<int> transformedIndices;
+        int vertexBaseIndex = 0;
 
-        for (auto& v : transformedVerts)
+        // Mỗi tile là 4 vertex, 6 indices (2 tam giác)
+        for (int i = 0; i < batch.vertices.size(); i += 4)
         {
-            v.position.x += cameraOffset.x;
-            v.position.y += cameraOffset.y;
+            // Lấy 4 vertex của 1 tile
+            SDL_Vertex v0 = batch.vertices[i + 0];
+            SDL_Vertex v1 = batch.vertices[i + 1];
+            SDL_Vertex v2 = batch.vertices[i + 2];
+            SDL_Vertex v3 = batch.vertices[i + 3];
+
+            // Tạo bounding rect từ 4 điểm
+
+            Rect tileRect(v0.position.x, v0.position.y, mapTileSize, mapTileSize);
+
+            // Kiểm tra va chạm với camera
+            if (!visibleRect.checkCollide(tileRect))
+                continue;
+
+
+            // Offset theo camera
+            v0.position.x += cameraOffset.x; v0.position.y += cameraOffset.y;
+            v1.position.x += cameraOffset.x; v1.position.y += cameraOffset.y;
+            v2.position.x += cameraOffset.x; v2.position.y += cameraOffset.y;
+            v3.position.x += cameraOffset.x; v3.position.y += cameraOffset.y;
+
+			//rect.push_back(Rect(v0.position.x, v0.position.y, mapTileSize, mapTileSize));
+            // Thêm vào vertex buffer mới
+            transformedVerts.push_back(v0);
+            transformedVerts.push_back(v1);
+            transformedVerts.push_back(v2);
+            transformedVerts.push_back(v3);
+
+            // Indices cho 2 tam giác: (0, 1, 2), (2, 3, 0)
+            transformedIndices.push_back(vertexBaseIndex + 0);
+            transformedIndices.push_back(vertexBaseIndex + 1);
+            transformedIndices.push_back(vertexBaseIndex + 2);
+            transformedIndices.push_back(vertexBaseIndex + 2);
+            transformedIndices.push_back(vertexBaseIndex + 3);
+            transformedIndices.push_back(vertexBaseIndex + 0);
+
+            vertexBaseIndex += 4;
         }
+
+        // Nếu không có gì cần vẽ
+        if (transformedVerts.empty()) continue;
 
         SDL_RenderGeometry(
             Global.Renderer,
             texture,
             transformedVerts.data(),
             transformedVerts.size(),
-            batch.indices.data(),
-            batch.indices.size()
+            transformedIndices.data(),
+            transformedIndices.size()
         );
+
+        /*for(auto& r : rect)
+        {
+			DrawRectStatic(r);
+		}*/
     }
 }
 

@@ -168,16 +168,19 @@ void EntityManager::watForInit()
 void EntityManager::Update(const float& dt)
 {
 	static float scale = Global.scale;
-	float speed = 10;
+	float speed = 7;
 
 	if (Key[SDL_SCANCODE_E]) {
 		Global.scale += speed * dt;
 	} 
 
 	if (Key[SDL_SCANCODE_Q]) {
+		//Global.scale -= speed * dt;
 		if (Global.scale >= scale) Global.scale -= speed * dt;
-		if (Global.scale < scale) Global.scale = scale;
+		else Global.scale = scale;
 	}
+
+	
 	
 	if (boss) {
 		if (boss->current == Death && boss->animationManger.IsDone()) {
@@ -192,6 +195,22 @@ void EntityManager::Update(const float& dt)
 
 	Entity::Update(dt);
 	Global.camera.Update();
+
+	/*if (Key[SDL_SCANCODE_K]) {
+		Global.camera.rect.y += speed * dt;
+	}
+
+	if (Key[SDL_SCANCODE_I]) {
+		Global.camera.rect.y -= speed * dt;
+	}
+
+	if (Key[SDL_SCANCODE_J]) {
+		Global.camera.rect.x += speed * dt;
+	}
+
+	if (Key[SDL_SCANCODE_L]) {
+		Global.camera.rect.x -= speed ;
+	}*/
 }
 
 void EntityManager::Draw() {

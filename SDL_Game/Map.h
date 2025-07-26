@@ -13,6 +13,7 @@ struct GeometryBatch {
 class Map : public Entity
 {
 private:
+    int mapTileSize;
     float width;
     float height;
     inline static tmx::Map map;
