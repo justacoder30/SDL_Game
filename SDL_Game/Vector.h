@@ -5,7 +5,7 @@ class Vector
 {
 public:
 	Vector(const float& X=0, const float& Y=0) : x(X), y(Y) {}
-	float x, y;
+	float x, y = 0;
 	static Vector zero();
 	static Vector all(const float& size);
 	Vector& operator+=(Vector const& v2);

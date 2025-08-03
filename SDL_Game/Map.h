@@ -29,6 +29,16 @@ private:
 public:
     Map() {}
     Map(const std::string& level);
+    ~Map() {
+        for (auto& texture : textures) {
+            texture.Free();
+        }
+
+        /*for (auto& batch : batches) {
+			delete batch.first;
+        }*/
+		LOG("Map destroyed");
+	}
 
     std::vector<Rect> GetObjectGroup(const std::string& name);
     float getWidth() const;

@@ -14,8 +14,8 @@ Texture::Texture(const std::string& f_path)
 		return;
 	}
 	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-
 	SetScaleMode(SDL_ScaleModeNearest);
+	path = f_path;
 	//SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 	//SetScaleMode(SDL_SCALEMODE_LINEAR);
 }
@@ -55,6 +55,12 @@ SDL_FRect Texture::getFRect() const
 SDL_Texture* Texture::getTex() const
 {
 	return texture;
+}
+
+void Texture::Free()
+{
+	SDL_DestroyTexture(texture);
+	texture = NULL;
 }
 
 Texture Texture::CreateTextTTF(const std::string& text)

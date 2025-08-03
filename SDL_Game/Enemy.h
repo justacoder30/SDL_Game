@@ -12,7 +12,7 @@ private:
 	Rect edgeRect;
 	
 	float enemyZone = 150;
-	HealthBar bar;
+	HealthBar* bar;
 	void addHealthBar();
 	
 public:
@@ -23,6 +23,13 @@ public:
 
 	Enemy();
 	Enemy(int level, Vector pos, Player* player);
+	~Enemy() {
+		/*if (bar != nullptr) delete bar;
+		if (state != nullptr) delete state;*/
+		freeEntities();
+		freeAnimations();
+		LOG("Enemy destroyed");
+	}
 	void UpdateVelocity();
 	void UpdatePosition(const float& dt);
 	void UpdateState();

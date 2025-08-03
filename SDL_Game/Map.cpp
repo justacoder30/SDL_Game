@@ -2,8 +2,9 @@
 #include <tmxlite/TileLayer.hpp>
 #include <filesystem>
 
-std::vector<Texture> GetTextures(std::vector<tmx::Tileset> tileSets) {
+std::vector<Texture> GetTextures(const std::vector<tmx::Tileset>& tileSets) {
 	std::vector<Texture> texure;
+	texure.reserve(tileSets.size());
 
 	for (auto ts : tileSets)
 	{

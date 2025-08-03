@@ -133,7 +133,8 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 	}
 	
-	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
+	//Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
+	Global.scale = CaculateScale(Global.camera.rect.w, Global.camera.rect.h);
 	Global.camera.SetCamera(GetWindowSize());
 	/*SDL_SetRenderVSync(renderer, 1);
 	SDL_SetWindowSurfaceVSync(window, 1);*/
@@ -142,9 +143,7 @@ RenderWindow::RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIG
 
 void RenderWindow::SetViewPort(Rect view)
 {
-	/*view.x -= 1;
-	view.y -= 1;*/
-	SDL_Rect Viewport = view.getRect();
+	SDL_Rect Viewport = {view.x, view.y, view.w + 1, view.h + 2};
 	SDL_RenderSetViewport(renderer, &Viewport);
 }
 
@@ -198,8 +197,12 @@ void RenderWindow::DrawFillRect(const Rect& rect)
 
 float RenderWindow::CaculateScale(float w, float h)
 {
-	float scale_x = w / Global.camera.rect.w;
-	float scale_y = h / Global.camera.rect.h;
+	/*float scale_x = w / Global.camera.rect.w;
+	float scale_y = h / Global.camera.rect.h;*/
+
+	Vector size = GetWindowSize();
+	float scale_x = size.x / w;
+	float scale_y = size.y / h;
 
 	return std::min(scale_x, scale_y);
 }
@@ -214,7 +217,7 @@ void RenderWindow::FullScreenToggle()
 	fullscreen = !fullscreen;
 	SDL_WindowFlags flags = fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_SHOWN;
 	SDL_SetWindowFullscreen(window, flags);
-	Global.scale = CaculateScale(GetWindowSize().x, GetWindowSize().y);
+	Global.scale = CaculateScale(Global.camera.rect.w, Global.camera.rect.h);
 	Global.camera.SetCamera(GetWindowSize());
 }
 

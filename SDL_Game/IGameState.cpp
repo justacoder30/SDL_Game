@@ -6,10 +6,18 @@ IGameState::IGameState(Game* game)
 	this->game = game;
 }
 
+MenuState::~MenuState()
+{
+	delete tittle;
+	delete playBtn;
+	delete exitBtn;
+	LOG("MenuState destroyed");
+}
+
 void MenuState::Update(const float& dt)
 {
 	if (playBtn->Clicked()) {
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(std::make_shared<PlayGameState>(game));
 	}
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
@@ -49,7 +57,8 @@ void PauseState::Update(const float& dt)
 	}
 	if (newGameBtn->Clicked()) {
 		game->ResetLevel();
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(std::make_shared<PlayGameState>(game));
+		game->getPreState() = nullptr; 
 	}
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
@@ -60,11 +69,11 @@ void PauseState::Update(const float& dt)
 void LoseGameState::Update(const float& dt)
 {
 	if (tryAgainBtn->Clicked()) {
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(std::make_shared<PlayGameState>(game));
 	}
 	if (newGameBtn->Clicked()) {
 		game->ResetLevel();
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(std::make_shared<PlayGameState>(game));
 	}
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;
@@ -76,7 +85,7 @@ void WinGameState::Update(const float& dt)
 {
 	if (continueBtn->Clicked()) {
 		game->ChangeToNextLevel();
-		game->ChangeState(new PlayGameState(game));
+		game->ChangeState(std::make_shared<PlayGameState>(game));
 	}
 	if (exitBtn->Clicked()) {
 		Global.gameLoop = false;

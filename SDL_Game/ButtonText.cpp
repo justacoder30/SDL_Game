@@ -6,6 +6,7 @@ ButtonText::ButtonText()
 
 ButtonText::ButtonText(std::string text, Vector pos, Vector size)
 {
+	this->text = text;
 	tex.CreateTextTTF(text);
 	this->pos = pos;
 	this->size = size;
@@ -14,18 +15,18 @@ ButtonText::ButtonText(std::string text, Vector pos, Vector size)
 	backDrop = true;
 }
 
-ButtonText ButtonText::SetColor(Uint8 r, Uint8 g, Uint8 b)
+ButtonText* ButtonText::SetColor(Uint8 r, Uint8 g, Uint8 b)
 {
 	baseColor = { r, g, b };
 	hoveringColor = { r, g, b };
 	tex.SetColor(baseColor.r, baseColor.g, baseColor.b);
-	return *this;
+	return this;
 }
 
-ButtonText ButtonText::SetColorHovering(Uint8 r, Uint8 g, Uint8 b)
+ButtonText* ButtonText::SetColorHovering(Uint8 r, Uint8 g, Uint8 b)
 {
 	hoveringColor = { r, g, b };
-	return *this;
+	return this;
 }
 
 void ButtonText::Update(const float& dt)

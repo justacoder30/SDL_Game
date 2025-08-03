@@ -14,6 +14,13 @@ public:
 
 	Player();
 	Player(int level, Vector pos);
+	~Player()
+	{
+		//delete state;
+		freeEntities();
+		freeAnimations();
+		LOG("Player destroyed");
+	}
 	void SetMapRect(Rect rect);
 	void UpdateVelocity();
 	void UpdatePosition(const float& dt);

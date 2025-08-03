@@ -15,6 +15,7 @@ private:
 public:
 	HealthBar();
 	HealthBar(Entity* entity, Vector pos, Vector size);
+	~HealthBar();
 	HealthBar SetColor(Uint8 r, Uint8 g, Uint8 b);
 	HealthBar SetStatic();
 	void resetTime();

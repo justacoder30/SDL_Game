@@ -14,7 +14,7 @@ private:
 	std::future<void> initFuture;
 	std::thread loadGame;
 	std::string level;
-	Player player;
+	Player *player;
 	Boss* boss;
 	HealthBar* playerHealthBar;
 	HealthBar *bossHealthBar;
@@ -30,6 +30,15 @@ private:
 public:
 	EntityManager() {}
 	EntityManager(std::string level);
+	~EntityManager() {
+		/*delete map;
+		delete boss;
+		delete playerHealthBar;
+		delete bossHealthBar;
+		delete flag;*/
+		freeEntities();
+		LOG("EntityManager destroyed");	
+	}
 	bool LoseGame();
 	bool WinGame();
 	void watForInit();

@@ -20,6 +20,14 @@ public:
 
 	Boss();
 	Boss(Vector pos, Player* player);
+	~Boss() {
+		/*if (bar != nullptr) delete bar;
+		if (state != nullptr) delete state;
+		if (player != nullptr) delete player;*/
+		freeEntities();
+		freeAnimations();
+		LOG("Boss destroyed");
+	}
 	void UpdateVelocity();
 	void UpdatePosition(const float& dt);
 	void UpdateState();

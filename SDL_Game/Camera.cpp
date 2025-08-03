@@ -2,6 +2,8 @@
 #include "Global.h"
 #include "RenderWindow.h"
 
+Camera* instance = nullptr;
+
 float clamp(float value, float min, float max) {
 	if (value < min) value = min;
 	if (value > max) value = max;
@@ -31,6 +33,10 @@ Camera::Camera(float w, float h)
 	size.y = h;
 }
 
+Camera& Camera::Get() {
+	return *instance;
+}
+
 void Camera::SetCamera(Vector _windowSize)
 {
 	window_size.x = rect.w * Global.scale;
@@ -43,6 +49,8 @@ void Camera::SetCamera(Vector _windowSize)
 		pos.y / Global.scale,
 		window_size.x / Global.scale,
 		window_size.y / Global.scale);*/
+
+	instance = this;
 }
 
 void Camera::SetBound(float left, float top, float right, float bottom)

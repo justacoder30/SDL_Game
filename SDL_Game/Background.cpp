@@ -55,9 +55,11 @@ void Background::Update(const float& dt)
 
 void Background::Draw()
 {
-	Camera& camera = Global.camera;
+	//Camera& camera = Global.camera;
+	Camera& camera = Camera::Get();
 	Vector og_pos;
 	float speed = 0;
+	
 	for (int i = 0; i < Entities.size(); ++i)
 	{
 		if (i == 1 || i == 2) {
@@ -70,7 +72,7 @@ void Background::Draw()
 		for (int j = 0; j < 3; j++) {
 			og_pos = Entities[i]->pos;
 			Entities[i]->pos += camera.transformStatic;
-			Entities[i]->pos.x += j * size.x + Global.camera.transform.x * speed;
+			Entities[i]->pos.x += j * size.x + camera.transform.x * speed;
 			Entities[i]->Draw();
 			
 			Entities[i]->pos = og_pos;

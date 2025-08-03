@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include "Camera.h"
 #include "Font.h"
+#include "ThreadPool.h"
 
 #define LOG(x) std::cout << x << std::endl
 
@@ -21,6 +22,7 @@ public:
 	bool gameLose;
 	float Score = 0;
 	bool gameLoop = true;
+	ThreadPool pool;
 
 	void Update();
 	void fpsShow();

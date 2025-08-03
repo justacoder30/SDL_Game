@@ -46,6 +46,14 @@ HealthBar::HealthBar(Entity* entity, Vector pos, Vector size)
 	rect = Rect(pos, size);
 	backDrop = true;
 	durationTime = 5;
+	parent = nullptr;
+}
+
+HealthBar::~HealthBar()
+{
+	parent = nullptr;
+	delete parent;
+	LOG("HealthBar destroyed");
 }
 
 HealthBar HealthBar::SetColor(Uint8 r, Uint8 g, Uint8 b)

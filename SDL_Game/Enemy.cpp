@@ -3,12 +3,13 @@
 
 void Enemy::addHealthBar()
 {
-	HealthBar* bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
-	bar->SetColor(0, 255, 0);
-	bar->SetErase();
+	//if()
+	if(bar->isRemoved()) {
+		bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
+		bar->SetColor(0, 255, 0);
+		bar->SetErase();
+	}
 	add(bar);
-	bar = nullptr;
-	delete bar;
 }
 
 Enemy::Enemy(int level, Vector pos, Player* player)
@@ -62,9 +63,9 @@ Enemy::Enemy(int level, Vector pos, Player* player)
 		Vector(40, 30)
 	);
 
-	bar = HealthBar(this, Vector(20, 8), Vector(50, 5))
-		.SetColor(0, 255, 0)
-		.SetErase();
+	bar = new HealthBar(this, Vector(20, 8), Vector(50, 5));
+	bar->SetColor(0, 255, 0);
+	bar->SetErase();
 	
 }
 
@@ -168,7 +169,7 @@ void Enemy::CollideWithPlayer(const float& dt)
 	}
 
 	if (rect.checkCollide(player->getAtkBox()) && player->isAttacking()) {
-		bar.resetTime();
+		bar->resetTime();
 		beingAttacked(*player, dt);
 		if (isHurt) addHealthBar();
 	}

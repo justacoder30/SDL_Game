@@ -14,24 +14,26 @@ Game::Game()
 
 	levels = { "map1.tmx", "map2.tmx" };
 
-	currentState = new MenuState(this);
-	//currentState = new PlayGameState(this);
-	preveriousState = currentState;
+	currentState = std::make_shared<MenuState>(this);
+    State = std::make_shared<MenuState>(this).get();
+	//preveriousState = std::move(currentState);
+	//delete currentState;
 }
 
-void Game::ChangeState(IGameState* newState)
-{
-	if (nextState == newState) return;
-	delete nextState;
+void Game::ChangeState(std::shared_ptr<IGameState> newState)
+{  
+    if (nextState == newState) return;  
+	//nextState = std::move(newState);
 	nextState = newState;
-}
+	newState = nullptr;
+}  
 
-void Game::ChangeToPreState()
-{
-	if (nextState == preveriousState) return;
-	delete nextState;
+void Game::ChangeToPreState()  
+{  
+    if (nextState == preveriousState) return;  
+	//nextState = std::move(preveriousState);
 	nextState = preveriousState;
-}
+}  
 
 void Game::ChangeToNextLevel()
 {
@@ -46,16 +48,19 @@ void Game::ResetLevel()
 
 void Game::SaveState()
 {
+	//preveriousState = std::move(currentState);
 	preveriousState = currentState;
 }
 
-IGameState* Game::getPreState()
+std::shared_ptr<IGameState> Game::getPreState()
 {
+	//return std::move(preveriousState);
 	return preveriousState;
 }
 
-IGameState* Game::getCurrentState()
+std::shared_ptr<IGameState> Game::getCurrentState()
 {
+	//return std::move(currentState);
 	return currentState;
 }
 
@@ -69,12 +74,14 @@ void Game::Update()
 	Input.Update();
 	Global.Update();
 	float dt = Global.DeltaTime;
-	if(nextState != nullptr) {
+	
+	currentState->Update(dt);
+
+	if (nextState != nullptr) {
+		//currentState = std::move(nextState);
 		currentState = nextState;
 		nextState = nullptr;
 	}
-
-	currentState->Update(dt);
 }
 
 void Game::Draw()
@@ -86,18 +93,12 @@ void Game::Draw()
 	
 	window.Render();
 	Global.fpsShow();
-	//LOG(Global.DeltaTime);
 }
 
 void Game::Run()
 {
 	while (Global.gameLoop) {
-		/*Global.pool.enqueue([this]() {
-			Update();
-		});
-		Global.pool.wait();*/
 		Update();
 		Draw();
 	}
-	window.quit();
 }

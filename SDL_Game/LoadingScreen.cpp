@@ -34,11 +34,6 @@ LoadingScreen::LoadingScreen(Vector size, double durationTime)
 LoadingScreen::LoadingScreen()
 {}
 
-LoadingScreen::~LoadingScreen()
-{
-	std::cout << "LoadingScreen destroyed" << std::endl;
-}
-
 void LoadingScreen::Update(const float& dt)
 {
 	if (time < durationTime) time += dt;

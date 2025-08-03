@@ -18,22 +18,36 @@ class Game
 {
 private:
 	EntityManager *entityManager;
-	IGameState *currentState;
-	IGameState *preveriousState;
-	IGameState *nextState;
+	/*IGameState* currentState;
+	IGameState* preveriousState;
+	IGameState* nextState;*/
+	std::shared_ptr<IGameState> currentState;
+	std::shared_ptr<IGameState> preveriousState;
+	std::shared_ptr<IGameState> nextState;
+
+	IGameState* State;
+
+	/*std::unique_ptr<IGameState> currentState;
+	std::unique_ptr<IGameState> preveriousState;
+	std::unique_ptr<IGameState> nextState;*/
+	
 	int currentLevelIndex = 1;
 	std::vector<std::string> levels;
 
 public:
 	Game();
-	
-	void ChangeState(IGameState* newState);
+	~Game() {
+		currentState = nullptr;
+		preveriousState = nullptr;
+		window.quit();
+	}
+	void ChangeState(std::shared_ptr<IGameState> newState);
 	void ChangeToPreState();
 	void ChangeToNextLevel();
 	void ResetLevel();
 	void SaveState();
-	IGameState *getPreState();
-	IGameState *getCurrentState();
+	std::shared_ptr<IGameState> getPreState();
+	std::shared_ptr<IGameState> getCurrentState();
 	std::string getLevel();
 	void Update();
 	void Draw();

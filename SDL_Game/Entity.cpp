@@ -1,18 +1,10 @@
 ﻿#include "Entity.h"
 #include <algorithm>
+#include <future>
+//#include "ThreadPool.h"
 
 //std::vector<Entity*> Collisions;
 std::vector<Rect> Collisions;
-
-void Entity::BreakLoop()
-{
-	breakLoop = true;
-}
-
-void Entity::Loop()
-{
-    breakLoop = false;
-}
 
 bool Entity::IsOnGround()
 {
@@ -98,20 +90,13 @@ void Entity::Update(const float& dt)
 {
     std::vector<int> toRemove;
 
-    //std::vector<Entity*> entitiesCopy = Entities; // clone để tránh crash
-
-    //for (Entity* e : entitiesCopy) {
-    //    Global.pool.enqueue([e, dt]() {
-    //        e->Update(dt); // logic từng entity
-    //        });
-    //}
-
-    //Global.pool.wait();
-
     for (int i = Entities.size() - 1; i >= 0; --i)
     {
-        Entities[i]->Update(dt);
-        if (Entities[i]->IsBreakLoop()) return;
+        //Entities[i]->Update(dt);
+        if (Entities[i]->IsBreakLoop()) {
+            Entities[i]->Update(dt);
+            return;
+        }
 
         if (Entities[i]->isChangLevel()) {
             ChangeLevel();
@@ -126,8 +111,16 @@ void Entity::Update(const float& dt)
         delete Entities[i];
         Entities.erase(Entities.begin() + i);
     }
+
+	std::vector<Entity*> entities = Entities;
+
+	for (auto& e : entities) {
+        Global.pool.enqueue([e, dt]() {
+            e->Update(dt);
+        });
+    }
+
     
-    //Global.pool.wait();
 }
 
 void Entity::Draw()
@@ -147,12 +140,42 @@ float Entity::AttackStepTime(Entity entity)
 Entity Entity::add(Entity* entity)
 {
     entity->setRemove();
-    if (std::find(Entities.begin(), Entities.end(), entity) == Entities.end())
+    /*if (std::find(Entities.begin(), Entities.end(), entity) == Entities.end())
     {
+        entity->parent = this;
+        Entities.push_back(entity);
+    }*/
+
+    if (entity->parent != this) {
+        entity->parent = this;
         Entities.push_back(entity);
     }
 
     return *this;
+}
+
+void Entity::freeEntities()
+{
+    for(auto& entity : Entities)
+    {
+        //if (entity != nullptr) delete entity; 
+	}
+
+    for (int i = Entities.size() - 1; i >= 0; --i)
+    {
+        if (Entities[i] != nullptr) delete Entities[i];
+    }
+}
+
+void Entity::freeAnimations()
+{
+    for (auto& anim : animations)
+    {
+        anim.second.free();
+    }
+    /*animations.clear();
+    animationManger = AnimationManager();
+	animationManger.animation = Animation();*/
 }
 
 void Entity::add_NoPoitner(Entity& entity)

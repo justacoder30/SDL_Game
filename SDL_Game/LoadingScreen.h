@@ -13,7 +13,11 @@ public:
 	double time = 0;
 	LoadingScreen(Vector size, double durationTime);
 	LoadingScreen();
-	~LoadingScreen();
+	~LoadingScreen()
+	{
+		freeEntities();
+		freeAnimations();
+	}
 	void Update(const float& dt);
 	void UpdateState(const float& dt);
 	void Draw();

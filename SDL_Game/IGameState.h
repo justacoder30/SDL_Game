@@ -17,9 +17,9 @@ public:
 
 class MenuState : public IGameState {
 private:
-	ButtonText* tittle;
-	ButtonText* playBtn;
-	ButtonText* exitBtn;
+	ButtonText* tittle = nullptr;
+	ButtonText* playBtn = nullptr;
+	ButtonText* exitBtn = nullptr;
 	Vector btnSize = Vector(99.00, 54.00);
 public:
 	MenuState(Game* game): IGameState(game) {
@@ -27,12 +27,11 @@ public:
 		tittle->SetColor(46, 58, 89);
 
 		playBtn = new ButtonText("Play", Vector(352.00, 272.00), btnSize);
-		playBtn->SetColor(255, 0, 0);
-		playBtn->SetColorHovering(255, 255, 0);
+		playBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
+		//playBtn->SetColorHovering(255, 255, 0);
 
 		exitBtn = new ButtonText("Exit", Vector(352.00, 352.00), btnSize);
-		exitBtn->SetColor(255, 0, 0);
-		exitBtn->SetColorHovering(255, 255, 0);
+		exitBtn->SetColor(255, 0, 0)->SetColorHovering(255, 255, 0);
 
 
 		add(new Background(Vector(Global.camera.rect.w, Global.camera.rect.h)));
@@ -41,11 +40,7 @@ public:
 		add(exitBtn);
 
 	}
-	~MenuState() {
-		delete tittle;
-		delete playBtn;
-		delete exitBtn;
-	}
+	~MenuState();
 	void Update(const float& dt);
 };
 
@@ -58,16 +53,13 @@ private:
 public:
 	PauseState(Game* game) : IGameState(game) {
 		countinueBtn = new ButtonText("Countinue", Vector(304.00, 112.00), Vector(208.00, 64.00));
-		countinueBtn->SetColor(255, 255, 255);
-		countinueBtn->SetColorHovering(255, 255, 0);
+		countinueBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		newGameBtn = new ButtonText("New Game", Vector(304.00, 192.00), Vector(208.00, 64.00));
-		newGameBtn->SetColor(255, 255, 255); 
-		newGameBtn->SetColorHovering(255, 255, 0);
+		newGameBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		exitBtn = new ButtonText("Exit", Vector(352.00, 272.00), btnSize);
-		exitBtn->SetColor(255, 255, 255);
-		exitBtn->SetColorHovering(255, 255, 0);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 
 		add(countinueBtn);
@@ -75,16 +67,13 @@ public:
 		add(exitBtn);
 		SoundManager::PauseMusic();
 	}
+	~PauseState() {
+		delete countinueBtn;
+		delete newGameBtn;
+		delete exitBtn;
+	}
 	void Update(const float& dt);
 };
-
-//class PlayGameState : public IGameState {
-//private:
-//	EntityManager *entityManager;
-//public:
-//	PlayGameState(Game* game);
-//	void Update();
-//};
 
 class LoseGameState : public IGameState {
 private:
@@ -96,16 +85,13 @@ private:
 public:
 	LoseGameState(Game* game) : IGameState(game) {
 		tryAgainBtn = new ButtonText("Try Again", Vector(304.00, 192.00), Vector(208.00, 64.00));
-		tryAgainBtn->SetColor(255, 255, 255);
-		tryAgainBtn->SetColorHovering(255, 255, 0);
+		tryAgainBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		newGameBtn = new ButtonText("New Game", Vector(304.00, 272.00), Vector(208.00, 64.00));
-		newGameBtn->SetColor(255, 255, 255);
-		newGameBtn->SetColorHovering(255, 255, 0);
+		newGameBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
-		exitBtn->SetColor(255, 255, 255);
-		exitBtn->SetColorHovering(255, 255, 0);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		ButtonText* text = new ButtonText("You Death!", Vector(192.00, 16.00), Vector(416.00, 128.00));
 		text->SetColor(255, 0, 0);
@@ -130,11 +116,10 @@ private:
 public:
 	WinGameState(Game* game) : IGameState(game) {
 		continueBtn = new ButtonText("Continue", Vector(304.00, 272.00), Vector(208.00, 64.00));
-		continueBtn->SetColor(255, 255, 255);
-		continueBtn->SetColorHovering(255, 255, 0);
+		continueBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		exitBtn = new ButtonText("Exit", Vector(352.00, 352), btnSize);
-		exitBtn->SetColor(255, 255, 255).SetColorHovering(255, 255, 0);
+		exitBtn->SetColor(255, 255, 255)->SetColorHovering(255, 255, 0);
 
 		ButtonText* text = new ButtonText("SCORE: " + std::to_string(int(Global.Score)), Vector(192.00, 16.00), Vector(416.00, 128.00));
 		text->SetColor(255, 0, 0);

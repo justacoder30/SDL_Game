@@ -9,7 +9,7 @@ class RenderWindow
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	float CaculateScale(float w, float h);
+	
 	bool fullscreen;
 	
 public:
@@ -17,6 +17,7 @@ public:
 	RenderWindow(const char* tittle, int SCREEN_WIDTH, int SCREEN_HEIGHT, bool _fullscreen);
 	void SetViewPort(Rect view);
 	Vector GetWindowSize();
+	float CaculateScale(float w, float h);
 	void blit(Texture& texture, const Rect& dest, const Rect& area, float rotate = 0.0, SDL_RendererFlip  flip = SDL_FLIP_NONE);
 	void blit(Texture& texture, const Vector& pos, const Rect& area, float scale = 1, SDL_RendererFlip  flip = SDL_FLIP_NONE);
 	void blit(Texture& texture, const Vector& pos, const Rect& area, const Vector& size);

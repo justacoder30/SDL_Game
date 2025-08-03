@@ -14,6 +14,10 @@ public:
 
 	Animation();
 	Animation(const char* f_p, int frame_count, float frame_speed = 0.08, bool Loop = true);
+	void free() {
+		texture.Free();
+		//LOG("Animation deleted: " << texture.getPath());
+	}
 	int LastFrame();
 };
 

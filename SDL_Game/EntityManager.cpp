@@ -18,7 +18,7 @@ void EntityManager::addObjects()
 		)
 	);
 	add(map);
-	player = Player(0, Vector(0, 0));
+	player = new Player(0, Vector(0, 0));
 	for (auto obj : objects_pos) {
 		auto positions = map->GetObjectGroup(obj);
 
@@ -26,15 +26,15 @@ void EntityManager::addObjects()
 
 		if (obj == "PlayerPosition") {
 			for (auto pos : positions) {
-				player.rect = Rect(Vector(pos.x, pos.y), Vector(player.rect.w, player.rect.h));
-				player.center_pos = player.GetCenter();
-				player.SetMapRect(Rect(0, 0, map->getWidth(), map->getHeight()));
-				add(&player);
+				player->rect = Rect(Vector(pos.x, pos.y), Vector(player->rect.w, player->rect.h));
+				player->center_pos = player->GetCenter();
+				player->SetMapRect(Rect(0, 0, map->getWidth(), map->getHeight()));
+				add(player);
 			}
 		}
 		else if (obj == "EnemyPosition") {
 			for (auto pos : positions) {
-				add(new Enemy(0, Vector(pos.x, pos.y), &player));
+				add(new Enemy(0, Vector(pos.x, pos.y), player));
 			}
 		}
 		else if (obj == "CoinPosition") {
@@ -44,30 +44,30 @@ void EntityManager::addObjects()
 		}
 		else if (obj == "HeartPosition") {
 			for (auto pos : positions) {
-				add(new Heart(Vector(pos.x, pos.y), &player));
+				add(new Heart(Vector(pos.x, pos.y), player));
 			}
 		}
 		else if (obj == "FlagPosition") {
 			for (auto pos : positions) {
-				flag = new Flag(Vector(pos.x, pos.y), &player);
+				flag = new Flag(Vector(pos.x, pos.y), player);
 				add(flag);
 			}
 		}
 		else if (obj == "BossPosition") {
 			for (auto pos : positions) {
-				boss = new Boss(Vector(pos.x, pos.y), &player);
+				boss = new Boss(Vector(pos.x, pos.y), player);
 				add(boss);
 			}
 		}
 
 	}
 
-	playerHealthBar = new HealthBar(&player, Vector(20, 10), Vector(150, 15));
+	playerHealthBar = new HealthBar(player, Vector(20, 10), Vector(150, 15));
 	playerHealthBar->SetStatic();
 	playerHealthBar->SetColor(255, 0, 0);
 	add(playerHealthBar);
 
-	/*ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
+	ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
 	text->SetColor(255, 255, 255);
 
 	bossHealthBar = new HealthBar(boss, Vector(160.00, 368.00), Vector(496.00, 16.00));
@@ -75,7 +75,7 @@ void EntityManager::addObjects()
 	bossHealthBar->SetColor(0, 255, 255);
 	bossHealthBar->add(text);
 
-	add(bossHealthBar);*/
+	//add(bossHealthBar);
 
 	add(new LoadingScreen(Vector(64, 64), 1.5));
 
@@ -98,15 +98,18 @@ void EntityManager::setCamera()
 		map->getWidth() - size.w / 2,
 		map->getHeight() - size.h / 2
 	);
-	Global.camera.Follow(&player.center_pos);
+	Global.camera.Follow(&player->center_pos);
 }
 
 void EntityManager::addBossHealthBar()
 {
+	if(bossHealthBar != nullptr) {
+		return;
+	}
 	ButtonText* text = new ButtonText("The Frost Guardian", Vector(160.00, 336.00), Vector(160.00, 32.00));
 	text->SetColor(255, 255, 255);
 
-	HealthBar* bossHealthBar = new HealthBar(boss, Vector(160.00, 368.00), Vector(496.00, 16.00));
+	bossHealthBar = new HealthBar(boss, Vector(160.00, 368.00), Vector(496.00, 16.00));
 	bossHealthBar->SetStatic();
 	bossHealthBar->SetColor(0, 255, 255);
 	bossHealthBar->add(text);
@@ -156,7 +159,7 @@ EntityManager::EntityManager(std::string level)
 }
 
 bool EntityManager::LoseGame() {
-	return player.isDeath;
+	return player->isDeath;
 }
 
 void EntityManager::watForInit()
@@ -167,7 +170,7 @@ void EntityManager::watForInit()
 
 void EntityManager::Update(const float& dt)
 {
-	static float scale = Global.scale;
+	static Rect rect = Global.camera.rect;
 	float speed = 7;
 
 	if (Key[SDL_SCANCODE_E]) {
@@ -176,41 +179,29 @@ void EntityManager::Update(const float& dt)
 
 	if (Key[SDL_SCANCODE_Q]) {
 		//Global.scale -= speed * dt;
-		if (Global.scale >= scale) Global.scale -= speed * dt;
-		else Global.scale = scale;
+		if (Global.camera.rect.w < rect.w) Global.scale -= speed * dt;
+		else {
+			Global.camera.rect = rect;
+			Global.scale = window.CaculateScale(rect.w, rect.h);
+		}
 	}
 
 	
-	
 	if (boss) {
 		if (boss->current == Death && boss->animationManger.IsDone()) {
-			ChangeLevel();
-			return;
+			/*ChangeLevel();
+			return;*/
+			boss->removeFromTree();
 		}
 		if (boss->isInEnemyZone() && boss->currentHp > 0) {
-			addBossHealthBar();
+			//addBossHealthBar();
+			add(bossHealthBar);
 		}
 		//else if (!boss->isInEnemyZone() || boss->currentHp <= 0) bossHealthBar->removeFromTree();
 	}
 
 	Entity::Update(dt);
 	Global.camera.Update();
-
-	/*if (Key[SDL_SCANCODE_K]) {
-		Global.camera.rect.y += speed * dt;
-	}
-
-	if (Key[SDL_SCANCODE_I]) {
-		Global.camera.rect.y -= speed * dt;
-	}
-
-	if (Key[SDL_SCANCODE_J]) {
-		Global.camera.rect.x += speed * dt;
-	}
-
-	if (Key[SDL_SCANCODE_L]) {
-		Global.camera.rect.x -= speed ;
-	}*/
 }
 
 void EntityManager::Draw() {

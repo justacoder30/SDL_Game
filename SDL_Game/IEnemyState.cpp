@@ -62,11 +62,11 @@ IEnemyState* DeathEnemyState::Update(Enemy& enemy)
 {
     enemy.current = Death;
     enemy.velocity.x = 0;
-    if (enemy.animationManger.IsDone()) {
+    /*if (enemy.animationManger.IsDone()) {
         Global.Score += enemy.hp;
         SoundManager::PlaySoundEffect("coin");
         enemy.removeFromTree();
-    }
+    }*/
     return this;
 }
 

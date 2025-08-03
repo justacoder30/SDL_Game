@@ -14,15 +14,15 @@ void PlayGameState::Update(const float& dt)
 {
 	if (Key[SDL_SCANCODE_ESCAPE]) {
 		game->SaveState();
-		game->ChangeState(new PauseState(game));
+		game->ChangeState(std::make_shared<PauseState>(game));
 	}
 
 	if (entityManager->LoseGame()) {
-		game->ChangeState(new LoseGameState(game));
+		game->ChangeState(std::make_shared<LoseGameState>(game));
 	}
 
 	if (entityManager->isChangLevel()) {
-		game->ChangeState(new WinGameState(game));
+		game->ChangeState(std::make_shared<WinGameState>(game));
 	}
 	Entity::Update(dt);
 }

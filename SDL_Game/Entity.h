@@ -40,14 +40,12 @@ protected:
 	float score = 0;
 	Rect atkBox;	
 	Rect OFFSET;
-	std::unordered_map<State, Animation> animations;
+	std::unordered_map<int, Animation> animations;
 	std::vector<Entity*> Entities;
 	
-	void BreakLoop();
-	void Loop();
-
+	void Loop() { breakLoop = false; }	
+	void BreakLoop() { breakLoop = true; }
 	bool IsOnGround();
-	bool IsBreakLoop();
 	void ChangeLevel();
 	void UpdateGravity();
 	void UpdateAnimation(const float& dt);
@@ -58,6 +56,7 @@ public:
 	Vector pos;
 	Texture tex;
 
+	Entity* parent = nullptr;
 	AnimationManager animationManger;	
 	Vector center_pos;
 	State current;
@@ -80,13 +79,15 @@ public:
 	int hurtDirection;
 	
 
-	//virtual ~Entity() = 0;
+	virtual ~Entity() = default;
 
 	virtual void Update(const float& dt);
 	virtual void Draw();
 
 	float AttackStepTime(Entity entity);
 	Entity add(Entity* entity);
+	void freeEntities();
+	void freeAnimations();
 	void add_NoPoitner(Entity& entity);
 	void Collision(std::string direction);
 	void SetCollision(float _left, float _top, float _right, float _bottom);
@@ -102,6 +103,7 @@ public:
 	void DrawRectStatic(Rect r);
 	void beingAttacked(const Entity& entity, const float& dt);
 	void beingHurt();
+	bool IsBreakLoop();
 	Rect getAtkBox();
 	Vector GetPos();
 	Rect GravityRect();

@@ -23,6 +23,7 @@ public:
 
 	Camera();
 	Camera(float w, float h);
+	static Camera& Get();
 	void SetCamera(Vector _windowSize);
 	void SetBound(float left, float top, float right, float bottom);
 	void SetAnchor(float x=0, float y=0);

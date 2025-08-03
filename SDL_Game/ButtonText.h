@@ -5,6 +5,7 @@
 class ButtonText: public Entity
 {
 private:
+	std::string text;
 	Texture tex;
 	Vector size;
 	SDL_Color baseColor;
@@ -15,8 +16,15 @@ private:
 public:
 	ButtonText();
 	ButtonText(std::string text, Vector pos, Vector size);
-	ButtonText SetColor(Uint8 r, Uint8 g, Uint8 b);
-	ButtonText SetColorHovering(Uint8 r, Uint8 g, Uint8 b);
+	~ButtonText()
+	{
+		tex.Free();
+		LOG("ButtonText deleted: " + text);
+	}
+	ButtonText* SetColor(Uint8 r, Uint8 g, Uint8 b);
+	ButtonText* SetColorHovering(Uint8 r, Uint8 g, Uint8 b);
+	/*void SetColor(Uint8 r, Uint8 g, Uint8 b);
+	void SetColorHovering(Uint8 r, Uint8 g, Uint8 b);*/
 	void Update(const float& dt);
 	void Draw();
 	bool Clicked();

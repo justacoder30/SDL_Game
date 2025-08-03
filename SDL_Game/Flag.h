@@ -9,6 +9,13 @@ private:
 public:
 	Flag();
 	Flag(Vector pos, Player* player);
+	~Flag()
+	{
+		//delete player;
+		freeEntities();
+		freeAnimations();
+		LOG("Flag destroyed");
+	}
 	void Update(const float& dt);
 	void Draw();
 	void OnCollideWithPlayer();
