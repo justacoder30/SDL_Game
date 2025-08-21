@@ -94,8 +94,9 @@ void Player::UpdatePosition(const float& dt)
 
 	rect.x += velocity.x * dt;
 	Collision("x");
-	rect.y += velocity.y * dt + 0.5 * gravity * dt * dt;
-	velocity.y += gravity * dt;
+	//rect.y += velocity.y * dt + 0.5 * gravity * dt * dt;
+	rect.y += velocity.y * dt;
+	if (!IsOnGround()) velocity.y += gravity * dt;
 	Collision("y");
 
 	center_pos = GetCenter();
@@ -119,6 +120,7 @@ void Player::Update(const float& dt)
 void Player::Draw()
 {
 	Entity::DrawAnimateGroup();
+	DrawRectTransform(rect);
 }
 
 bool Player::isOutOfMap()

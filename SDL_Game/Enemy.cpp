@@ -82,12 +82,14 @@ void Enemy::UpdateVelocity()
 
 void Enemy::UpdatePosition(const float& dt)
 {
-	old_rect = rect;
+	//old_rect = rect;
+	old_rect = Rect(rect.x, rect.y, rect.w, rect.h);
 
 	rect.x += velocity.x * dt;
 	Collision("x");
-	rect.y += velocity.y * dt + gravity * dt * dt;
-	velocity.y += gravity * dt;
+	//rect.y += velocity.y * dt + 0.5 * gravity * dt * dt;
+	rect.y += velocity.y * dt;
+	if (!IsOnGround() ) velocity.y += gravity * dt;
 	Collision("y");
 
 	center_pos = GetCenter();
@@ -100,12 +102,12 @@ void Enemy::UpdateState()
 
 void Enemy::Update(const float& dt)
 {
-	Entity::Update(dt);
 	CollideWithPlayer(dt);
 	UpdateVelocity();
 	UpdateState();
 	UpdatePosition(dt);
 	UpdateAnimation(dt);
+	Entity::Update(dt);
 
 	
 }

@@ -7,6 +7,7 @@ void GLOBAL::Update() {
 	lastTime = startTime;
 	startTime = SDL_GetPerformanceCounter();
 	DeltaTime = (float)(startTime - lastTime) / SDL_GetPerformanceFrequency();
+	if (DeltaTime > 1/60.f) DeltaTime = 1/60.f;
 }
 
 void GLOBAL::fpsShow()

@@ -5,14 +5,14 @@
 #include <tmxlite/Map.hpp>
 #include <unordered_map>
 
-struct GeometryBatch {
-    std::vector<SDL_Vertex> vertices;
-    std::vector<int> indices;
-};
-
 class Map : public Entity
 {
 private:
+    struct GeometryBatch {
+        std::vector<SDL_Vertex> vertices;
+        std::vector<int> indices;
+    };
+
     int mapTileSize;
     float width;
     float height;

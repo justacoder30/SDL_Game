@@ -53,7 +53,7 @@ HealthBar::~HealthBar()
 {
 	parent = nullptr;
 	delete parent;
-	LOG("HealthBar destroyed");
+	//LOG("HealthBar destroyed");
 }
 
 HealthBar HealthBar::SetColor(Uint8 r, Uint8 g, Uint8 b)

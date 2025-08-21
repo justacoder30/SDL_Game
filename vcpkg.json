@@ -1,8 +1,6 @@
 {
   "dependencies": [
     "tmxlite",
-    "zlib",
-    "zstd",
     "sdl2",
     "sdl2-image",
     "sdl2-ttf",

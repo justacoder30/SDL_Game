@@ -26,6 +26,7 @@ enum State
 	Protect,
 };
 
+
 class Entity
 {
 private:
@@ -45,7 +46,6 @@ protected:
 	
 	void Loop() { breakLoop = false; }	
 	void BreakLoop() { breakLoop = true; }
-	bool IsOnGround();
 	void ChangeLevel();
 	void UpdateGravity();
 	void UpdateAnimation(const float& dt);
@@ -59,7 +59,7 @@ public:
 	Entity* parent = nullptr;
 	AnimationManager animationManger;	
 	Vector center_pos;
-	State current;
+	int current;
 	Vector velocity = Vector::zero();
 	Rect rect;
 	Rect old_rect;
@@ -88,6 +88,7 @@ public:
 	Entity add(Entity* entity);
 	void freeEntities();
 	void freeAnimations();
+	bool IsOnGround();
 	void add_NoPoitner(Entity& entity);
 	void Collision(std::string direction);
 	void SetCollision(float _left, float _top, float _right, float _bottom);

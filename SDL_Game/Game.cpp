@@ -71,8 +71,7 @@ std::string Game::getLevel()
 
 void Game::Update()
 {
-	Input.Update();
-	Global.Update();
+	
 	float dt = Global.DeltaTime;
 	
 	currentState->Update(dt);
@@ -92,12 +91,19 @@ void Game::Draw()
 	currentState->Draw();
 	
 	window.Render();
-	Global.fpsShow();
+	//Global.fpsShow();
 }
 
 void Game::Run()
 {
 	while (Global.gameLoop) {
+		Input.Update();
+		Global.Update();
+		if(Global.freezeFrame > 0.0f) {
+			Global.freezeFrame -= Global.DeltaTime;
+			continue;
+			//if (Global.freezeFrame < 0.0f) Global.freezeFrame = 0.0f;
+		}
 		Update();
 		Draw();
 	}

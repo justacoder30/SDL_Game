@@ -11,7 +11,7 @@ void SoundManager::init()
 		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 	}
 
-	bgMusic = Sound::LoadMusic("resource/Music/bg_music.ogg");
+	bgMusic = Sound::LoadMusic("resource/Music/Heavy.mp3");
 
 	sounds = {
 		{"coin", Sound("resource/SoundFX/coin_sound.wav")},

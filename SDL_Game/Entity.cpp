@@ -74,6 +74,7 @@ void Entity::beingAttacked(const Entity& entity, const float& dt)
     isHurt = true;
     damageTaken = entity.damage;
     hurtDirection = entity.center_pos.x > center_pos.x ? -1 : 1;
+	Global.freezeFrame = 0.1f; // Freeze frame for 0.1 seconds
 }
 
 void Entity::beingHurt()
@@ -89,15 +90,10 @@ void Entity::beingHurt()
 void Entity::Update(const float& dt)
 {
     std::vector<int> toRemove;
+	auto& pool = Global.pool;
 
     for (int i = Entities.size() - 1; i >= 0; --i)
     {
-        //Entities[i]->Update(dt);
-        if (Entities[i]->IsBreakLoop()) {
-            Entities[i]->Update(dt);
-            return;
-        }
-
         if (Entities[i]->isChangLevel()) {
             ChangeLevel();
         }
@@ -115,9 +111,10 @@ void Entity::Update(const float& dt)
 	std::vector<Entity*> entities = Entities;
 
 	for (auto& e : entities) {
-        Global.pool.enqueue([e, dt]() {
+        pool.enqueue([e, dt]() {
             e->Update(dt);
         });
+        //e->Update(dt);
     }
 
     
@@ -125,9 +122,10 @@ void Entity::Update(const float& dt)
 
 void Entity::Draw()
 {
+	Camera& camera = Global.camera;
     for (int i = 0; i < Entities.size(); ++i)
     {
-        if (!Global.camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
+        if (!camera.canSee(Entities[i]->rect) && !Entities[i]->backDrop) continue;
         Entities[i]->Draw();
     }
 }
@@ -186,34 +184,40 @@ void Entity::add_NoPoitner(Entity& entity)
 
 void Entity::Collision(std::string direction)
 {
+    auto& collisions = Collisions;
     rect = Rect(rect.x, rect.y, rect.w, rect.h);
-    for (int i = 0; i < Collisions.size(); ++i) {
-        if (!rect.checkCollide(Collisions[i]))
+    for (int i = 0; i < collisions.size(); ++i) {
+        if (!rect.checkCollide(collisions[i]))
             continue;
         if (direction == "y") {
 
-            if (rect.bottom >= Collisions[i].top && old_rect.bottom <= Collisions[i].top) {
-                rect.y += Collisions[i].top - rect.bottom;
-                rect.bottom = Collisions[i].top;
+            if (rect.bottom >= collisions[i].top && old_rect.bottom <= collisions[i].top) 
+            //if (velocity.y > 0)
+            {
+                rect.y += collisions[i].top - rect.bottom;
+                rect.bottom = collisions[i].top;
                 isOnGround = true;
             }
 
-            if (rect.top <= Collisions[i].bottom && rect.top >= Collisions[i].bottom) {
-                rect.y += Collisions[i].bottom - rect.top;
-                rect.top = Collisions[i].bottom;
+            if (rect.top <= collisions[i].bottom && old_rect.top >= collisions[i].bottom)
+            //if (velocity.y < 0)
+            {
+                rect.y += collisions[i].bottom - rect.top;
+                rect.top = collisions[i].bottom;
+                
             }
 
             velocity.y = 0;
         }
         else {
-            if (rect.right >= Collisions[i].left && old_rect.right <= Collisions[i].left) {
-                rect.x += Collisions[i].left - rect.right;
-                rect.right = Collisions[i].left;
+            if (rect.right >= collisions[i].left && old_rect.right <= collisions[i].left) {
+                rect.x += collisions[i].left - rect.right;
+                rect.right = collisions[i].left;
             }
 
-            if (rect.left <= Collisions[i].right && old_rect.left >= Collisions[i].right) {
-                rect.x += Collisions[i].right - rect.left;
-                rect.left = Collisions[i].right;
+            if (rect.left <= collisions[i].right && old_rect.left >= collisions[i].right) {
+                rect.x += collisions[i].right - rect.left;
+                rect.left = collisions[i].right;
             }
 
             //velocity.x *= -1;

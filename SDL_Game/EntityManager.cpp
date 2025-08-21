@@ -7,9 +7,12 @@
 #include "SoundManager.h"
 #include <thread>
 
+Enemy* enemy = nullptr;	
+float y = 0;
+
 void EntityManager::addObjects()
 {
-	std::string objects_pos[] = {"PlayerPosition", "CoinPosition", "EnemyPosition", "HeartPosition", "FlagPosition", "BossPosition", };
+	std::string objects_pos[] = {"PlayerPosition", "CoinPosition", "EnemyPosition", "EnemyPosition 1", "HeartPosition", "FlagPosition", "BossPosition",};
 
 	
 	add(
@@ -35,6 +38,13 @@ void EntityManager::addObjects()
 		else if (obj == "EnemyPosition") {
 			for (auto pos : positions) {
 				add(new Enemy(0, Vector(pos.x, pos.y), player));
+			}
+		}
+		else if (obj == "EnemyPosition 1") {
+			for (auto pos : positions) {
+				enemy = new Enemy(0, Vector(pos.x, pos.y), player);
+				add(enemy);
+				y = enemy->rect.y;
 			}
 		}
 		else if (obj == "CoinPosition") {
@@ -77,9 +87,7 @@ void EntityManager::addObjects()
 
 	//add(bossHealthBar);
 
-	add(new LoadingScreen(Vector(64, 64), 1.5));
-
-	
+	//add(new LoadingScreen(Vector(64, 64), 1.5));
 }
 
 void EntityManager::addCollisions()
@@ -170,6 +178,7 @@ void EntityManager::watForInit()
 
 void EntityManager::Update(const float& dt)
 {
+	
 	static Rect rect = Global.camera.rect;
 	float speed = 7;
 
@@ -202,6 +211,7 @@ void EntityManager::Update(const float& dt)
 
 	Entity::Update(dt);
 	Global.camera.Update();
+	//LOG(enemy->rect.printf);
 }
 
 void EntityManager::Draw() {

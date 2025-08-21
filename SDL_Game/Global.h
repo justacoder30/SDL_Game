@@ -10,10 +10,11 @@ class GLOBAL
 {
 private:
 	Uint64 startTime = SDL_GetPerformanceCounter();
-	Uint64 lastTime = 0;
+	Uint64 lastTime = startTime;
 public:
 	SDL_Renderer* Renderer;
 	Camera camera;
+	float freezeFrame = 0.0f;
 	Font font;
 	float scale;
 	float DeltaTime = 0;
