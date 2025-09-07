@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/wavpack-x64-windows-5.8.1#1-86138964-9e2a-409b-b3c3-4f8ac2d3ad87",
-  "name": "wavpack:x64-windows@5.8.1#1 6aba28b9c69ebcd891cd2b962a4ee4a7efbb25d7f6b0a8a829bac2f7a69f220e",
+  "documentNamespace": "https://spdx.org/spdxdocs/wavpack-x64-windows-5.8.1#1-7b96bc5b-e69b-451d-b3c6-6709b44faf58",
+  "name": "wavpack:x64-windows@5.8.1#1 bfcd0fdd92fe4e3ee83e310a82070534b8ac123ee7d275a1640971d40a564c94",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-2025-06-02-145689e84b7637525510e2c9b4ee603fda046b56"
+      "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-06-18T11:01:16Z"
+    "created": "2025-09-07T14:25:30Z"
   },
   "relationships": [
     {
@@ -74,7 +74,7 @@
     {
       "name": "wavpack:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "6aba28b9c69ebcd891cd2b962a4ee4a7efbb25d7f6b0a8a829bac2f7a69f220e",
+      "versionInfo": "bfcd0fdd92fe4e3ee83e310a82070534b8ac123ee7d275a1640971d40a564c94",
       "downloadLocation": "NONE",
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "NOASSERTION",

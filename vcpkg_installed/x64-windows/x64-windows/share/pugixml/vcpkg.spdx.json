@@ -3,13 +3,13 @@
   "spdxVersion": "SPDX-2.2",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "documentNamespace": "https://spdx.org/spdxdocs/pugixml-x64-windows-1.15-a9c7952e-bcec-48ee-91fb-e64249dbd667",
-  "name": "pugixml:x64-windows@1.15 f61ab7ea4ca2ea5d4bf11f9faf5fbab141b0030b4c7b63f6a2839f114253196f",
+  "documentNamespace": "https://spdx.org/spdxdocs/pugixml-x64-windows-1.15-7a5a4add-3837-4280-ad1c-13a9b728c104",
+  "name": "pugixml:x64-windows@1.15 189b96fd41aca4e606426176c8c80c9bc8586e92d6c015212109a8bb7659394a",
   "creationInfo": {
     "creators": [
-      "Tool: vcpkg-2025-06-02-145689e84b7637525510e2c9b4ee603fda046b56"
+      "Tool: vcpkg-2025-04-16-f9b6c6917b23c1ccf16c1a9f015ebabf8f615045"
     ],
-    "created": "2025-06-18T10:38:40Z"
+    "created": "2025-09-07T14:28:14Z"
   },
   "relationships": [
     {
@@ -64,7 +64,7 @@
     {
       "name": "pugixml:x64-windows",
       "SPDXID": "SPDXRef-binary",
-      "versionInfo": "f61ab7ea4ca2ea5d4bf11f9faf5fbab141b0030b4c7b63f6a2839f114253196f",
+      "versionInfo": "189b96fd41aca4e606426176c8c80c9bc8586e92d6c015212109a8bb7659394a",
       "downloadLocation": "NONE",
       "licenseConcluded": "MIT",
       "licenseDeclared": "NOASSERTION",
